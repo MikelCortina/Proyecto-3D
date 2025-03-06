@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 20f;  // Velocidad del proyectil
+    public float speed;  // Velocidad del proyectil
     public float lifetime = 3f; // Tiempo hasta que el proyectil desaparezca
 
     void Start()
