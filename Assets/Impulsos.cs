@@ -10,7 +10,8 @@ public class Impulsos : MonoBehaviour
     public float shootForce;
     public GameObject projectilePrefab;
 
-    public float recoilDistance = 0.1f; // Distancia de retroceso de la cámara
+    public float recoilDistance;
+    public float recoilCameraDistance = 0.1f;// Distancia de retroceso de la cámara
     public float recoilDuration = 0.1f; // Duración del retroceso
     private Vector3 originalPosition1; // Posición original de la cámara
     private Vector3 originalPosition2;
@@ -38,7 +39,7 @@ public class Impulsos : MonoBehaviour
         {
             recoilTimer -= Time.deltaTime;
             // Mover la cámara hacia atrás en el eje Z
-            camera.transform.localPosition = Vector3.Lerp(originalPosition1, originalPosition1 - new Vector3(0, 0, recoilDistance), (1 - (recoilTimer / recoilDuration)));
+            camera.transform.localPosition = Vector3.Lerp(originalPosition1, originalPosition1 - new Vector3(0, 0, recoilCameraDistance), (1 - (recoilTimer / recoilDuration)));
             muzzle.transform.localPosition = Vector3.Lerp(originalPosition2, originalPosition2 - new Vector3(0, 0, recoilDistance), (1 - (recoilTimer / recoilDuration)));
         }
         else

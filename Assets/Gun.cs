@@ -7,9 +7,8 @@ public class Gun : MonoBehaviour
     public float fireRate = 0.5f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Para controlar el tiempo de recarga entre disparos
     public new Camera camera;
-    private Vector3 originalPosition1; // Posición original de la cámara
-    private Vector3 originalPosition2; // Posición original de la boca del arma
     public float recoilAmount = 10f; // Ángulo de retroceso en grados
+    public float recoilCameraAmount = 3f;
     public float recoilDuration = 0.1f; // Duración del retroceso
     private float recoilTimer = 0f; // Temporizador de retroceso
     private Quaternion originalCameraRotation; // Rotación original de la cámara
@@ -17,14 +16,15 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        // Guardamos la posición y rotación originales de la cámara y el arma
-        originalPosition1 = camera.transform.localPosition;
+
+        
 
         originalMuzzleRotation = muzzle.transform.localRotation;
     }
 
     void Update()
     {
+        originalCameraRotation = camera.transform.localRotation;
         // Detectar si el jugador hace clic para disparar
         if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) // "Fire1" es el clic izquierdo por defecto
         {
@@ -41,7 +41,10 @@ public class Gun : MonoBehaviour
 
 
             // Rotar la boca del arma (muzzle) hacia arriba rápidamente
-            muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, originalMuzzleRotation * Quaternion.Euler(-recoilAmount, 0, 0), (1 - (recoilTimer / recoilDuration)));
+            muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, Quaternion.Euler(-recoilAmount, 0, 0) * originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3));
+            camera.transform.localRotation = Quaternion.Slerp(originalCameraRotation, Quaternion.Euler(-recoilCameraAmount, 0, 0) * originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3));
+            muzzle.transform.localRotation = Quaternion.Slerp(muzzle.transform.localRotation, originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));            
+            camera.transform.localRotation = Quaternion.Slerp(camera.transform.localRotation, originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));
         }
         else
         {

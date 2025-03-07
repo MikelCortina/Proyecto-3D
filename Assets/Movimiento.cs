@@ -49,20 +49,21 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
 
-        // Si se presiona el shift, se mueve más rápido
+        // Si se presiona shift, se mueve más rápido
         float speed = Input.GetKey(KeyCode.LeftShift) && isGrounded ? sprintSpeed : moveSpeed;
 
-        // Aplicar inercia en el movimiento
+        // Aplicar inercia en el movimiento solo en los ejes X y Z
         Vector3 targetVelocity = moveDirection * speed;
-        Vector3 velocity = Vector3.Lerp(rb.linearVelocity, new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z), Time.deltaTime * inertiaFactor);
+        Vector3 velocityXZ = Vector3.Lerp(new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z), targetVelocity, Time.deltaTime * inertiaFactor);
 
-        // Limitar la velocidad máxima
-        if (velocity.magnitude > maxVelocity)
+        // Limitar la velocidad en los ejes X y Z sin afectar la caída en Y
+        if (velocityXZ.magnitude > maxVelocity)
         {
-            velocity = velocity.normalized * maxVelocity;
+            velocityXZ = velocityXZ.normalized * maxVelocity;
         }
 
-        rb.linearVelocity = velocity;
+        // Aplicar la nueva velocidad manteniendo el valor de Y sin cambios
+        rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
     }
 
     void LookAround()
