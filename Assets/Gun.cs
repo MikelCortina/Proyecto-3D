@@ -3,7 +3,8 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public GameObject projectilePrefab;  // Prefabricado del proyectil
-    public Transform muzzle;  // La posición de la boca del arma (donde se dispara)
+    public Transform muzzle;  // La posición de la boca del arma (donde rota)
+    public Transform muzzleTarget;// La posición de la boca del arma (donde se dispara)
     public float fireRate = 0.5f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Para controlar el tiempo de recarga entre disparos
     public new Camera camera;
@@ -60,7 +61,7 @@ public class Gun : MonoBehaviour
         Vector3 shootingDirection = camera.transform.forward;
 
         // Instanciar el proyectil
-        GameObject projectile = Instantiate(projectilePrefab, muzzle.position, Quaternion.LookRotation(shootingDirection));
+        GameObject projectile = Instantiate(projectilePrefab, muzzleTarget.position, Quaternion.LookRotation(shootingDirection));
         recoilTimer = recoilDuration;  // Iniciar el retroceso
     }
 }

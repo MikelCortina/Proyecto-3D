@@ -17,9 +17,16 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(UnityEngine.Collider other)
     {
-        // Aquí puedes añadir lógica para cuando el proyectil golpea algo (por ejemplo, destruir el proyectil o hacer daño)
-        Destroy(gameObject); // Destruir el proyectil cuando golpea algo
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Jugador");
+        }
+        else
+        {
+            // Aquí puedes añadir lógica para cuando el proyectil golpea algo (por ejemplo, destruir el proyectil o hacer daño)
+            Destroy(gameObject); // Destruir el proyectil cuando golpea algo
+        }
     }
 }

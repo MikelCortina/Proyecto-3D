@@ -1,5 +1,7 @@
 using UnityEngine;
-using TMPro; // Importa el espacio de nombres para TextMesh Pro
+using TMPro;
+using Unity.VisualScripting;
+using System.Collections; // Importa el espacio de nombres para TextMesh Pro
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public float maxLookAngle = 80f;
     public float jumpForce = 10f;
     public float inertiaFactor = 5f; // Factor de inercia
-    public float maxVelocity = 1000f; // Velocidad máxima permitida
+    public float maxVelocity; // Velocidad máxima permitida
+    private float originSpeed;
+    private float originMaxVelocity;
 
     private Rigidbody rb;
     public Camera playerCamera;
@@ -25,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Para que el cursor no se vea.
         Cursor.visible = false; // Hace invisible el cursor.
         rb.freezeRotation = true;
+
+        originMaxVelocity = maxVelocity;
+        originSpeed = moveSpeed;
     }
 
     void Update()
@@ -40,17 +47,45 @@ public class PlayerMovement : MonoBehaviour
 
         // Mostrar la velocidad actual en pantalla
         DisplaySpeed();
+       
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ZonaVelocidad"))
+        {
+            maxVelocity = 40f;
+            moveSpeed = 30f;
+        }
+        else
+        {
+            maxVelocity = originMaxVelocity;
+            moveSpeed = originSpeed;
+        }
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ZonaVelocidad"))
+        {
+            maxVelocity = originMaxVelocity;
+            moveSpeed = originSpeed;
+        }
     }
 
     void MovePlayer()
     {
+        float speed = moveSpeed;
+
         float moveX = Input.GetAxis("Horizontal"); // A, D
         float moveZ = Input.GetAxis("Vertical");   // W, S
 
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
 
-        // Si se presiona shift, se mueve más rápido
-        float speed = Input.GetKey(KeyCode.LeftShift) && isGrounded ? sprintSpeed : moveSpeed;
+        // Normalizar la dirección de movimiento para evitar el aumento de velocidad en diagonal
+        if (moveDirection.magnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
 
         // Aplicar inercia en el movimiento solo en los ejes X y Z
         Vector3 targetVelocity = moveDirection * speed;
