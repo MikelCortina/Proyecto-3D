@@ -6,6 +6,8 @@ TagManager:
   tags:
   - groundMask
   - ZonaVelocidad
+  - Enemigo
+  - Bala
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile2 : MonoBehaviour
 {
     public float speed;  // Velocidad del proyectil
-    public float lifetime = 3f; // Tiempo hasta que el proyectil desaparezca
+    public float lifetime; // Tiempo hasta que el proyectil desaparezca
 
     void Start()
     {
@@ -17,16 +17,19 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter(UnityEngine.Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Jugador");
+
+        }
+        if (other.gameObject.CompareTag("Enemigo"))
+        {
+            Debug.Log("Enemigo");
         }
         else
         {
-            // Aquí puedes añadir lógica para cuando el proyectil golpea algo (por ejemplo, destruir el proyectil o hacer daño)
-            Destroy(gameObject); // Destruir el proyectil cuando golpea algo
+            Destroy(gameObject);
         }
     }
 }
