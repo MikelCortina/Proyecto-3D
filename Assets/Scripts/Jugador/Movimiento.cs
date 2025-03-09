@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public float maxVelocity; // Velocidad máxima permitida
     private float originSpeed;
     private float originMaxVelocity;
+    private Vector3 originalVelocity;
+   
 
     private Rigidbody rb;
     public Camera playerCamera;
@@ -37,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        LookAround();
+        
         CheckGrounded();
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Mostrar la velocidad actual en pantalla
         DisplaySpeed();
-       
+        LookAround();
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -133,4 +135,39 @@ public class PlayerMovement : MonoBehaviour
         // Mostrar la velocidad actual del jugador en el texto de TextMeshPro
         speedText.text = "Speed: " + rb.linearVelocity.magnitude.ToString("F2") + " m/s";
     }
+    public void MoveToEnemy(Vector3 enemyPosition)
+    {
+        StartCoroutine(MoveToPositionCoroutine(enemyPosition));
+    }
+    private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
+    {
+       
+        originalVelocity = rb.linearVelocity;
+
+        float journeyLength = Vector3.Distance(transform.position, targetPosition);
+        float startTime = Time.time;
+
+        // Lerp desde la posición actual hasta la del enemigo
+        while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
+        {
+            float distanceCovered = (Time.time - startTime) * moveSpeed;
+            float fractionOfJourney = distanceCovered / journeyLength;
+
+            fractionOfJourney = Mathf.Clamp01(fractionOfJourney); // Aseguramos que no se pase del 100%
+
+            transform.position = Vector3.Lerp(transform.position, targetPosition, fractionOfJourney);
+
+            yield return null;
+        }
+
+        // Aseguramos que el jugador llegue exactamente a la posición del enemigo
+        transform.position = targetPosition;
+
+        // Restauramos la velocidad original
+        rb.linearVelocity = originalVelocity;
+       
+    }
+
+
+
 }
