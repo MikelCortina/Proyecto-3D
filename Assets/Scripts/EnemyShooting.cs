@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
@@ -58,11 +59,14 @@ public class EnemyShooter : MonoBehaviour
         Gizmos.color = detectionRadiusColor;  // Establecer el color del Gizmo
         Gizmos.DrawWireSphere(transform.position, detectionRadius);  // Dibujar una esfera al rededor del enemigo
     }
-     void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bala"))
         {
-            Destroy(gameObject);
+            Debug.Log("¡Impacto registrado!"); // Para verificar
+            Destroy(gameObject, 0.1f); // Pequeño delay para asegurar que la colisión se procesa
         }
     }
+
 }
+

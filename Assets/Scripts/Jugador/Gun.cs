@@ -4,7 +4,7 @@ public class Gun : MonoBehaviour
 {
     public GameObject projectilePrefab;  // Prefabricado del proyectil
     public Transform muzzle;  // La posición de la boca del arma (donde rota)
-    public Transform muzzleTarget;// La posición de la boca del arma (donde se dispara)
+    public Transform muzzleTarget;// La posición de la boca del arma (donde parece que se dispara)
     public float fireRate = 0.5f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Para controlar el tiempo de recarga entre disparos
     public new Camera camera;
@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     private float recoilTimer = 0f; // Temporizador de retroceso
     private Quaternion originalCameraRotation; // Rotación original de la cámara
     private Quaternion originalMuzzleRotation; // Rotación original del muzzle
+    public AudioClip shootSound; // Clip de sonido del disparo
+    public AudioSource audioSource; // Fuente de audio
 
     private void Start()
     {
@@ -62,6 +64,13 @@ public class Gun : MonoBehaviour
 
         // Instanciar el proyectil
         GameObject projectile = Instantiate(projectilePrefab, muzzleTarget.position, Quaternion.LookRotation(shootingDirection));
+
         recoilTimer = recoilDuration;  // Iniciar el retroceso
+                                       // Instanciar el proyectil
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound); // Reproduce el sonido del disparo
+        }
+
     }
 }
