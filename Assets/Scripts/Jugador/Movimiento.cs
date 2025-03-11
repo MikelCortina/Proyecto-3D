@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float originSpeed;
     private float originMaxVelocity;
     private Vector3 originalVelocity;
+    private float saltosTot = 1; //Contador del doble salto
    
 
     private Rigidbody rb;
@@ -24,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     // Referencia al componente TextMesh Pro para mostrar la velocidad
     public TextMeshProUGUI speedText;  // Usa TextMeshProUGUI
+
+    // NUEVO:
+    public float jumpCooldown = 0.2f; // Cooldown entre saltos
+    private float jumpCooldownTimer = 0f; // Temporizador para controlar el cooldown
 
     void Start()
     {
@@ -39,15 +44,38 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        
+
         CheckGrounded();
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        // Restar tiempo al cooldown
+        if (jumpCooldownTimer > 0)
         {
-            Jump();
+            jumpCooldownTimer -= Time.deltaTime;
         }
 
-        // Mostrar la velocidad actual en pantalla
+        // Solo saltas si el cooldown terminó
+        if (Input.GetButtonDown("Jump") && jumpCooldownTimer <= 0)
+        {
+            if (isGrounded)
+            {
+                Jump();
+                saltosTot++;
+                jumpCooldownTimer = jumpCooldown; // Reinicia el cooldown
+            }
+            else if (saltosTot < 1)
+            {
+                Jump();
+                saltosTot++;
+                jumpCooldownTimer = jumpCooldown; // Reinicia el cooldown
+            }
+        }
+
+        // Si estás en el suelo, reseteas el contador de saltos
+        if (isGrounded)
+        {
+            saltosTot = 0;
+        }
+
         DisplaySpeed();
         LookAround();
     }
@@ -55,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ZonaVelocidad"))
         {
-            maxVelocity = 40f;
+            maxVelocity = 50f;
             moveSpeed = 30f;
         }
         else
@@ -118,12 +146,14 @@ public class PlayerMovement : MonoBehaviour
     void CheckGrounded()
     {
         RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f); // Ajusta el valor 1.1f según el tamaño del jugador
+       
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f); // Ajusta el valor 1.1f según el tamaño del jugador
+        
     }
 
     void Jump()
     {
-        if (isGrounded)
+        if (isGrounded | saltosTot<2)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -148,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         float startTime = Time.time;
 
         // Lerp desde la posición actual hasta la del enemigo
-        while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
+        while (Vector3.Distance(transform.position, targetPosition) > 4f) // Menor tolerancia
         {
             float distanceCovered = (Time.time - startTime) * moveSpeed;
             float fractionOfJourney = distanceCovered / journeyLength;
