@@ -34,6 +34,13 @@ public class EnemyShooter : MonoBehaviour
             ShootAtPlayer();
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player")&&dash.isDashing)
+        {
+            Destroy(gameObject); 
+        }
+    }
 
     private void ShootAtPlayer()
     {
@@ -74,7 +81,7 @@ public class EnemyShooter : MonoBehaviour
     private void OnDestroy()
     {
         armaJugador.charger = armaJugador.chargerMax;
-        dash.lastDashTime = -999f;
+        dash.canDash = true;
     }
 
 }

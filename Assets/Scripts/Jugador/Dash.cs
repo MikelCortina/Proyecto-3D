@@ -11,11 +11,10 @@ public class DashRigidbody : MonoBehaviour
     public float groundCheckDistance = 1.1f; // Distancia del raycast para detectar el suelo
 
     private Rigidbody rb;
-    private bool isDashing = false;
-    private bool canDash = true;             // Controla si se puede hacer dash después de saltar o al tocar el suelo
-    private bool isGrounded = false;         // Detecta si el jugador está en el suelo
+    public bool isDashing = false;
     public float dashEndTime = 0f;
     public float lastDashTime = -999f;
+    public bool canDash = true;
 
     void Start()
     {
@@ -27,7 +26,7 @@ public class DashRigidbody : MonoBehaviour
 
 
         // Input para dash, solo si puede hacer dash y ya pasó el cooldown
-        if (Input.GetKeyDown(KeyCode.E) && Time.time > lastDashTime + dashCooldown)
+        if (Input.GetKeyDown(KeyCode.E) && canDash)
         {
             StartDash();
         }
@@ -51,17 +50,19 @@ public class DashRigidbody : MonoBehaviour
         isDashing = true;
         dashEndTime = Time.time + dashDuration;
         lastDashTime = Time.time;
+        canDash = false;
 
         rb.useGravity = false;  // Opcional: desactiva la gravedad durante el dash
     }
 
-    void EndDash()
+    public void EndDash()
     {
         isDashing = false;
         rb.useGravity = true;
 
         // Opcional: reduce la velocidad después del dash para que no quede flotando
         rb.linearVelocity *= 0.5f;
+        
     }
 
     // Visualizador del raycast en el editor

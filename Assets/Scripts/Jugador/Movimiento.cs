@@ -15,10 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private float originSpeed;
     private float originMaxVelocity;
     private Vector3 originalVelocity;
+    public float speed;
     
 
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     public Camera playerCamera;
     private float rotationX = 0f;
     private bool isGrounded;
@@ -83,8 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        
-        
+
             float speed = moveSpeed;
 
             float moveX = Input.GetAxis("Horizontal"); // A, D

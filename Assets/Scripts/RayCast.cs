@@ -7,6 +7,7 @@ public class RayCast : MonoBehaviour
     public float fireRate = 0.5f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Control de tiempo de disparo
     public Camera cam;
+    public LayerMask layerIgnorar; // Asigna esto en el Inspector para excluir capas
 
     void Update()
     {
@@ -22,7 +23,8 @@ public class RayCast : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Raycast desde el centro de la pantalla
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, distanciDisparo))  // Usa distanciDisparo para el alcance
+        // Excluir la capa de las balas usando una máscara de capas
+        if (Physics.Raycast(ray, out hit, distanciDisparo, ~layerIgnorar))  // "~" invierte la máscara para excluir la capa
         {
             Debug.DrawRay(ray.origin, ray.direction * distanciDisparo, Color.red, 1f); // Visualizar el raycast
 
