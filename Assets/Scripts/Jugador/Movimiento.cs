@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private float originSpeed;
     private float originMaxVelocity;
     private Vector3 originalVelocity;
-    private float saltosTot = 1; //Contador del doble salto
-   
+    
+
 
     private Rigidbody rb;
     public Camera playerCamera;
@@ -25,10 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Referencia al componente TextMesh Pro para mostrar la velocidad
     public TextMeshProUGUI speedText;  // Usa TextMeshProUGUI
-
-    // NUEVO:
-    public float jumpCooldown = 0.2f; // Cooldown entre saltos
-    private float jumpCooldownTimer = 0f; // Temporizador para controlar el cooldown
 
     void Start()
     {
@@ -47,35 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
         CheckGrounded();
 
-        // Restar tiempo al cooldown
-        if (jumpCooldownTimer > 0)
-        {
-            jumpCooldownTimer -= Time.deltaTime;
-        }
 
         // Solo saltas si el cooldown terminó
-        if (Input.GetButtonDown("Jump") && jumpCooldownTimer <= 0)
+        if (Input.GetButtonDown("Jump"))
         {
             if (isGrounded)
             {
                 Jump();
-                saltosTot++;
-                jumpCooldownTimer = jumpCooldown; // Reinicia el cooldown
-            }
-            else if (saltosTot < 1)
-            {
-                Jump();
-                saltosTot++;
-                jumpCooldownTimer = jumpCooldown; // Reinicia el cooldown
+
             }
         }
 
-        // Si estás en el suelo, reseteas el contador de saltos
-        if (isGrounded)
-        {
-            saltosTot = 0;
-        }
-
+      
         DisplaySpeed();
         LookAround();
     }
@@ -104,31 +83,34 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        float speed = moveSpeed;
+        
+        
+            float speed = moveSpeed;
 
-        float moveX = Input.GetAxis("Horizontal"); // A, D
-        float moveZ = Input.GetAxis("Vertical");   // W, S
+            float moveX = Input.GetAxis("Horizontal"); // A, D
+            float moveZ = Input.GetAxis("Vertical");   // W, S
 
-        Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
+            Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
 
-        // Normalizar la dirección de movimiento para evitar el aumento de velocidad en diagonal
-        if (moveDirection.magnitude > 1f)
-        {
-            moveDirection.Normalize();
-        }
+            // Normalizar la dirección de movimiento para evitar el aumento de velocidad en diagonal
+            if (moveDirection.magnitude > 1f)
+            {
+                moveDirection.Normalize();
+            }
 
-        // Aplicar inercia en el movimiento solo en los ejes X y Z
-        Vector3 targetVelocity = moveDirection * speed;
-        Vector3 velocityXZ = Vector3.Lerp(new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z), targetVelocity, Time.deltaTime * inertiaFactor);
+            // Aplicar inercia en el movimiento solo en los ejes X y Z
+            Vector3 targetVelocity = moveDirection * speed;
+            Vector3 velocityXZ = Vector3.Lerp(new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z), targetVelocity, Time.deltaTime * inertiaFactor);
 
-        // Limitar la velocidad en los ejes X y Z sin afectar la caída en Y
-        if (velocityXZ.magnitude > maxVelocity)
-        {
-            velocityXZ = velocityXZ.normalized * maxVelocity;
-        }
+            // Limitar la velocidad en los ejes X y Z sin afectar la caída en Y
+            if (velocityXZ.magnitude > maxVelocity)
+            {
+                velocityXZ = velocityXZ.normalized * maxVelocity;
+            }
 
-        // Aplicar la nueva velocidad manteniendo el valor de Y sin cambios
-        rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
+            // Aplicar la nueva velocidad manteniendo el valor de Y sin cambios
+            rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
+        
     }
 
     void LookAround()
@@ -153,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded | saltosTot<2)
+        if (isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -178,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         float startTime = Time.time;
 
         // Lerp desde la posición actual hasta la del enemigo
-        while (Vector3.Distance(transform.position, targetPosition) > 4f) // Menor tolerancia
+        while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
         {
             float distanceCovered = (Time.time - startTime) * moveSpeed;
             float fractionOfJourney = distanceCovered / journeyLength;

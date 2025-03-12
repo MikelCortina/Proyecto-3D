@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -20,8 +20,8 @@ public class Impulsos : MonoBehaviour
     private Vector3 originalPosition1;
     private Vector3 originalPosition2;
     private Quaternion originalMuzzleRotation;
-    private Quaternion originalWeaponRotation;   // RotaciÛn inicial del arma
-    private Quaternion reloadRotation;           // RotaciÛn hacia arriba durante recarga
+    private Quaternion originalWeaponRotation;   // Rotaci√≥n inicial del arma
+    private Quaternion reloadRotation;           // Rotaci√≥n hacia arriba durante recarga
     private float recoilTimer = 0f;
 
     public float charger;
@@ -35,30 +35,41 @@ public class Impulsos : MonoBehaviour
 
     private bool isReloading = false; // Bandera para saber si estamos recargando
 
+    public float grappleSpeed = 20f;
+    public float maxGrappleDistance = 50f;
+    private Vector3 grapplePoint;
+    private bool isGrappling = false;
+    private bool isHanging = false;
+
+    private LineRenderer lineRenderer; // L√≠nea del gancho
+
     void Start()
     {
         originalPosition1 = camera.transform.localPosition;
         originalPosition2 = muzzle.transform.localPosition;
         originalMuzzleRotation = muzzle.transform.localRotation;
 
-        // Guardamos la rotaciÛn original del arma
+        // Guardamos la rotaci√≥n original del arma
         originalWeaponRotation = muzzle.transform.localRotation;
 
-        // RotaciÛn de recarga: 75 grados en el eje Y
-        reloadRotation = originalWeaponRotation * Quaternion.Euler(0f, 0f,-75f);
+        // Rotaci√≥n de recarga: 75 grados en el eje Y
+        reloadRotation = originalWeaponRotation * Quaternion.Euler(0f, 0f, -75f);
 
         chargerMax = charger;
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.startWidth = 0.05f;   // Grosor de la l√≠nea al inicio
+        lineRenderer.endWidth = 0.05f;     // Grosor de la l√≠nea al final
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // Material simple
+        lineRenderer.startColor = Color.cyan;  // Color de la l√≠nea
+        lineRenderer.endColor = Color.cyan;
+        lineRenderer.enabled = false; // Ocultar al inicio
     }
 
     void Update()
     {
-        // Si el cargador est· vacÌo, recargar autom·ticamente
-        if (charger <= 0 && !isReloading)
-        {
-            StartCoroutine(Reload());
-        }
+        
 
-        // Disparo si se mantiene presionado el botÛn derecho y no se est· recargando
+        // Disparo si se mantiene presionado el bot√≥n derecho y no se est√° recargando
         if (Input.GetMouseButton(1) && Time.time >= nextFireTime && charger > 0 && !isReloading)
         {
             Shoot();
@@ -85,11 +96,29 @@ public class Impulsos : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(randomRecoilX, randomRecoilY, 0) * baseRotation * originalMuzzleRotation;
             muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, targetRotation, 1 - (recoilTimer / recoilDuration));
         }
-        else if (!isReloading) // Solo resetea cuando no se est· recargando
+        else if (!isReloading) // Solo resetea cuando no se est√° recargando
         {
             camera.transform.localPosition = originalPosition1;
             muzzle.transform.localPosition = originalPosition2;
             muzzle.transform.localRotation = originalMuzzleRotation;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            TryGrapple();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isGrappling = false;
+            isHanging = false;
+            lineRenderer.enabled = false; // Ocultar l√≠nea
+        }
+
+        if (isGrappling)
+        {
+            MoveTowardsGrapplePoint();
+            UpdateGrappleLine();
+            RestrictDistanceAndSpeed(); // Restringir movimiento
         }
 
         DisplayBullets();
@@ -113,7 +142,49 @@ public class Impulsos : MonoBehaviour
             audioSource.PlayOneShot(shootSound);
         }
     }
+    void TryGrapple()
+    {
+        RaycastHit hit;
+        Vector3 rayOrigin = camera.transform.position;
+        Vector3 rayDirection = camera.transform.forward;
 
+        if (Physics.Raycast(rayOrigin, rayDirection, out hit, maxGrappleDistance))
+        {
+            grapplePoint = hit.point;
+            isGrappling = true;
+            isHanging = false;
+
+            // Activar l√≠nea del gancho
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, muzzle.position); // Inicio en el arma
+            lineRenderer.SetPosition(1, grapplePoint);    // Fin en el punto de impacto
+        }
+    }
+    void MoveTowardsGrapplePoint()
+    {
+        if (Vector3.Distance(transform.position, grapplePoint) > 1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, grapplePoint, grappleSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isHanging = true;
+        }
+        else
+        {
+            isGrappling = false;
+            isHanging = false;
+            lineRenderer.enabled = false; // Ocultar l√≠nea al soltar
+        }
+    }
+    void UpdateGrappleLine()
+    {
+        if (isGrappling)
+        {
+            lineRenderer.SetPosition(0, muzzle.position); // Actualizar inicio en el arma
+            lineRenderer.SetPosition(1, grapplePoint);    // Mantener punto final en el gancho
+        }
+    }
     IEnumerator Reload()
     {
         isReloading = true;
@@ -121,7 +192,7 @@ public class Impulsos : MonoBehaviour
 
         float elapsedTime = 0f;
 
-        // RotaciÛn hacia la posiciÛn de recarga durante el tiempo de recarga
+        // Rotaci√≥n hacia la posici√≥n de recarga durante el tiempo de recarga
         while (elapsedTime < recargaTimer)
         {
             float t = elapsedTime / recargaTimer;
@@ -131,14 +202,14 @@ public class Impulsos : MonoBehaviour
             yield return null;
         }
 
-        // Asegurarse de que termine en la rotaciÛn de recarga exacta
+        // Asegurarse de que termine en la rotaci√≥n de recarga exacta
         muzzle.transform.localRotation = reloadRotation;
 
         // Esperar un momento si quieres (opcional)
         // yield return new WaitForSeconds(0.1f);
 
-        // Regreso suave a la rotaciÛn original
-        float returnTime = 0.3f; // Tiempo que tarda en volver a la posiciÛn original
+        // Regreso suave a la rotaci√≥n original
+        float returnTime = 0.3f; // Tiempo que tarda en volver a la posici√≥n original
         elapsedTime = 0f;
 
         while (elapsedTime < returnTime)
@@ -150,13 +221,41 @@ public class Impulsos : MonoBehaviour
             yield return null;
         }
 
-        // Asegurar que se quede exactamente en la rotaciÛn original
+        // Asegurar que se quede exactamente en la rotaci√≥n original
         muzzle.transform.localRotation = originalWeaponRotation;
 
         charger = chargerMax;
         isReloading = false;
 
         Debug.Log("Recarga completa.");
+    }
+    void RestrictDistanceAndSpeed()
+    {
+        if (isGrappling && Input.GetKey(KeyCode.LeftShift))
+        {
+            float currentDistance = Vector3.Distance(transform.position, grapplePoint);
+
+            // Si est√° m√°s lejos que la distancia m√°xima, limitar la posici√≥n
+            if (currentDistance > maxGrappleDistance)
+            {
+                Vector3 directionToGrapple = (grapplePoint - transform.position).normalized;
+                transform.position = grapplePoint - (directionToGrapple * maxGrappleDistance);
+
+                // Reducir la velocidad si intenta alejarse demasiado
+                rb.linearVelocity *= 0.8f; // Disminuye progresivamente la velocidad
+            }
+
+            // Si est√° cerca del punto y sigue manteniendo Shift, suspenderlo en el aire
+            if (currentDistance < 1.5f)
+            {
+                isHanging = true;
+                rb.linearVelocity = Vector3.zero; // Detener el movimiento al colgarse
+            }
+            else
+            {
+                isHanging = false;
+            }
+        }
     }
 
     void DisplayBullets()

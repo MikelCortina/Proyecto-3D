@@ -9,6 +9,8 @@ public class EnemyShooter : MonoBehaviour
     public float shootInterval = 2f;  // Intervalo entre disparos
     public float projectileSpeed = 5f;  // Velocidad del proyectil ajustada
     public Color detectionRadiusColor = Color.red;  // Color del Gizmo
+    public Impulsos armaJugador;
+    public DashRigidbody dash;
 
     private void Start()
     {
@@ -63,9 +65,16 @@ public class EnemyShooter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bala"))
         {
+            
             Debug.Log("¡Impacto registrado!"); // Para verificar
             Destroy(gameObject, 0.1f); // Pequeño delay para asegurar que la colisión se procesa
+           
         }
+    }
+    private void OnDestroy()
+    {
+        armaJugador.charger = armaJugador.chargerMax;
+        dash.lastDashTime = -999f;
     }
 
 }
