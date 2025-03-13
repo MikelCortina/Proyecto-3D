@@ -14,19 +14,22 @@ public class EnemigoImpulsor : MonoBehaviour
             Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
             if (playerRb != null)
             {
+                dash.isDashing = false;
                 // Reinicia la velocidad del jugador antes de aplicar la fuerza
-                playerRb.linearVelocity = Vector3.zero;
-                playerRb.angularVelocity = Vector3.zero; // Tambi�n resetea la rotaci�n si es necesario
+                playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0, playerRb.linearVelocity.z);
+                playerRb.angularVelocity = Vector3.zero;
 
                 // Aplica la nueva fuerza
-                playerRb.AddForce(Vector3.up * 1000f, ForceMode.Impulse);
-
-                dash.isDashing = false;
+                playerRb.linearVelocity += Vector3.up * 10f;
             }
             dash.canDash = true;
 
             Destroy(gameObject);
         }
+    }
+    private void OnDestroy()
+    {
+        
     }
 
 }
