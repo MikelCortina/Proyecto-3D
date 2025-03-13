@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX = 0f;
     private bool isGrounded;
 
+    public float launchForce;
+    public DashRigidbody dashRigidbody;
     // Referencia al componente TextMesh Pro para mostrar la velocidad
     public TextMeshProUGUI speedText;  // Usa TextMeshProUGUI
 
@@ -40,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (rb.linearVelocity.y < 0) // Solo cuando cae
+        {
+            rb.AddForce(Vector3.down * 1.25f, ForceMode.Acceleration); // Aumenta la gravedad
+        }
         MovePlayer();
 
         CheckGrounded();
@@ -178,6 +184,25 @@ public class PlayerMovement : MonoBehaviour
         // Restauramos la velocidad original
         rb.linearVelocity = originalVelocity;
        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Glovo"))
+        {
+           
+            if (dashRigidbody.isDashing) 
+            {
+                rb.AddForce(Vector3.up * 1.5f *launchForce, ForceMode.Impulse);
+                dashRigidbody.canDash = true;
+                dashRigidbody.isDashing = false;
+                rb.useGravity = true;
+            }
+            else
+            {
+                // Ajusta la fuerza del impulso vertical
+                rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
+            }
+        }
     }
 
 

@@ -37,6 +37,10 @@ public class ProjectileBehavior : MonoBehaviour
         {
 
         }
+        else if (other.gameObject.CompareTag("BalaEnemy"))
+        {
+
+        }
         else 
         {
             Destroy(gameObject);

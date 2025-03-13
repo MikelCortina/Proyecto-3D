@@ -8,6 +8,8 @@ TagManager:
   - ZonaVelocidad
   - Enemigo
   - Bala
+  - BalaEnemy
+  - Glovo
   layers:
   - Default
   - TransparentFX

@@ -166,6 +166,10 @@ public class Impulsos : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, grapplePoint, grappleSpeed * Time.deltaTime);
         }
+        if (Vector3.Distance(transform.position, grapplePoint) <= 1f)
+        {
+            isGrappling = false;
+        }
         else if (Input.GetKey(KeyCode.LeftShift))
         {
             isHanging = true;
