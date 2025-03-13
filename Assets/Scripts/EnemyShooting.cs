@@ -36,7 +36,7 @@ public class EnemyShooter : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player")&&dash.isDashing)
+        if (collision.gameObject.CompareTag("Player")&&dash.hasDashed)
         {
             Destroy(gameObject); 
         }

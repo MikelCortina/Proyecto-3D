@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DashRigidbody : MonoBehaviour
@@ -15,6 +16,7 @@ public class DashRigidbody : MonoBehaviour
     public float dashEndTime = 0f;
     public float lastDashTime = -999f;
     public bool canDash = true;
+    public bool hasDashed;
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class DashRigidbody : MonoBehaviour
         }
         else if (isDashing)
         {
-            EndDash();
+            StartCoroutine(EndDash());
         }
     }
 
@@ -51,14 +53,26 @@ public class DashRigidbody : MonoBehaviour
         dashEndTime = Time.time + dashDuration;
         lastDashTime = Time.time;
         canDash = false;
+        hasDashed = true;
 
         rb.useGravity = false;  // Opcional: desactiva la gravedad durante el dash
     }
-
-    public void EndDash()
+    private void OnTriggerEnter(Collider other)
     {
+        if (isDashing && other.CompareTag("Enemy")) // Asegúrate de que los enemigos tengan el tag "Enemy"
+        {
+            canDash = true; // Permite concatenar dashes
+        }
+    }
+
+    IEnumerator EndDash()
+    {
+       
         isDashing = false;
         rb.useGravity = true;
+        yield return new WaitForSeconds(0.15f);
+        
+        hasDashed = false;
 
         // Opcional: reduce la velocidad después del dash para que no quede flotando
         rb.linearVelocity *= 0.5f;
