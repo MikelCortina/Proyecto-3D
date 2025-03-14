@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class RayCast : MonoBehaviour
 {
@@ -23,15 +23,17 @@ public class RayCast : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Raycast desde el centro de la pantalla
         RaycastHit hit;
 
-        // Excluir la capa de las balas usando una máscara de capas
-        if (Physics.Raycast(ray, out hit, distanciDisparo, ~layerIgnorar))  // "~" invierte la máscara para excluir la capa
+        // Excluir la capa de las balas usando una mï¿½scara de capas
+        if (Physics.Raycast(ray, out hit, distanciDisparo, ~layerIgnorar))  // "~" invierte la mï¿½scara para excluir la capa
         {
             Debug.DrawRay(ray.origin, ray.direction * distanciDisparo, Color.red, 1f); // Visualizar el raycast
 
             // Si golpea un enemigo, lo destruye
             if (hit.collider.CompareTag("Enemigo"))
             {
-                Destroy(hit.collider.gameObject);
+                hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
+
+                
             }
 
             // Si el objeto golpeado tiene un Rigidbody, aplica una fuerza
