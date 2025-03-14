@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxVelocity; // Velocidad máxima permitida
     private float originSpeed;
     private float originMaxVelocity;
-    private Vector3 originalVelocity;
+    public Vector3 originalVelocity;
     public float speed;
     
 
@@ -185,14 +185,14 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = originalVelocity;
        
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Glovo"))
         {
            
             if (dashRigidbody.isDashing) 
             {
-                rb.AddForce(Vector3.up * 1.5f *launchForce, ForceMode.Impulse);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
                 dashRigidbody.canDash = true;
                 dashRigidbody.isDashing = false;
                 rb.useGravity = true;
@@ -200,8 +200,12 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 // Ajusta la fuerza del impulso vertical
-                rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
+                     dashRigidbody.canDash = true;
+                dashRigidbody.isDashing = false;
+                rb.useGravity = true;
             }
+            Destroy(collision.gameObject);
         }
     }
 
