@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyShooterBurst : MonoBehaviour
@@ -10,8 +11,28 @@ public class EnemyShooterBurst : MonoBehaviour
     public int projectileCount = 15;  // Cantidad de proyectiles en la ráfaga
     public Color detectionRadiusColor = Color.red;  // Color del Gizmo
 
+    private Animator animator; // <-- Referencia al Animator
+
     private void Start()
     {
+       
+        // Asigna el Animator desde el objeto o sus hijos
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+            animator.speed = 1f;
+        }
+
+        if (animator != null)
+        {
+            Debug.Log("Animator encontrado y asignado.");
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un Animator en el objeto ni en sus hijos.");
+        }
+
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,15 +45,17 @@ public class EnemyShooterBurst : MonoBehaviour
     private void TryShoot()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
         if (distanceToPlayer <= detectionRadius)
         {
-            ShootBurst();
+            StartCoroutine(ShootAnim());
+            
         }
     }
 
     private void ShootBurst()
     {
-        float angleStep = 360f / projectileCount; // Ángulo entre cada proyectil
+        float angleStep = 360f / projectileCount;
 
         for (int i = 0; i < projectileCount; i++)
         {
@@ -55,5 +78,19 @@ public class EnemyShooterBurst : MonoBehaviour
     {
         Gizmos.color = detectionRadiusColor;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+    IEnumerator ShootAnim()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot"); // Asegúrate que este trigger existe en tu Animator Controller
+        }
+        yield return new WaitForSeconds(0.2f);
+        ShootBurst();
+
+        if (animator != null)
+        {
+            animator.SetTrigger("DontShoot"); // Asegúrate que este trigger existe en tu Animator Controller
+        }
     }
 }
