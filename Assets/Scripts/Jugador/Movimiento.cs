@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.linearVelocity.y < 0) // Solo cuando cae
         {
-            rb.AddForce(Vector3.down * 1.25f, ForceMode.Acceleration); // Aumenta la gravedad
+            rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
         }
         MovePlayer();
 

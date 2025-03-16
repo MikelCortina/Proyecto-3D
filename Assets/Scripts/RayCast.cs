@@ -8,6 +8,9 @@ public class RayCast : MonoBehaviour
     private float nextFireTime = 0f;  // Control de tiempo de disparo
     public Camera cam;
     public LayerMask layerIgnorar; // Asigna esto en el Inspector para excluir capas
+    public PlayerMovement jugador;
+    public Impulsos armaJugador;
+    public DashRigidbody dash;
 
     void Update()
     {
@@ -32,8 +35,36 @@ public class RayCast : MonoBehaviour
             if (hit.collider.CompareTag("Enemigo"))
             {
                 hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
-
                 
+                if (armaJugador != null)
+                {
+                    armaJugador.charger = armaJugador.chargerMax;
+                }
+
+                if (dash != null)
+                {
+                    dash.canDash = true;
+                }
+
+
+            }
+            if (hit.collider.CompareTag("EnemigoMovimiento"))
+            {
+              
+
+                jugador.MoveToEnemy(hit.collider.gameObject.GetComponent<Transform>().position);
+                hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
+                if (armaJugador != null)
+                {
+                    armaJugador.charger = armaJugador.chargerMax;
+                }
+
+                if (dash != null)
+                {
+                    dash.canDash = true;
+                }
+
+
             }
 
             // Si el objeto golpeado tiene un Rigidbody, aplica una fuerza

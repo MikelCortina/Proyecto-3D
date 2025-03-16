@@ -10,6 +10,7 @@ TagManager:
   - Bala
   - BalaEnemy
   - Glovo
+  - EnemigoMovimiento
   layers:
   - Default
   - TransparentFX

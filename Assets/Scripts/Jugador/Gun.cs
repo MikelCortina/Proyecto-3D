@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -16,23 +17,39 @@ public class Gun : MonoBehaviour
     private Quaternion originalMuzzleRotation; // Rotación original del muzzle
     public AudioClip shootSound; // Clip de sonido del disparo
     public AudioSource audioSource; // Fuente de audio
+    public Animator animator;
 
     private void Start()
     {
 
-        
 
+        animator.speed = 3f;
         originalMuzzleRotation = muzzle.transform.localRotation;
     }
 
     void Update()
     {
+       
         originalCameraRotation = camera.transform.localRotation;
         // Detectar si el jugador hace clic para disparar
         if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) // "Fire1" es el clic izquierdo por defecto
         {
-            Shoot();
+            animator.speed = 3f;
+            StartCoroutine(ShootAnim());
+            
             nextFireTime = Time.time + fireRate;  // Controlar la tasa de disparo
+        }
+        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            animator.speed = 1f;
+            animator.SetTrigger("FuckYes"); // Asegúrate que este trigger existe en tu Animator Controller
+        }
+        else if (Input.GetKeyUp(KeyCode.C))
+        {
+            animator.speed = 1f;
+
+            animator.SetTrigger("FuckNo");
         }
 
         // Controla la duración del retroceso
@@ -59,6 +76,7 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
+        
         // Obtener la dirección hacia donde está mirando la cámara
         Vector3 shootingDirection = camera.transform.forward;
 
@@ -66,11 +84,30 @@ public class Gun : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, muzzleTarget.position, Quaternion.LookRotation(shootingDirection));
 
         recoilTimer = recoilDuration;  // Iniciar el retroceso
-                                       // Instanciar el proyectil
+
+        // Reproduce el sonido del disparo
         if (audioSource != null && shootSound != null)
         {
-            audioSource.PlayOneShot(shootSound); // Reproduce el sonido del disparo
+            audioSource.PlayOneShot(shootSound);
+        }
+
+      
+    }
+    IEnumerator ShootAnim()
+    {
+        // Iniciar la animación de disparo
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot"); // Asegúrate que este trigger existe en tu Animator Controller
+        }
+        yield return new WaitForSeconds(0.1f);
+        Shoot();
+        // Iniciar la animación de disparo
+        if (animator != null)
+        {
+            animator.SetTrigger("DontShoot");  // Asegúrate que este trigger existe en tu Animator Controller
         }
 
     }
+
 }

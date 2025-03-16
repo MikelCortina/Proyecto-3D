@@ -4,9 +4,13 @@ public class EnemigoTransportador : MonoBehaviour
 {
     public PlayerMovement jugador;
 
-    private void OnDestroy()
+    private void OnTriggerEnter(Collider other)
     {
-        jugador.MoveToEnemy(transform.position);
+        if (other.gameObject.CompareTag("Bala"))
+        {
+
+            jugador.MoveToEnemy(transform.position);
+        }
     }
 
 }

@@ -162,11 +162,11 @@ public class Impulsos : MonoBehaviour
     }
     void MoveTowardsGrapplePoint()
     {
-        if (Vector3.Distance(transform.position, grapplePoint) > 1f)
+        if (Vector3.Distance(transform.position, grapplePoint) > 3f)
         {
             transform.position = Vector3.MoveTowards(transform.position, grapplePoint, grappleSpeed * Time.deltaTime);
         }
-        if (Vector3.Distance(transform.position, grapplePoint) <= 1f)
+        if (Vector3.Distance(transform.position, grapplePoint) <= 3f)
         {
             isGrappling = false;
         }
