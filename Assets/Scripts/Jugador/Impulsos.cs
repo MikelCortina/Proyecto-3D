@@ -35,11 +35,6 @@ public class Impulsos : MonoBehaviour
 
     private bool isReloading = false; // Bandera para saber si estamos recargando
 
-    public float grappleSpeed = 20f;
-    public float maxGrappleDistance = 50f;
-    private Vector3 grapplePoint;
-    private bool isGrappling = false;
-    private bool isHanging = false;
 
     private LineRenderer lineRenderer; // Línea del gancho
 
@@ -102,24 +97,14 @@ public class Impulsos : MonoBehaviour
             muzzle.transform.localPosition = originalPosition2;
             muzzle.transform.localRotation = originalMuzzleRotation;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            TryGrapple();
-        }
+     
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            isGrappling = false;
-            isHanging = false;
+          
             lineRenderer.enabled = false; // Ocultar línea
         }
 
-        if (isGrappling)
-        {
-            MoveTowardsGrapplePoint();
-            UpdateGrappleLine();
-            RestrictDistanceAndSpeed(); // Restringir movimiento
-        }
 
         DisplayBullets();
     }
@@ -142,53 +127,9 @@ public class Impulsos : MonoBehaviour
             audioSource.PlayOneShot(shootSound);
         }
     }
-    void TryGrapple()
-    {
-        RaycastHit hit;
-        Vector3 rayOrigin = camera.transform.position;
-        Vector3 rayDirection = camera.transform.forward;
-
-        if (Physics.Raycast(rayOrigin, rayDirection, out hit, maxGrappleDistance))
-        {
-            grapplePoint = hit.point;
-            isGrappling = true;
-            isHanging = false;
-
-            // Activar línea del gancho
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, muzzle.position); // Inicio en el arma
-            lineRenderer.SetPosition(1, grapplePoint);    // Fin en el punto de impacto
-        }
-    }
-    void MoveTowardsGrapplePoint()
-    {
-        if (Vector3.Distance(transform.position, grapplePoint) > 3f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, grapplePoint, grappleSpeed * Time.deltaTime);
-        }
-        if (Vector3.Distance(transform.position, grapplePoint) <= 3f)
-        {
-            isGrappling = false;
-        }
-        else if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isHanging = true;
-        }
-        else
-        {
-            isGrappling = false;
-            isHanging = false;
-            lineRenderer.enabled = false; // Ocultar línea al soltar
-        }
-    }
-    void UpdateGrappleLine()
-    {
-        if (isGrappling)
-        {
-            lineRenderer.SetPosition(0, muzzle.position); // Actualizar inicio en el arma
-            lineRenderer.SetPosition(1, grapplePoint);    // Mantener punto final en el gancho
-        }
-    }
+   
+   
+ 
     IEnumerator Reload()
     {
         isReloading = true;
@@ -233,34 +174,7 @@ public class Impulsos : MonoBehaviour
 
         Debug.Log("Recarga completa.");
     }
-    void RestrictDistanceAndSpeed()
-    {
-        if (isGrappling && Input.GetKey(KeyCode.LeftShift))
-        {
-            float currentDistance = Vector3.Distance(transform.position, grapplePoint);
-
-            // Si está más lejos que la distancia máxima, limitar la posición
-            if (currentDistance > maxGrappleDistance)
-            {
-                Vector3 directionToGrapple = (grapplePoint - transform.position).normalized;
-                transform.position = grapplePoint - (directionToGrapple * maxGrappleDistance);
-
-                // Reducir la velocidad si intenta alejarse demasiado
-                rb.linearVelocity *= 0.8f; // Disminuye progresivamente la velocidad
-            }
-
-            // Si está cerca del punto y sigue manteniendo Shift, suspenderlo en el aire
-            if (currentDistance < 1.5f)
-            {
-                isHanging = true;
-                rb.linearVelocity = Vector3.zero; // Detener el movimiento al colgarse
-            }
-            else
-            {
-                isHanging = false;
-            }
-        }
-    }
+  
 
     void DisplayBullets()
     {

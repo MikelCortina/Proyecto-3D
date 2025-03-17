@@ -46,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        { 
+            rb.AddForce(Vector3.down*5000f, ForceMode.Impulse);
+        }
         MovePlayer();
 
         CheckGrounded();
