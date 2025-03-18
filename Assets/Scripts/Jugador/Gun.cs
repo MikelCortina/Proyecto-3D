@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     public AudioClip shootSound; // Clip de sonido del disparo
     public AudioSource audioSource; // Fuente de audio
     public Animator animator;
+    
 
     private void Start()
     {

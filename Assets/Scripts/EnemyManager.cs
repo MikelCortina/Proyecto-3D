@@ -3,30 +3,41 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public Impulsos armaJugador;
-    public DashRigidbody dash;
-    private Renderer enemyRenderer; // Se asignará automáticamente si no se asigna manualmente en el Inspector
+    private Impulsos armaJugador;
+    private DashRigidbody dash;
+    private Renderer enemyRenderer;
     private MaterialPropertyBlock propertyBlock;
-    private float tiempoDisolucion = 0.25f; // Tiempo total de la animación
+    private float tiempoDisolucion = 0.25f;
+    private Transform jugador; // Referencia al jugador
+    private LevelExit levelExit;
 
     private void Start()
     {
+        // Buscar el arma del jugador en la escena
+        armaJugador = FindObjectOfType<Impulsos>();
+
+        // Buscar el dash del jugador en la escena
+        dash = FindObjectOfType<DashRigidbody>();
+
+        // Buscar al jugador en la escena
+        GameObject jugadorObj = GameObject.FindGameObjectWithTag("Player");
+        if (jugadorObj != null)
+        {
+            jugador = jugadorObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un objeto con la etiqueta 'Player'.");
+        }
+
         // Inicializa el bloque de propiedades para cambiar los valores del shader
         propertyBlock = new MaterialPropertyBlock();
 
-        // Asigna el renderer automáticamente si no lo has hecho
-        if (enemyRenderer == null)
-        {
-            enemyRenderer = GetComponent<Renderer>();
-            if (enemyRenderer == null)
-            {
-                enemyRenderer = GetComponentInChildren<Renderer>();
-            }
-        }
+        // Asigna el renderer automáticamente
+        enemyRenderer = GetComponent<Renderer>() ?? GetComponentInChildren<Renderer>();
 
         if (enemyRenderer != null)
         {
-            // Cambia el shader del material principal
             Shader shaderNuevo = Shader.Find("Nombre/Del/Shader");
             if (shaderNuevo != null)
             {
@@ -37,11 +48,21 @@ public class EnemyHealth : MonoBehaviour
                 Debug.LogWarning("No se encontró el shader especificado.");
             }
         }
+
+        GameObject salidaObj = GameObject.FindGameObjectWithTag("Salida");
+        if (salidaObj != null)
+        {
+            levelExit = salidaObj.GetComponent<LevelExit>();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un objeto con el tag 'Salida'.");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && dash.hasDashed)
+        if (collision.gameObject.CompareTag("Player") && dash != null && dash.hasDashed)
         {
             if (armaJugador != null)
             {
@@ -52,14 +73,37 @@ public class EnemyHealth : MonoBehaviour
             {
                 dash.canDash = true;
             }
-            IniciarDisolucion();
+
+            if (PuedeVerAlJugador()) // Verifica si el enemigo tiene línea de visión con el jugador
+            {
+                IniciarDisolucion();
+            }
         }
+    }
+
+    private bool PuedeVerAlJugador()
+    {
+        if (jugador == null) return false; // Si no hay referencia al jugador, no puede verlo
+
+        Vector3 direccion = (jugador.position - transform.position).normalized;
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, direccion, out hit))
+        {
+            // Si el objeto impactado no es el jugador, entonces hay un obstáculo en el camino
+            if (!hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("El enemigo no puede ver al jugador. Hay un obstáculo: " + hit.collider.name);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void IniciarDisolucion()
     {
         GetComponent<Collider>().enabled = false;
-
         StartCoroutine(DisolverCoroutine(-0.80f, 0.60f, tiempoDisolucion));
     }
 
@@ -69,13 +113,13 @@ public class EnemyHealth : MonoBehaviour
 
         while (tiempo < duracion)
         {
-            float valorDisolucion = Mathf.Lerp(inicio, fin, tiempo / duracion); // Interpolación
+            float valorDisolucion = Mathf.Lerp(inicio, fin, tiempo / duracion);
             AplicarDisolucion(valorDisolucion);
             tiempo += Time.deltaTime;
             yield return null;
         }
 
-        AplicarDisolucion(fin); // Asegurar que termine en el valor exacto
+        AplicarDisolucion(fin);
         DestroyEnemy();
     }
 
@@ -97,18 +141,21 @@ public class EnemyHealth : MonoBehaviour
         if (other.gameObject.CompareTag("Bala"))
         {
             Debug.Log("¡Impacto registrado!");
-            Destroy(gameObject, 0.1f);
 
+            if (PuedeVerAlJugador()) // Solo se destruye si tiene línea de visión con el jugador
+            {
+                Destroy(gameObject, 0.1f);
+            }
         }
-    }
-
-    private void OnDestroy()
-    {
-       
     }
 
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        levelExit.killCount++;
     }
 }

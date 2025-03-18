@@ -11,6 +11,7 @@ TagManager:
   - BalaEnemy
   - Glovo
   - EnemigoMovimiento
+  - Salida
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - BalaEnemigo
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

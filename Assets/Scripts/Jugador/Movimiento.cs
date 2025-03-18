@@ -24,13 +24,14 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX = 0f;
     private bool isGrounded;
 
-    public float launchForce;
+    
     public DashRigidbody dashRigidbody;
     // Referencia al componente TextMesh Pro para mostrar la velocidad
     public TextMeshProUGUI speedText;  // Usa TextMeshProUGUI
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; // Para que el cursor no se vea.
         Cursor.visible = false; // Hace invisible el cursor.
@@ -139,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hit;
        
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f); // Ajusta el valor 1.1f según el tamaño del jugador
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.35f); // Ajusta el valor 1.1f según el tamaño del jugador
         
     }
 
