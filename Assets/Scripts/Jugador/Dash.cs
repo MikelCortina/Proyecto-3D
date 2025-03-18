@@ -4,14 +4,18 @@ using UnityEngine;
 public class DashRigidbody : MonoBehaviour
 {
     [Header("Dash Settings")]
-    public float dashSpeed = 30f;        // Velocidad del dash
-    public float dashDuration = 0.2f;    // Duración en segundos
-    public float dashCooldown = 1f;      // Tiempo de recarga
+    public float dashSpeed = 30f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
 
     [Header("Ground Check Settings")]
-    public float groundCheckDistance = 1.1f; // Distancia del raycast para detectar el suelo
+    public float groundCheckDistance = 1.1f;
 
     private Rigidbody rb;
+    private Collider playerCollider;    // <<<< Referencia al collider del jugador
+    private Vector3 originalColliderSize; // <<<< Guarda el tamaño original (para BoxCollider)
+    private Vector3 dashColliderSize = new Vector3(3f, 3f, 3f); // <<<< Tamaño durante el dash (ajústalo según tu juego)
+
     public bool isDashing = false;
     public float dashEndTime = 0f;
     public float lastDashTime = -999f;
@@ -21,13 +25,27 @@ public class DashRigidbody : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        // Obtenemos el collider del jugador
+        playerCollider = GetComponent<Collider>();
+
+        // Si es un BoxCollider o similar, guarda su tamaño inicial
+        if (playerCollider is BoxCollider)
+        {
+            originalColliderSize = ((BoxCollider)playerCollider).size;
+        }
+        else if (playerCollider is CapsuleCollider)
+        {
+            originalColliderSize = new Vector3(((CapsuleCollider)playerCollider).radius, ((CapsuleCollider)playerCollider).height, ((CapsuleCollider)playerCollider).radius);
+        }
+        else
+        {
+            Debug.LogWarning("No se detectó un BoxCollider ni un CapsuleCollider. Ajusta el código según el tipo de collider.");
+        }
     }
 
     void Update()
     {
-
-
-        // Input para dash, solo si puede hacer dash y ya pasó el cooldown
         if (Input.GetKeyDown(KeyCode.E) && canDash)
         {
             StartDash();
@@ -36,14 +54,33 @@ public class DashRigidbody : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Durante el dash, mueve el rigidbody hacia adelante a alta velocidad
         if (isDashing && Time.time < dashEndTime)
         {
             rb.linearVelocity = transform.forward * dashSpeed;
+
+            // Lanza un SphereCast al frente mientras dasheas
+            DetectEnemiesInDash();
         }
         else if (isDashing)
         {
             StartCoroutine(EndDash());
+        }
+    }
+
+    void DetectEnemiesInDash()
+    {
+        float sphereRadius = 1f;  // ajusta el radio a tu necesidad
+        float rayLength = 2f;     // distancia al frente para detectar enemigos
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereRadius, transform.forward, rayLength);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Enemigo"))
+            {
+                hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
+                canDash = true;  // Si quieres permitir concatenar el dash tras destruir uno
+            }
         }
     }
 
@@ -55,31 +92,51 @@ public class DashRigidbody : MonoBehaviour
         canDash = false;
         hasDashed = true;
 
-        rb.useGravity = false;  // Opcional: desactiva la gravedad durante el dash
+        rb.useGravity = false;
+
+        // Aumenta el tamaño del collider durante el dash
+        if (playerCollider is BoxCollider)
+        {
+            ((BoxCollider)playerCollider).size = dashColliderSize;
+        }
+        else if (playerCollider is CapsuleCollider)
+        {
+            ((CapsuleCollider)playerCollider).height = dashColliderSize.y;
+            ((CapsuleCollider)playerCollider).radius = dashColliderSize.x; // usa X o Z según prefieras
+        }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (isDashing && other.CompareTag("Enemy")) // Asegúrate de que los enemigos tengan el tag "Enemy"
+        if (isDashing && other.CompareTag("Enemigo"))
         {
-            canDash = true; // Permite concatenar dashes
+            canDash = true;
         }
     }
 
     IEnumerator EndDash()
     {
-       
         isDashing = false;
         rb.useGravity = true;
-        yield return new WaitForSeconds(0.15f);
-        
-        hasDashed = false;
 
-        // Opcional: reduce la velocidad después del dash para que no quede flotando
+        // Espera un poquito antes de terminar el dash (opcional)
+        yield return new WaitForSeconds(0.15f);
+
+        hasDashed = false;
         rb.linearVelocity *= 0.5f;
-        
+
+        // Regresa el tamaño del collider a su estado original
+        if (playerCollider is BoxCollider)
+        {
+            ((BoxCollider)playerCollider).size = originalColliderSize;
+        }
+        else if (playerCollider is CapsuleCollider)
+        {
+            ((CapsuleCollider)playerCollider).height = originalColliderSize.y;
+            ((CapsuleCollider)playerCollider).radius = originalColliderSize.x;
+        }
     }
 
-    // Visualizador del raycast en el editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

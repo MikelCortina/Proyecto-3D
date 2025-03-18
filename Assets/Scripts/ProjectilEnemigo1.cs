@@ -11,6 +11,7 @@ public class ProjectileBehavior : MonoBehaviour
     private float oscillationFrequency;
     private bool oscillating = false;
     private float startTime;
+   
   
 
     private void Start()
@@ -18,7 +19,7 @@ public class ProjectileBehavior : MonoBehaviour
         // Destruir el proyectil después de un tiempo
         Destroy(gameObject, lifetime);
         startTime = Time.time;
-
+      
     }
 
     public void MoveProjectile(Vector3 dir, float spd)
@@ -50,12 +51,8 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Te han dado");
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.CompareTag("Enemigo"))
+       
+         if (other.gameObject.CompareTag("Enemigo"))
         {
 
         }

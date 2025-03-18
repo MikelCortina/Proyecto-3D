@@ -1,24 +1,31 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class EnemyShooter : MonoBehaviour
 {
-    public GameObject projectilePrefab;  // Prefab del proyectil
-    public Transform player;  // Referencia al jugador
-    public float detectionRadius = 10f;  // Distancia a la que el enemigo detecta al jugador
-    public float shootInterval = 2f;  // Intervalo entre disparos
-    public float projectileSpeed = 5f;  // Velocidad del proyectil ajustada
-    public Color detectionRadiusColor = Color.red;  // Color del Gizmo
-    private Animator animator; // <-- Referencia al Animator
+    public GameObject projectilePrefab;
+    public Transform player;
+    public float detectionRadius = 10f;
+    public LayerMask obstacleLayer; // Capa para los obstáculos que deben bloquear la visión.
+
+    [Header("Disparo")]
+    public float minShootInterval = 1f; // Intervalo mínimo entre disparos
+    public float maxShootInterval = 3f; // Intervalo máximo entre disparos
+    public float projectileSpeed = 5f;
+
+    [Header("Debug Gizmo")]
+    public Color detectionRadiusColor = Color.red;
+
+    private Animator animator;
+    private bool playerInRange = false;
 
     private void Start()
     {
-        // Asigna el Animator desde el objeto o sus hijos
         animator = GetComponent<Animator>();
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
-            animator.speed = 1f;
         }
 
         if (animator != null)
@@ -29,22 +36,54 @@ public class EnemyShooter : MonoBehaviour
         {
             Debug.LogWarning("No se encontró un Animator en el objeto ni en sus hijos.");
         }
+
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        // Empieza la coroutine de disparo
-        InvokeRepeating("TryShoot", 0f, shootInterval);
+        // Empezamos el ciclo de disparos con un delay aleatorio
+        float randomStartDelay = Random.Range(0f, 2f);
+        StartCoroutine(ShootingLoop(randomStartDelay));
     }
 
-    private void TryShoot()
+    private IEnumerator ShootingLoop(float initialDelay)
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer <= detectionRadius)
+        // Espera inicial aleatoria para desincronizar los enemigos al empezar
+        yield return new WaitForSeconds(initialDelay);
+
+        while (true)
         {
-            StartCoroutine(ShootAnim());
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (distanceToPlayer <= detectionRadius)
+            {
+                // Verifica si hay algún obstáculo entre el enemigo y el jugador
+                if (!IsObstacleBetweenPlayerAndEnemy())
+                {
+                    StartCoroutine(ShootAnim());
+                }
+            }
+
+            // Espera entre disparos con un intervalo aleatorio
+            float randomShootInterval = Random.Range(minShootInterval, maxShootInterval);
+            yield return new WaitForSeconds(randomShootInterval);
         }
+    }
+
+    private bool IsObstacleBetweenPlayerAndEnemy()
+    {
+        // Disparar un rayo desde el enemigo hacia el jugador para verificar obstáculos
+        RaycastHit hit;
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, detectionRadius, obstacleLayer))
+        {
+            // Si el rayo golpea un objeto en la capa de obstáculos, significa que hay un obstáculo
+            return true; // Hay un obstáculo
+        }
+
+        return false; // No hay obstáculo
     }
 
     private void ShootAtPlayer()
@@ -66,18 +105,21 @@ public class EnemyShooter : MonoBehaviour
         Gizmos.color = detectionRadiusColor;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+
     IEnumerator ShootAnim()
     {
         if (animator != null)
         {
-            animator.SetTrigger("Shoot"); // Asegúrate que este trigger existe en tu Animator Controller
+            animator.SetTrigger("Shoot");
         }
+
         yield return new WaitForSeconds(0.2f);
+
         ShootAtPlayer();
 
         if (animator != null)
         {
-            animator.SetTrigger("DontShoot"); // Asegúrate que este trigger existe en tu Animator Controller
+            animator.SetTrigger("DontShoot");
         }
     }
 }

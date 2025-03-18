@@ -4,7 +4,7 @@ public class RayCast : MonoBehaviour
 {
     public float distanciDisparo = 500f;
     public float fuerzaDisparo = 15f;
-    public float fireRate = 0.5f;  // Tiempo entre disparos
+    public float fireRate = 0.3f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Control de tiempo de disparo
     public Camera cam;
     public LayerMask layerIgnorar; // Asigna esto en el Inspector para excluir capas

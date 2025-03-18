@@ -7,12 +7,14 @@ public class SceneReloader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Time.timeScale = 1f;
             ReloadScene();
         }
     }
 
-    private void ReloadScene()
+    public void ReloadScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
