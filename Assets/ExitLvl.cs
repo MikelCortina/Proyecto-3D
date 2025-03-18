@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class LevelExit : MonoBehaviour
 {
     public int killCount = 0;
+    public EndLevelUI end;
 
     private void Start()
     {
@@ -14,7 +15,7 @@ public class LevelExit : MonoBehaviour
         if (other.CompareTag("Player")&&killCount==1) 
         {
             
-        SceneManager.LoadScene("Menu Jugar");
+        end.ShowEndScreen();
         }
     }
 }

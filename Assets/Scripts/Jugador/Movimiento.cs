@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hit;
        
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.35f); // Ajusta el valor 1.1f según el tamaño del jugador
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.6f); // Ajusta el valor 1.1f según el tamaño del jugador
         
     }
 

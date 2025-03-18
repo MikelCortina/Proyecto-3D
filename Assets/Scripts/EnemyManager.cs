@@ -36,19 +36,7 @@ public class EnemyHealth : MonoBehaviour
         // Asigna el renderer automáticamente
         enemyRenderer = GetComponent<Renderer>() ?? GetComponentInChildren<Renderer>();
 
-        if (enemyRenderer != null)
-        {
-            Shader shaderNuevo = Shader.Find("Nombre/Del/Shader");
-            if (shaderNuevo != null)
-            {
-                enemyRenderer.material.shader = shaderNuevo;
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró el shader especificado.");
-            }
-        }
-
+       
         GameObject salidaObj = GameObject.FindGameObjectWithTag("Salida");
         if (salidaObj != null)
         {
