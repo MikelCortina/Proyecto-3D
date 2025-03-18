@@ -5,6 +5,7 @@ public class LevelExit : MonoBehaviour
 {
     public int killCount = 0;
     public EndLevelUI end;
+    public int killCountObjc;
 
     private void Start()
     {
@@ -12,7 +13,7 @@ public class LevelExit : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")&&killCount==1) 
+        if (other.CompareTag("Player")&&killCount==killCountObjc) 
         {
             
         end.ShowEndScreen();

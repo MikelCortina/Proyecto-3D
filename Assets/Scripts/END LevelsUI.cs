@@ -10,6 +10,7 @@ public class EndLevelUI : MonoBehaviour
     public TextMeshProUGUI bestTimesText;
     public Timer timer;
     public BestTimesManager bestTimesManager;
+    public int level;
 
     void Start()
     {
@@ -26,12 +27,12 @@ public class EndLevelUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
         float finalTime = timer.GetCurrentTime();
-        bestTimesManager.SaveNewTime(finalTime);
+        bestTimesManager.SaveNewTime(finalTime, level);
 
         finalTimeText.text = $" {finalTime:F2} s";
 
         string bestTimesDisplay = "";
-        float[] bestTimes = bestTimesManager.GetBestTimes();
+        float[] bestTimes = bestTimesManager.GetBestTimes(level);
         for (int i = 0; i < bestTimes.Length; i++)
         {
             bestTimesDisplay += $"{i + 1}: {bestTimes[i]:F2} s\n";
@@ -45,13 +46,12 @@ public class EndLevelUI : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Lvl 1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void NextLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Lvl2");
+        SceneManager.LoadScene("Lvl 2");
     }
-
 }

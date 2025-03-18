@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("ZonaVelocidad"))
         {
             maxVelocity = 50f;
-            moveSpeed = 30f;
+            moveSpeed = 50f;
         }
         else
         {
