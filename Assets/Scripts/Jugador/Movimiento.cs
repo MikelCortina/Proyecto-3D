@@ -252,6 +252,26 @@ public class PlayerMovement : MonoBehaviour
             }
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.CompareTag("SuperGlovo"))
+        {
+
+            if (dashRigidbody.isDashing)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
+                dashRigidbody.canDash = true;
+                dashRigidbody.isDashing = false;
+                rb.useGravity = true;
+            }
+            else
+            {
+                // Ajusta la fuerza del impulso vertical
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
+                dashRigidbody.canDash = true;
+                dashRigidbody.isDashing = false;
+                rb.useGravity = true;
+            }
+            Destroy(collision.gameObject);
+        }
     }
     void PlayFootsteps()
     {

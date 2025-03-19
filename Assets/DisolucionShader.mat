@@ -58,7 +58,7 @@ Material:
     - _Disolcuion_Inicial: -0.8
     - _Disolucion_Inicial: -0.8
     - _DissolveAmount: 0.02
-    - _EdgeWidth: 20
+    - _EdgeWidth: 31.48
     - _NoiseScale: 20
     - _QueueControl: 0
     - _QueueOffset: 0

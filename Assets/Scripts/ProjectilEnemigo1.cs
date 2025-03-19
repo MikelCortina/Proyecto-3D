@@ -64,5 +64,9 @@ public class ProjectileBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (other.gameObject.CompareTag("EnemigoMovimiento"))
+        {
+
+        }
     }
 }

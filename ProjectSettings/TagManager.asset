@@ -12,6 +12,7 @@ TagManager:
   - Glovo
   - EnemigoMovimiento
   - Salida
+  - SuperGlovo
   layers:
   - Default
   - TransparentFX
