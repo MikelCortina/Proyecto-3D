@@ -21,10 +21,15 @@ public class DashRigidbody : MonoBehaviour
     public float lastDashTime = -999f;
     public bool canDash = true;
     public bool hasDashed;
+    
+
+    public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public float speedThreshold; // Velocidad mínima para activar partículas
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        speedParticles.Stop();
 
         // Obtenemos el collider del jugador
         playerCollider = GetComponent<Collider>();
@@ -60,10 +65,18 @@ public class DashRigidbody : MonoBehaviour
 
             // Lanza un SphereCast al frente mientras dasheas
             DetectEnemiesInDash();
+            if (!speedParticles.isPlaying)
+            {
+                speedParticles.Play(); // Activa las partículas
+            }
         }
         else if (isDashing)
         {
             StartCoroutine(EndDash());
+            if (speedParticles.isPlaying)
+            {
+                speedParticles.Stop(); // Desactiva las partículas
+            }
         }
     }
 

@@ -43,12 +43,14 @@ public class PlayerMovement : MonoBehaviour
     private float landSoundCooldown = 1f;  // Duración del cooldown en segundos
     private float landSoundCooldownTimer = 0f; // Contador
 
+    public bool rapido = false;
 
 
     void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
+       
+       
         Cursor.lockState = CursorLockMode.Locked; // Para que el cursor no se vea.
         Cursor.visible = false; // Hace invisible el cursor.
         rb.freezeRotation = true;
@@ -135,34 +137,47 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+        float speed = moveSpeed;
 
-            float speed = moveSpeed;
+        float moveX = Input.GetAxis("Horizontal"); // A, D
+        float moveZ = Input.GetAxis("Vertical");   // W, S
 
-            float moveX = Input.GetAxis("Horizontal"); // A, D
-            float moveZ = Input.GetAxis("Vertical");   // W, S
+        Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
 
-            Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
+        // Normalizar la dirección de movimiento para evitar el aumento de velocidad en diagonal
+        if (moveDirection.magnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
 
-            // Normalizar la dirección de movimiento para evitar el aumento de velocidad en diagonal
-            if (moveDirection.magnitude > 1f)
-            {
-                moveDirection.Normalize();
-            }
+        // Aplicar inercia en el movimiento solo en los ejes X y Z
+        Vector3 targetVelocity = moveDirection * speed;
+        Vector3 velocityXZ = Vector3.Lerp(new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z), targetVelocity, Time.deltaTime * inertiaFactor);
 
-            // Aplicar inercia en el movimiento solo en los ejes X y Z
-            Vector3 targetVelocity = moveDirection * speed;
-            Vector3 velocityXZ = Vector3.Lerp(new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z), targetVelocity, Time.deltaTime * inertiaFactor);
+        // Limitar la velocidad en los ejes X y Z sin afectar la caída en Y
+        if (velocityXZ.magnitude > maxVelocity)
+        {
+            velocityXZ = velocityXZ.normalized * maxVelocity;
+        }
 
-            // Limitar la velocidad en los ejes X y Z sin afectar la caída en Y
-            if (velocityXZ.magnitude > maxVelocity)
-            {
-                velocityXZ = velocityXZ.normalized * maxVelocity;
-            }
+        // Aplicar la nueva velocidad manteniendo el valor de Y sin cambios
+        rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
 
-            // Aplicar la nueva velocidad manteniendo el valor de Y sin cambios
-            rb.linearVelocity = new Vector3(velocityXZ.x, rb.linearVelocity.y, velocityXZ.z);
-        
+        float currentSpeed = rb.linearVelocity.magnitude;
+        float verticalSpeed = rb.linearVelocity.y;
+
+        // Verifica si la velocidad total supera el umbral o si la velocidad en Y es mayor a 20
+        if (currentSpeed > 15 || verticalSpeed > 10f)
+        {
+            rapido = true;
+        }
+        else
+        {
+            rapido = false;
+        }
     }
+
+
 
     void LookAround()
     {

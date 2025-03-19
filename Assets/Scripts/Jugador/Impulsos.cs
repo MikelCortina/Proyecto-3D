@@ -16,6 +16,7 @@ public class Impulsos : MonoBehaviour
     public float recoilDistance;
     public float recoilCameraDistance = 0.1f;
     public float recoilDuration = 0.1f;
+    public PlayerMovement player;
 
     private Vector3 originalPosition1;
     private Vector3 originalPosition2;
@@ -35,8 +36,8 @@ public class Impulsos : MonoBehaviour
 
     private bool isReloading = false; // Bandera para saber si estamos recargando
 
-
-    private LineRenderer lineRenderer; // Línea del gancho
+    public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public float speedThreshold; // Velocidad mínima para activar partículas
 
     void Start()
     {
@@ -51,13 +52,7 @@ public class Impulsos : MonoBehaviour
         reloadRotation = originalWeaponRotation * Quaternion.Euler(0f, 0f, -75f);
 
         chargerMax = charger;
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.05f;   // Grosor de la línea al inicio
-        lineRenderer.endWidth = 0.05f;     // Grosor de la línea al final
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // Material simple
-        lineRenderer.startColor = Color.cyan;  // Color de la línea
-        lineRenderer.endColor = Color.cyan;
-        lineRenderer.enabled = false; // Ocultar al inicio
+
     }
 
     void Update()
@@ -69,7 +64,19 @@ public class Impulsos : MonoBehaviour
         {
             Shoot();
             ShootBullet();
+            if (!speedParticles.isPlaying&&player.rapido)
+            {
+                speedParticles.Play(); // Activa las partículas
+            }
             nextFireTime = Time.time + fireRate;
+
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (speedParticles.isPlaying)
+            {
+                speedParticles.Stop(); // Activa las partículas
+            }
         }
 
         // Recargar manualmente con la tecla R
@@ -96,13 +103,6 @@ public class Impulsos : MonoBehaviour
             camera.transform.localPosition = originalPosition1;
             muzzle.transform.localPosition = originalPosition2;
             muzzle.transform.localRotation = originalMuzzleRotation;
-        }
-     
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-          
-            lineRenderer.enabled = false; // Ocultar línea
         }
 
 
@@ -179,5 +179,20 @@ public class Impulsos : MonoBehaviour
     void DisplayBullets()
     {
         bulletText.text = charger + "/" + chargerMax;
+    }
+
+    IEnumerator DashScreen()
+    {
+        if (!speedParticles.isPlaying)
+        {
+            speedParticles.Play(); // Activa las partículas
+        }
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (speedParticles.isPlaying)
+        {
+            speedParticles.Stop(); // Desactiva las partículas
+        }
     }
 }

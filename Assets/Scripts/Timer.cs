@@ -1,22 +1,26 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText; // Asigna un UI Text en el Inspector
-    public Rigidbody playerRigidbody; // Asigna el Rigidbody del jugador en el Inspector
+    public Rigidbody player; // Asigna el Rigidbody del jugador en el Inspector
     private float currentTime;
     private bool isRunning;
 
     void Start()
     {
         ResetTimer();
+      
+
     }
 
     void Update()
     {
-        if (!isRunning && playerRigidbody.linearVelocity.magnitude > 0.1f) // Detecta movimiento
+        if (!isRunning && player.linearVelocity.magnitude > 0.1f) // Detecta movimiento
         {
             StartTimer();
         }
