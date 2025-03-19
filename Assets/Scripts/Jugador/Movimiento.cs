@@ -24,10 +24,26 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX = 0f;
     private bool isGrounded;
 
-    
+    public AudioClip[] footstepSounds;  // Array de sonidos de pasos
+
+    public float stepInterval;    // Tiempo entre pasos
+    private float stepTimer = 0f;        // Controla el tiempo entre pasos
+
+    private int lastFootstepIndex = -1; // Guarda el último sonido que se usó
+
+    public AudioSource audioSource;
+    public AudioClip landSound;
+
+
     public DashRigidbody dashRigidbody;
     // Referencia al componente TextMesh Pro para mostrar la velocidad
     public TextMeshProUGUI speedText;  // Usa TextMeshProUGUI
+
+    private bool wasGrounded;
+    private float landSoundCooldown = 1f;  // Duración del cooldown en segundos
+    private float landSoundCooldownTimer = 0f; // Contador
+
+
 
     void Start()
     {
@@ -43,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (landSoundCooldownTimer > 0f)
+        {
+            landSoundCooldownTimer -= Time.deltaTime;
+        }
         if (rb.linearVelocity.y < 0) // Solo cuando cae
         {
             rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
@@ -50,10 +70,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
         { 
             rb.AddForce(Vector3.down*5000f, ForceMode.Impulse);
+
         }
         MovePlayer();
 
         CheckGrounded();
+
+        PlayFootsteps();
 
 
         // Solo saltas si el cooldown terminó
@@ -65,8 +88,23 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        if (!wasGrounded && isGrounded)
+        {
+            if (landSoundCooldownTimer <= 0f)
+            {
+                if (landSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(landSound);
+                }
 
-      
+                // Reiniciar el cooldown después de reproducir el sonido
+                landSoundCooldownTimer = landSoundCooldown;
+            }
+        }
+
+        wasGrounded = isGrounded;
+
+
         DisplaySpeed();
         LookAround();
     }
@@ -75,12 +113,14 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("ZonaVelocidad"))
         {
             maxVelocity = 50f;
-            moveSpeed = 50f;
+            moveSpeed = 35f;
+            stepInterval= 0.2f;
         }
         else
         {
             maxVelocity = originMaxVelocity;
             moveSpeed = originSpeed;
+            stepInterval = 0.35f;
         }
 
     }
@@ -213,6 +253,45 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    void PlayFootsteps()
+    {
+        float speed = rb.linearVelocity.magnitude;
+
+        // Condiciones para que suenen los pasos:
+        if (isGrounded && speed > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                if (footstepSounds.Length > 0 && audioSource != null)
+                {
+                    int index;
+
+                    // Escoger un índice al azar, pero distinto al anterior
+                    do
+                    {
+                        index = Random.Range(0, footstepSounds.Length);
+                    } while (index == lastFootstepIndex && footstepSounds.Length > 1);
+
+                    // Reproducir el sonido elegido
+                    audioSource.PlayOneShot(footstepSounds[index]);
+
+                    // Guardamos el último sonido para evitar repetidos
+                    lastFootstepIndex = index;
+
+                    // Reiniciar el temporizador del paso
+                    stepTimer = stepInterval;
+                }
+            }
+        }
+        else
+        {
+            // Si no se mueve o no está en el suelo, se resetea el temporizador
+            stepTimer = 0f;
+        }
+    }
+
 
 
 
