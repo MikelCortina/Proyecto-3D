@@ -6,16 +6,16 @@ public class Impulsos : MonoBehaviour
 {
     public Transform muzzle;
     public Transform muzzleBalas;
-    public float fireRate;
+    private float fireRate = 0.1f;
     private float nextFireTime = 0f;
     public new Camera camera;
     public Rigidbody rb;
-    public float shootForce;
+    private float shootForce = 200;
     public GameObject projectilePrefab;
-    public float recoilRotationAmount;
-    public float recoilDistance;
-    public float recoilCameraDistance = 0.1f;
-    public float recoilDuration = 0.1f;
+    private float recoilRotationAmount = 0.1f;
+    private float recoilDistance = 0.1f;
+    private float recoilCameraDistance = 0.1f;
+    private float recoilDuration = 0.1f;
     public PlayerMovement player;
 
     private Vector3 originalPosition1;
@@ -25,9 +25,9 @@ public class Impulsos : MonoBehaviour
     private Quaternion reloadRotation;           // Rotación hacia arriba durante recarga
     private float recoilTimer = 0f;
 
-    public float charger;
-    public float chargerMax;
-    public float recargaTimer;
+    public float charger = 15;
+    public float chargerMax = 15;
+    public float recargaTimer = 1.5f;
 
     public AudioClip shootSound;
     public AudioSource audioSource;
@@ -37,8 +37,29 @@ public class Impulsos : MonoBehaviour
     private bool isReloading = false; // Bandera para saber si estamos recargando
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
-    public float speedThreshold; // Velocidad mínima para activar partículas
+ 
+    
 
+    void Awake()
+    {
+        // Busca todos los textos en la escena
+        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
+
+        foreach (TextMeshProUGUI tmp in allTexts)
+        {
+            if (tmp.text == "Bullets") // Aquí pones el texto que quieres buscar
+            {
+                bulletText = tmp;
+                Debug.Log("bulletText asignado automáticamente a: " + tmp.gameObject.name);
+                break;
+            }
+        }
+
+        if (bulletText == null)
+        {
+            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Bullets'");
+        }
+    }
     void Start()
     {
         originalPosition1 = camera.transform.localPosition;
@@ -64,8 +85,9 @@ public class Impulsos : MonoBehaviour
         {
             Shoot();
             ShootBullet();
-            if (!speedParticles.isPlaying&&player.rapido)
+            if (player.rapido)
             {
+
                 speedParticles.Play(); // Activa las partículas
             }
             nextFireTime = Time.time + fireRate;

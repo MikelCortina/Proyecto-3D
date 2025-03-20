@@ -6,18 +6,18 @@ public class Gun : MonoBehaviour
     public GameObject projectilePrefab;  // Prefabricado del proyectil
     public Transform muzzle;  // La posición de la boca del arma (donde rota)
     public Transform muzzleTarget;// La posición de la boca del arma (donde parece que se dispara)
-    public float fireRate = 0.5f;  // Tiempo entre disparos
+    private float fireRate = 0.5f;  // Tiempo entre disparos
     private float nextFireTime = 0f;  // Para controlar el tiempo de recarga entre disparos
     public new Camera camera;
-    public float recoilAmount = 10f; // Ángulo de retroceso en grados
-    public float recoilCameraAmount = 3f;
-    public float recoilDuration = 0.1f; // Duración del retroceso
+    private float recoilAmount = 10f; // Ángulo de retroceso en grados
+    private float recoilCameraAmount = 3f;
+    private float recoilDuration = 0.1f; // Duración del retroceso
     private float recoilTimer = 0f; // Temporizador de retroceso
     private Quaternion originalCameraRotation; // Rotación original de la cámara
     private Quaternion originalMuzzleRotation; // Rotación original del muzzle
-    public AudioClip shootSound; // Clip de sonido del disparo
-    public AudioSource audioSource; // Fuente de audio
+   
     public Animator animator;
+    
     
 
     private void Start()
@@ -35,6 +35,7 @@ public class Gun : MonoBehaviour
         // Detectar si el jugador hace clic para disparar
         if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) // "Fire1" es el clic izquierdo por defecto
         {
+            
             animator.speed = 3f;
             StartCoroutine(ShootAnim());
             
@@ -87,10 +88,7 @@ public class Gun : MonoBehaviour
         recoilTimer = recoilDuration;  // Iniciar el retroceso
 
         // Reproduce el sonido del disparo
-        if (audioSource != null && shootSound != null)
-        {
-            audioSource.PlayOneShot(shootSound);
-        }
+       
 
       
     }

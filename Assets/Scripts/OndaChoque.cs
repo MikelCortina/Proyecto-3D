@@ -11,6 +11,8 @@ public class PlayerFallAttack : MonoBehaviour
     private DashRigidbody dashRigidbody;
     private Impulsos impulsos;
 
+    public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,6 +26,7 @@ public class PlayerFallAttack : MonoBehaviour
         {
             rb.AddForce(Vector3.down * fallForce, ForceMode.Impulse);
             isFalling = true; // Marca que el jugador está cayendo
+            speedParticles.Play();
         }
     }
 
@@ -31,6 +34,7 @@ public class PlayerFallAttack : MonoBehaviour
     {
         if (isFalling)
         {
+            speedParticles.Stop();
             // Detectar todos los objetos en el radio de daño
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius);
 

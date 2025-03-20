@@ -5,18 +5,17 @@ using System.Collections; // Importa el espacio de nombres para TextMesh Pro
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 20f;
-    public float sprintSpeed = 20f;
-    public float lookSpeed = 2f;
-    public float maxLookAngle = 80f;
-    public float jumpForce = 10f;
-    public float inertiaFactor = 5f; // Factor de inercia
-    public float maxVelocity; // Velocidad máxima permitida
+    private float moveSpeed = 20f;
+    private float lookSpeed = 1f;
+    private float maxLookAngle = 90f;
+    private float jumpForce = 1250f;
+    private float inertiaFactor = 50f; // Factor de inercia
+    private float maxVelocity = 40f; // Velocidad máxima permitida
     private float originSpeed;
     private float originMaxVelocity;
     public Vector3 originalVelocity;
-    public float speed;
-    
+    private float speed;
+
 
 
     public Rigidbody rb;
@@ -33,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip landSound;
+    public bool isMovingTowards = false;
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
 
 
     public DashRigidbody dashRigidbody;
@@ -45,12 +47,40 @@ public class PlayerMovement : MonoBehaviour
 
     public bool rapido = false;
 
+    public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
 
+    private Coroutine currentDashEffectCoroutine; // Guarda la corutina actual en ejecución
+
+
+
+
+    void Awake()
+    {
+
+        speedParticles.Stop();
+        // Busca todos los textos en la escena
+        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
+
+        foreach (TextMeshProUGUI tmp in allTexts)
+        {
+            if (tmp.text == "Speed") // Aquí pones el texto que quieres buscar
+            {
+                speedText = tmp;
+                Debug.Log("speedText asignado automáticamente a: " + tmp.gameObject.name);
+                break;
+            }
+        }
+
+        if (speedText == null)
+        {
+            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Speed'");
+        }
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
-       
+
+
         Cursor.lockState = CursorLockMode.Locked; // Para que el cursor no se vea.
         Cursor.visible = false; // Hace invisible el cursor.
         rb.freezeRotation = true;
@@ -69,9 +99,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
-        { 
-            rb.AddForce(Vector3.down*5000f, ForceMode.Impulse);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rb.AddForce(Vector3.down * 5000f, ForceMode.Impulse);
 
         }
         MovePlayer();
@@ -86,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isGrounded)
             {
+                audioSource.PlayOneShot(jumpSound);
                 Jump();
 
             }
@@ -116,13 +147,19 @@ public class PlayerMovement : MonoBehaviour
         {
             maxVelocity = 50f;
             moveSpeed = 35f;
-            stepInterval= 0.2f;
+            stepInterval = 0.2f;
+
+            speedParticles.Play(); // Activa las partículas
+
+        
         }
         else
         {
+
             maxVelocity = originMaxVelocity;
             moveSpeed = originSpeed;
             stepInterval = 0.35f;
+
         }
 
     }
@@ -132,6 +169,12 @@ public class PlayerMovement : MonoBehaviour
         {
             maxVelocity = originMaxVelocity;
             moveSpeed = originSpeed;
+
+            if (!isMovingTowards)
+            {
+                speedParticles.Stop(); // Activa las partículas
+            }
+
         }
     }
 
@@ -167,10 +210,11 @@ public class PlayerMovement : MonoBehaviour
         float verticalSpeed = rb.linearVelocity.y;
 
         // Verifica si la velocidad total supera el umbral o si la velocidad en Y es mayor a 20
-        if (currentSpeed > 15 || verticalSpeed > 10f)
+        if (verticalSpeed > 10f)
         {
             rapido = true;
         }
+
         else
         {
             rapido = false;
@@ -194,9 +238,9 @@ public class PlayerMovement : MonoBehaviour
     void CheckGrounded()
     {
         RaycastHit hit;
-       
-            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.6f); // Ajusta el valor 1.1f según el tamaño del jugador
-        
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1.6f); // Ajusta el valor 1.1f según el tamaño del jugador
+
     }
 
     void Jump()
@@ -215,15 +259,17 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveToEnemy(Vector3 enemyPosition)
     {
+        audioSource.PlayOneShot(dashSound);
         StartCoroutine(MoveToPositionCoroutine(enemyPosition));
     }
     private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
     {
-       
+
         originalVelocity = rb.linearVelocity;
 
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
         float startTime = Time.time;
+        speedParticles.Play(); // Activa las partículas
 
         // Lerp desde la posición actual hasta la del enemigo
         while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
@@ -235,56 +281,54 @@ public class PlayerMovement : MonoBehaviour
 
             transform.position = Vector3.Lerp(transform.position, targetPosition, fractionOfJourney);
 
+
+
             yield return null;
         }
 
         // Aseguramos que el jugador llegue exactamente a la posición del enemigo
         transform.position = targetPosition;
 
+        speedParticles.Stop(); // Activa las partículas
         // Restauramos la velocidad original
         rb.linearVelocity = originalVelocity;
-       
+
     }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Glovo"))
         {
-           
-            if (dashRigidbody.isDashing) 
+            // Si hay una corutina corriendo, la paramos antes de iniciar otra
+            if (currentDashEffectCoroutine != null)
             {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
-                dashRigidbody.canDash = true;
-                dashRigidbody.isDashing = false;
-                rb.useGravity = true;
+                StopCoroutine(currentDashEffectCoroutine);
             }
-            else
-            {
-                // Ajusta la fuerza del impulso vertical
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
-                     dashRigidbody.canDash = true;
-                dashRigidbody.isDashing = false;
-                rb.useGravity = true;
-            }
+
+            currentDashEffectCoroutine = StartCoroutine(DashEffect());
+
+            // Lógica del impulso vertical para Glovo
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
+            dashRigidbody.canDash = true;
+            dashRigidbody.isDashing = false;
+            rb.useGravity = true;
+
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("SuperGlovo"))
+        else if (collision.gameObject.CompareTag("SuperGlovo"))
         {
+            if (currentDashEffectCoroutine != null)
+            {
+                StopCoroutine(currentDashEffectCoroutine);
+            }
 
-            if (dashRigidbody.isDashing)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
-                dashRigidbody.canDash = true;
-                dashRigidbody.isDashing = false;
-                rb.useGravity = true;
-            }
-            else
-            {
-                // Ajusta la fuerza del impulso vertical
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
-                dashRigidbody.canDash = true;
-                dashRigidbody.isDashing = false;
-                rb.useGravity = true;
-            }
+            currentDashEffectCoroutine = StartCoroutine(DashEffect());
+
+            // Lógica del impulso vertical para SuperGlovo
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
+            dashRigidbody.canDash = true;
+            dashRigidbody.isDashing = false;
+            rb.useGravity = true;
+
             Destroy(collision.gameObject);
         }
     }
@@ -328,6 +372,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-
+    IEnumerator DashEffect()
+    {
+        speedParticles.Play();
+        yield return new WaitForSeconds(1f);
+        speedParticles.Stop();
+    }
 }
+

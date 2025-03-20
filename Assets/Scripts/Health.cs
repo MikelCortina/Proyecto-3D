@@ -9,6 +9,26 @@ public class Health : MonoBehaviour
     public TextMeshProUGUI healthText; // Referencia al texto de la UI
     private DashRigidbody dash;
 
+    void Awake()
+    {
+        // Busca todos los textos en la escena
+        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
+
+        foreach (TextMeshProUGUI tmp in allTexts)
+        {
+            if (tmp.text == "Health") // Cambia aquí si el texto es diferente
+            {
+                healthText = tmp;
+                Debug.Log("healthText asignado automáticamente a: " + tmp.gameObject.name);
+                break;
+            }
+        }
+
+        if (healthText == null)
+        {
+            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Health'");
+        }
+    }
     void Start()
     {
         dash = GetComponent<DashRigidbody>();

@@ -18,7 +18,6 @@ public class EnemyShooter : MonoBehaviour
     public Color detectionRadiusColor = Color.red;
 
     private Animator animator;
-    private bool playerInRange = false;
 
     private void Start()
     {

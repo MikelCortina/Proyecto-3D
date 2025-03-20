@@ -13,7 +13,7 @@ public class LevelExit : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")&&killCount==killCountObjc) 
+        if (other.CompareTag("Player")&&killCount>=killCountObjc) 
         {
             
         end.ShowEndScreen();

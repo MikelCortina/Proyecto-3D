@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class DashRigidbody : MonoBehaviour
 {
@@ -26,10 +27,14 @@ public class DashRigidbody : MonoBehaviour
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
     public float speedThreshold; // Velocidad mínima para activar partículas
 
+    public AudioClip dashSound;
+    public AudioSource audioSource;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         speedParticles.Stop();
+        rb = GetComponent<Rigidbody>();
+      
 
         // Obtenemos el collider del jugador
         playerCollider = GetComponent<Collider>();
@@ -65,18 +70,16 @@ public class DashRigidbody : MonoBehaviour
 
             // Lanza un SphereCast al frente mientras dasheas
             DetectEnemiesInDash();
-            if (!speedParticles.isPlaying)
-            {
-                speedParticles.Play(); // Activa las partículas
-            }
+          
+            
+                // Activa las partículas
+          
         }
         else if (isDashing)
         {
             StartCoroutine(EndDash());
-            if (speedParticles.isPlaying)
-            {
-                speedParticles.Stop(); // Desactiva las partículas
-            }
+         
+               
         }
     }
 
@@ -99,11 +102,13 @@ public class DashRigidbody : MonoBehaviour
 
     void StartDash()
     {
+        audioSource.PlayOneShot(dashSound);
         isDashing = true;
         dashEndTime = Time.time + dashDuration;
         lastDashTime = Time.time;
         canDash = false;
         hasDashed = true;
+        speedParticles.Play();
 
         rb.useGravity = false;
 
@@ -131,7 +136,7 @@ public class DashRigidbody : MonoBehaviour
     {
         isDashing = false;
         rb.useGravity = true;
-
+        speedParticles.Stop();
         // Espera un poquito antes de terminar el dash (opcional)
         yield return new WaitForSeconds(0.15f);
 
