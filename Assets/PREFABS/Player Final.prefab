@@ -226,7 +226,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.99999917, z: -0, w: -0.001351282}
   m_LocalPosition: {x: 25.494225, y: -14.357531, z: 45.057873}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8954808401583127996}
@@ -306,9 +306,13 @@ MonoBehaviour:
   stepInterval: 0.25
   audioSource: {fileID: 6443942777209423725}
   landSound: {fileID: 8300000, guid: c2e0d3f88cb48f240af40a1f1bac7e8c, type: 3}
+  isMovingTowards: 0
+  jumpSound: {fileID: 8300000, guid: e708389b7a8f64a46aa12d201c187b69, type: 3}
+  dashSound: {fileID: 8300000, guid: 014eef2c50944284482df9db08c78538, type: 3}
   dashRigidbody: {fileID: 720118448033238030}
   speedText: {fileID: 0}
   rapido: 0
+  speedParticles: {fileID: 7972774188996515450}
 --- !u!114 &1573286958613818388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,8 +329,6 @@ MonoBehaviour:
   muzzle: {fileID: 106197745928999323}
   muzzleTarget: {fileID: 106197745928999323}
   camera: {fileID: 6218290563337148242}
-  shootSound: {fileID: 8300000, guid: 4d1c89c02d4eb6a45b6be30bb721359e, type: 3}
-  audioSource: {fileID: 6443942777209423725}
   animator: {fileID: 7763611750343944414}
 --- !u!114 &3740512921958237540
 MonoBehaviour:
@@ -368,7 +370,7 @@ MonoBehaviour:
   dashSpeed: 80
   dashDuration: 0.4
   dashCooldown: 0
-  groundCheckDistance: 1.1
+  groundCheckDistance: 1.6
   isDashing: 0
   dashEndTime: 0
   lastDashTime: -999
@@ -376,6 +378,8 @@ MonoBehaviour:
   hasDashed: 0
   speedParticles: {fileID: 7972774188996515450}
   speedThreshold: 0
+  dashSound: {fileID: 8300000, guid: 014eef2c50944284482df9db08c78538, type: 3}
+  audioSource: {fileID: 6443942777209423725}
 --- !u!114 &4027266204820956603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +402,9 @@ MonoBehaviour:
   jugador: {fileID: 878438982078430053}
   armaJugador: {fileID: 3740512921958237540}
   dash: {fileID: 720118448033238030}
+  soundEffectYoN: 0
+  shootSound: {fileID: 8300000, guid: 4d1c89c02d4eb6a45b6be30bb721359e, type: 3}
+  audioSource: {fileID: 6443942777209423725}
 --- !u!114 &6427735135310502488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +420,7 @@ MonoBehaviour:
   fallForce: 5000
   damageRadius: 5
   enemyTag: Enemigo
+  speedParticles: {fileID: 7972774188996515450}
 --- !u!114 &6951697279420999249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +786,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.86263
+      objectReference: {fileID: 0}
+    - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -787,7 +799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 11.6
       objectReference: {fileID: 0}
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_LocalRotation.w
@@ -807,7 +819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -824,6 +836,10 @@ PrefabInstance:
     - target: {fileID: 1029171006900154857, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750184814129283775, guid: b95349b8a76c438468995cb9b772b406, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2750184814129283775, guid: b95349b8a76c438468995cb9b772b406, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1

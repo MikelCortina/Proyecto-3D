@@ -11,6 +11,14 @@ public class LevelExit : MonoBehaviour
     {
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Time.timeScale = 1f;
+            ReloadScene();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")&&killCount>=killCountObjc) 
@@ -18,5 +26,10 @@ public class LevelExit : MonoBehaviour
             
         end.ShowEndScreen();
         }
+    }
+    public void ReloadScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
+
     void Awake()
     {
 
@@ -210,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         float verticalSpeed = rb.linearVelocity.y;
 
         // Verifica si la velocidad total supera el umbral o si la velocidad en Y es mayor a 20
-        if (verticalSpeed > 10f)
+        if (verticalSpeed > 9f)
         {
             rapido = true;
         }
@@ -375,7 +377,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashEffect()
     {
         speedParticles.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         speedParticles.Stop();
     }
 }

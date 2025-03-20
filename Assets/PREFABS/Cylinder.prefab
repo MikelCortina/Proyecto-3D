@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killCount: 0
   end: {fileID: 36930782444941230}
+  killCountObjc: 0
 --- !u!114 &4035425912176236015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
-  playerRigidbody: {fileID: 0}
+  player: {fileID: 7718179470875167799, guid: e1945f76d4f55774d8a529b51117a431, type: 3}
 --- !u!114 &36930782444941230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +160,7 @@ MonoBehaviour:
   bestTimesText: {fileID: 0}
   timer: {fileID: 4035425912176236015}
   bestTimesManager: {fileID: 7342716331863585895}
+  level: 0
 --- !u!114 &7342716331863585895
 MonoBehaviour:
   m_ObjectHideFlags: 0

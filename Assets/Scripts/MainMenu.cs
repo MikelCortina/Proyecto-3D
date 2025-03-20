@@ -3,10 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+   
     // Función para iniciar el juego
     public void Menu()
     {
         SceneManager.LoadScene("Menu Jugar"); // Cambia "GameScene" por el nombre de tu escena de juego
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MenuPrincipal"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
     public void Creditos()
     {
@@ -27,11 +32,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
-
-    public void Lvl2Wrld1()
+    
+    public void Config()
     {
-        SceneManager.LoadScene("Lvl2"); // Cambia "GameScene" por el nombre de tu escena de juego
+        SceneManager.LoadScene("Config"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
+    
 
 
 
