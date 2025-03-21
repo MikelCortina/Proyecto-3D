@@ -42,23 +42,7 @@ public class Impulsos : MonoBehaviour
 
     void Awake()
     {
-        // Busca todos los textos en la escena
-        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
 
-        foreach (TextMeshProUGUI tmp in allTexts)
-        {
-            if (tmp.text == "Bullets") // Aquí pones el texto que quieres buscar
-            {
-                bulletText = tmp;
-                Debug.Log("bulletText asignado automáticamente a: " + tmp.gameObject.name);
-                break;
-            }
-        }
-
-        if (bulletText == null)
-        {
-            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Bullets'");
-        }
     }
     void Start()
     {

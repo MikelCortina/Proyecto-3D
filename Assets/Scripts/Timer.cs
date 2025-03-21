@@ -14,26 +14,9 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
-        // Busca el GameObject llamado "Player" en la escena
-        GameObject playerObj = GameObject.Find("Player");
+        
 
-        if (playerObj != null)
-        {
-            player = playerObj.GetComponent<Rigidbody>();
-
-            if (player != null)
-            {
-                Debug.Log("player Rigidbody asignado automáticamente a: " + playerObj.name);
-            }
-            else
-            {
-                Debug.LogWarning("El GameObject 'Player' no tiene un componente Rigidbody");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró un GameObject llamado 'Player' en la escena");
-        }
+      
     }
     void Start()
     {

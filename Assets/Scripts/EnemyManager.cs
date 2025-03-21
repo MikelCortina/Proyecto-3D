@@ -11,6 +11,9 @@ public class EnemyHealth : MonoBehaviour
     private Transform jugador; // Referencia al jugador
     private LevelExit levelExit;
 
+    public AudioClip destroySound;
+    public AudioSource audioSource;
+
     private void Start()
     {
         // Buscar el arma del jugador en la escena
@@ -64,6 +67,7 @@ public class EnemyHealth : MonoBehaviour
 
             if (PuedeVerAlJugador()) // Verifica si el enemigo tiene línea de visión con el jugador
             {
+
                 IniciarDisolucion();
             }
         }

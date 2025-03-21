@@ -51,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine currentDashEffectCoroutine; // Guarda la corutina actual en ejecución
 
+    public ParticleSystem blackParticles; // Arrastra el Particle System desde el Inspector
+
+
+
 
 
 
@@ -60,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         speedParticles.Stop();
+        
         // Busca todos los textos en la escena
         TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
 
@@ -272,6 +277,7 @@ public class PlayerMovement : MonoBehaviour
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
         float startTime = Time.time;
         speedParticles.Play(); // Activa las partículas
+        StartCoroutine(DashMiniEffect());
 
         // Lerp desde la posición actual hasta la del enemigo
         while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
@@ -373,7 +379,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    IEnumerator DashMiniEffect()
+    {
+        blackParticles.Play();
+        yield return new WaitForSeconds(0.1f);
+        blackParticles.Stop();
+    }
     IEnumerator DashEffect()
     {
         speedParticles.Play();

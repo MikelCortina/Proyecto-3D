@@ -156,8 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armaJugador: {fileID: 0}
-  dash: {fileID: 0}
 --- !u!54 &8005866307326066872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,13 +195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce9e7757537bcf4598866cc3b25efb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3589904956059532546, guid: d94dffc0fef6244458bbfa973fcaa2fe, type: 3}
-  player: {fileID: 0}
+  projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
+  player: {fileID: 1302960204873297798, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
   detectionRadius: 25
   shootInterval: 2
   projectileSpeed: 10
   detectionRadiusColor: {r: 1, g: 0, b: 0, a: 1}
-  oscillationAmplitude: 0.025
+  oscillationAmplitude: 0.02
   oscillationFrequency: 5
 --- !u!95 &7006309837937803442
 Animator:
