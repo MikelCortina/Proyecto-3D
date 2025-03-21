@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8922928291919271407}
   - component: {fileID: 5479287376637624698}
   - component: {fileID: 8444025787024234768}
+  - component: {fileID: 3523064469372233202}
   m_Layer: 0
   m_Name: Glovo
   m_TagString: Glovo
@@ -108,3 +109,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3523064469372233202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634089271696684128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b23a7f98b1ae0a4caf5a25e6f02e832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuerza: 0

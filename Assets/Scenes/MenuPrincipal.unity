@@ -393,6 +393,8 @@ GameObject:
   - component: {fileID: 361205169}
   - component: {fileID: 361205171}
   - component: {fileID: 361205170}
+  - component: {fileID: 361205173}
+  - component: {fileID: 361205172}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -543,9 +545,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 361205171}
-          m_TargetAssemblyTypeName: CambiarColorHex1, Assembly-CSharp
-          m_MethodName: CambiarAColorResaltado
+        - m_Target: {fileID: 361205172}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresResaltados
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -559,9 +561,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 361205171}
-          m_TargetAssemblyTypeName: CambiarColorHex1, Assembly-CSharp
-          m_MethodName: CambiarAColorNormal
+        - m_Target: {fileID: 361205172}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresNormales
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -583,6 +585,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ce231d1a015234cbb47d74e60a4e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &361205172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361205164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e3eb4fe1706374082c12e9fd753821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexPadreNormal: '#D47777'
+  hexPadreResaltado: '#000000'
+  hexHijosNormal: '#000000'
+  hexHijosResaltado: '#FFFFFF'
+--- !u!114 &361205173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361205164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5761a65b39195845acb560524ecef0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &474413567
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +628,8 @@ GameObject:
   - component: {fileID: 474413572}
   - component: {fileID: 474413574}
   - component: {fileID: 474413573}
+  - component: {fileID: 474413576}
+  - component: {fileID: 474413575}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -760,9 +792,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 474413573}
-          m_TargetAssemblyTypeName: CambiarColorHex2, Assembly-CSharp
-          m_MethodName: CambiarAColorResaltado
+        - m_Target: {fileID: 474413575}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresResaltados
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -776,9 +808,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 474413573}
-          m_TargetAssemblyTypeName: CambiarColorHex2, Assembly-CSharp
-          m_MethodName: CambiarAColorNormal
+        - m_Target: {fileID: 474413575}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresNormales
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -788,6 +820,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &474413575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474413567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e3eb4fe1706374082c12e9fd753821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexPadreNormal: '#69CDDD'
+  hexPadreResaltado: '#000000'
+  hexHijosNormal: '#000000'
+  hexHijosResaltado: '#FFFFFF'
+--- !u!114 &474413576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474413567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5761a65b39195845acb560524ecef0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &604712593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1502,8 @@ GameObject:
   - component: {fileID: 1222979700}
   - component: {fileID: 1222979702}
   - component: {fileID: 1222979701}
+  - component: {fileID: 1222979704}
+  - component: {fileID: 1222979703}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -1604,9 +1666,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1222979701}
-          m_TargetAssemblyTypeName: CambiarColorHex, Assembly-CSharp
-          m_MethodName: CambiarAColorResaltado
+        - m_Target: {fileID: 1222979703}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresResaltados
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1620,9 +1682,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1222979701}
-          m_TargetAssemblyTypeName: CambiarColorHex, Assembly-CSharp
-          m_MethodName: CambiarAColorNormal
+        - m_Target: {fileID: 1222979703}
+          m_TargetAssemblyTypeName: CambiarColorPadreEHijos, Assembly-CSharp
+          m_MethodName: CambiarAColoresNormales
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1632,6 +1694,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1222979703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222979695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e3eb4fe1706374082c12e9fd753821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexPadreNormal: '#FFD700'
+  hexPadreResaltado: '#000000'
+  hexHijosNormal: '#000000'
+  hexHijosResaltado: '#FFFFFF'
+--- !u!114 &1222979704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222979695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5761a65b39195845acb560524ecef0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1477459918
 GameObject:
   m_ObjectHideFlags: 0

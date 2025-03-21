@@ -26,7 +26,9 @@ public class DashRigidbody : MonoBehaviour
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
     public float speedThreshold; // Velocidad mínima para activar partículas
-    public ParticleSystem blackParticles; // Arrastra el Particle System desde el Inspector
+
+    
+
 
     public AudioClip dashSound;
     public AudioSource audioSource;
@@ -34,26 +36,11 @@ public class DashRigidbody : MonoBehaviour
     void Start()
     {
         speedParticles.Stop();
-        blackParticles.Stop();
+       
         rb = GetComponent<Rigidbody>();
-      
+     
 
-        // Obtenemos el collider del jugador
-        playerCollider = GetComponent<Collider>();
-
-        // Si es un BoxCollider o similar, guarda su tamaño inicial
-        if (playerCollider is BoxCollider)
-        {
-            originalColliderSize = ((BoxCollider)playerCollider).size;
-        }
-        else if (playerCollider is CapsuleCollider)
-        {
-            originalColliderSize = new Vector3(((CapsuleCollider)playerCollider).radius, ((CapsuleCollider)playerCollider).height, ((CapsuleCollider)playerCollider).radius);
-        }
-        else
-        {
-            Debug.LogWarning("No se detectó un BoxCollider ni un CapsuleCollider. Ajusta el código según el tipo de collider.");
-        }
+       
     }
 
     void Update()
@@ -111,7 +98,7 @@ public class DashRigidbody : MonoBehaviour
         canDash = false;
         hasDashed = true;
         speedParticles.Play();
-        StartCoroutine(DashMiniEffect());
+       
 
         rb.useGravity = false;
 
@@ -158,12 +145,7 @@ public class DashRigidbody : MonoBehaviour
         }
     }
 
-    IEnumerator DashMiniEffect()
-    {
-        blackParticles.Play();
-        yield return new WaitForSeconds(0.1f);
-        blackParticles.Stop();
-    }
+  
 
     private void OnDrawGizmosSelected()
     {

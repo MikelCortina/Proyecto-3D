@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float originMaxVelocity;
     public Vector3 originalVelocity;
     private float speed;
-
+    public float fuerzaGlovo;
 
 
     public Rigidbody rb;
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine currentDashEffectCoroutine; // Guarda la corutina actual en ejecución
 
-    public ParticleSystem blackParticles; // Arrastra el Particle System desde el Inspector
+
 
 
 
@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         speedParticles.Stop();
+       
         
         // Busca todos los textos en la escena
         TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
@@ -271,13 +272,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
     {
-
+        
         originalVelocity = rb.linearVelocity;
 
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
         float startTime = Time.time;
         speedParticles.Play(); // Activa las partículas
-        StartCoroutine(DashMiniEffect());
+        
 
         // Lerp desde la posición actual hasta la del enemigo
         while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
@@ -306,6 +307,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Glovo"))
         {
+            fuerzaGlovo = collision.gameObject.GetComponent<Glovo>().fuerza;
             // Si hay una corutina corriendo, la paramos antes de iniciar otra
             if (currentDashEffectCoroutine != null)
             {
@@ -315,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
             currentDashEffectCoroutine = StartCoroutine(DashEffect());
 
             // Lógica del impulso vertical para Glovo
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 25f, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x,fuerzaGlovo, rb.linearVelocity.z);
             dashRigidbody.canDash = true;
             dashRigidbody.isDashing = false;
             rb.useGravity = true;
@@ -379,12 +381,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator DashMiniEffect()
-    {
-        blackParticles.Play();
-        yield return new WaitForSeconds(0.1f);
-        blackParticles.Stop();
-    }
     IEnumerator DashEffect()
     {
         speedParticles.Play();
