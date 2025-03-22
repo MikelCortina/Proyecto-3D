@@ -88,24 +88,14 @@ public class Gun : MonoBehaviour
         recoilTimer = recoilDuration;  // Iniciar el retroceso
 
         // Reproduce el sonido del disparo
-       
-
-      
+  
     }
     IEnumerator ShootAnim()
     {
-        // Iniciar la animación de disparo
-        if (animator != null)
-        {
-            animator.SetTrigger("Shoot"); // Asegúrate que este trigger existe en tu Animator Controller
-        }
+
         yield return new WaitForSeconds(0.1f);
         Shoot();
-        // Iniciar la animación de disparo
-        if (animator != null)
-        {
-            animator.SetTrigger("DontShoot");  // Asegúrate que este trigger existe en tu Animator Controller
-        }
+        
 
     }
 

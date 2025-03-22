@@ -22,24 +22,23 @@ public class DashRigidbody : MonoBehaviour
     public float lastDashTime = -999f;
     public bool canDash = true;
     public bool hasDashed;
-    
+
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
     public float speedThreshold; // Velocidad mínima para activar partículas
 
-    
-
+    public Animator animator;
 
     public AudioClip dashSound;
     public AudioSource audioSource;
 
+
+
     void Start()
     {
         speedParticles.Stop();
-       
-        rb = GetComponent<Rigidbody>();
-     
 
+        rb = GetComponent<Rigidbody>();
        
     }
 
@@ -47,8 +46,11 @@ public class DashRigidbody : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canDash)
         {
+            audioSource.PlayOneShot(dashSound);
             StartDash();
         }
+
+        
     }
 
     void FixedUpdate()
@@ -59,16 +61,16 @@ public class DashRigidbody : MonoBehaviour
 
             // Lanza un SphereCast al frente mientras dasheas
             DetectEnemiesInDash();
-          
-            
-                // Activa las partículas
-          
+
+
+            // Activa las partículas
+
         }
         else if (isDashing)
         {
             StartCoroutine(EndDash());
-         
-               
+
+
         }
     }
 
@@ -91,14 +93,14 @@ public class DashRigidbody : MonoBehaviour
 
     void StartDash()
     {
-        audioSource.PlayOneShot(dashSound);
+        StartCoroutine(DashAnim());
         isDashing = true;
         dashEndTime = Time.time + dashDuration;
         lastDashTime = Time.time;
         canDash = false;
         hasDashed = true;
         speedParticles.Play();
-       
+
 
         rb.useGravity = false;
 
@@ -145,11 +147,32 @@ public class DashRigidbody : MonoBehaviour
         }
     }
 
-  
+
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
     }
+
+    public IEnumerator DashAnim()
+    {
+      
+            animator.speed = 5f;
+            if (animator != null)
+            {
+                animator.Play("Dash2", 0, 0f);         // Empieza desde el principio sí o sí
+            }
+
+            // Espera el tiempo necesario para el dash o la duración de la animación
+            yield return new WaitForSeconds(dashDuration / 2f);
+
+            if (animator != null)
+            {
+                animator.SetTrigger("DontDash");      // Transición a otro estado si es necesario
+            }
+        animator.speed = 1f;
+    }
+
+
 }

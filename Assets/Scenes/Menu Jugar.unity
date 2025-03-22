@@ -2304,7 +2304,7 @@ MonoBehaviour:
   hexPadreNormal: '#FFD700'
   hexPadreResaltado: '#000000'
   hexHijosNormal: '#000000'
-  hexHijosResaltado: '#FFD700'
+  hexHijosResaltado: '#FFFFFF'
 --- !u!114 &2020855348
 MonoBehaviour:
   m_ObjectHideFlags: 0

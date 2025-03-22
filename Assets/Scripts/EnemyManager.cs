@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     public AudioClip destroySound;
     public AudioSource audioSource;
+    
 
     private void Start()
     {
@@ -94,7 +96,8 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void IniciarDisolucion()
-    {
+    { 
+        audioSource.PlayOneShot(destroySound);
         GetComponent<Collider>().enabled = false;
         StartCoroutine(DisolverCoroutine(-0.80f, 0.60f, tiempoDisolucion));
     }
@@ -143,6 +146,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        
         Destroy(gameObject);
     }
 
@@ -150,4 +154,5 @@ public class EnemyHealth : MonoBehaviour
     {
         levelExit.killCount++;
     }
+   
 }

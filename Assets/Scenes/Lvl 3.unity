@@ -487,6 +487,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo TP (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -552,6 +560,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo TP (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -569,9 +585,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 782528672}
     m_Modifications:
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 349097030}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: dashSound
       value: 
-      objectReference: {fileID: 8300000, guid: 014eef2c50944284482df9db08c78538, type: 3}
+      objectReference: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: audioSource
       value: 
@@ -579,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: dashSound
       value: 
-      objectReference: {fileID: 8300000, guid: 014eef2c50944284482df9db08c78538, type: 3}
+      objectReference: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
     - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: jumpSound
       value: 
@@ -648,6 +668,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 408300643}
+    - target: {fileID: 4027266204820956603, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: screenEffect
+      value: 
+      objectReference: {fileID: 1262293955}
     - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: speedParticles
       value: 
@@ -662,6 +686,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+--- !u!95 &349097030 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7763611750343944414, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  m_PrefabInstance: {fileID: 349097029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &408300643 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6443942777209423725, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
@@ -724,6 +753,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo TP (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3435,6 +3472,7 @@ PrefabInstance:
     - {fileID: 8417603100253497699, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
     - {fileID: 2507256069215734224, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
     - {fileID: -2622872577462562200, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+    - {fileID: 2993743076803515193, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4040527748032824639, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       insertIndex: -1
@@ -3447,6 +3485,17 @@ PrefabInstance:
       addedObject: {fileID: 211933063}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+--- !u!114 &1262293955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4369050670057374430, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 1262293954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1296862836
 Mesh:
   m_ObjectHideFlags: 0
@@ -4130,6 +4179,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo TP
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4689,6 +4746,10 @@ PrefabInstance:
       propertyPath: fuerza
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3523064469372233202, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
     - target: {fileID: 5479287376637624698, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6187,6 +6248,10 @@ PrefabInstance:
       propertyPath: fuerza
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3523064469372233202, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
     - target: {fileID: 5479287376637624698, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6252,6 +6317,10 @@ PrefabInstance:
       propertyPath: fuerza
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3523064469372233202, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
     - target: {fileID: 5479287376637624698, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6344,6 +6413,10 @@ PrefabInstance:
       propertyPath: fuerza
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3523064469372233202, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
     - target: {fileID: 5479287376637624698, guid: c3b434ab770abcc428385af4b14b5b0d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6409,6 +6482,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemigo TP (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 408300643}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

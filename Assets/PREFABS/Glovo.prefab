@@ -121,4 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b23a7f98b1ae0a4caf5a25e6f02e832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroySound: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
+  audioSource: {fileID: 2323509645293174695, guid: 5a343ba6cf4151e4ca9d4a157b367254, type: 3}
   fuerza: 0

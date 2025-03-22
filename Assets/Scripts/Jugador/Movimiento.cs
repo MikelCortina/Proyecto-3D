@@ -52,17 +52,16 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine currentDashEffectCoroutine; // Guarda la corutina actual en ejecución
 
 
+    public Animator animator;
 
-
-
-
-
+    private Coroutine currentMoveCoroutine; // Referencia a la corrutina actual
+    private Vector3 targetPosition; // Posición objetivo actual
 
 
 
     void Awake()
     {
-
+        animator.speed = 1;
         speedParticles.Stop();
        
         
@@ -112,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector3.down * 5000f, ForceMode.Impulse);
 
         }
+
+      
         MovePlayer();
 
         CheckGrounded();
@@ -147,7 +148,9 @@ public class PlayerMovement : MonoBehaviour
 
 
         DisplaySpeed();
-        LookAround();
+         LookAround();
+       
+           
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -189,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         float speed = moveSpeed;
-
+       
         float moveX = Input.GetAxis("Horizontal"); // A, D
         float moveZ = Input.GetAxis("Vertical");   // W, S
 
@@ -267,22 +270,38 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveToEnemy(Vector3 enemyPosition)
     {
+        // Si ya hay una corrutina corriendo, la detenemos antes de iniciar otra
+        if (currentMoveCoroutine != null)
+        {
+            StopCoroutine(currentMoveCoroutine);
+        }
+
+        // Actualizamos la posición objetivo
+        targetPosition = enemyPosition;
+
+        StartCoroutine(MoveAnim());
         audioSource.PlayOneShot(dashSound);
-        StartCoroutine(MoveToPositionCoroutine(enemyPosition));
+
+        // Iniciamos la nueva corrutina y guardamos su referencia
+        currentMoveCoroutine = StartCoroutine(MoveToPositionCoroutine(enemyPosition));
     }
     private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
     {
-        
         originalVelocity = rb.linearVelocity;
 
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
         float startTime = Time.time;
         speedParticles.Play(); // Activa las partículas
-        
 
         // Lerp desde la posición actual hasta la del enemigo
         while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
         {
+            // Si el objetivo cambió, terminamos la corrutina
+            if (targetPosition != this.targetPosition)
+            {
+                yield break;
+            }
+
             float distanceCovered = (Time.time - startTime) * moveSpeed;
             float fractionOfJourney = distanceCovered / journeyLength;
 
@@ -290,18 +309,18 @@ public class PlayerMovement : MonoBehaviour
 
             transform.position = Vector3.Lerp(transform.position, targetPosition, fractionOfJourney);
 
-
-
             yield return null;
         }
 
         // Aseguramos que el jugador llegue exactamente a la posición del enemigo
         transform.position = targetPosition;
 
-        speedParticles.Stop(); // Activa las partículas
-        // Restauramos la velocidad original
+        speedParticles.Stop(); // Desactiva las partículas
+                               // Restauramos la velocidad original
         rb.linearVelocity = originalVelocity;
 
+        // Limpiamos la referencia a la corrutina actual
+        currentMoveCoroutine = null;
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -387,5 +406,24 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         speedParticles.Stop();
     }
+    public IEnumerator MoveAnim()
+    {
+
+        animator.speed = 0.75f;
+        yield return new WaitForSeconds(0.2f / 2);
+        if (animator != null)
+        {
+          
+            animator.Play("MoveFw", 0, 0f);         // Empieza desde el principio sí o sí
+        }
+        // Espera el tiempo necesario para el dash o la duración de la animación
+        yield return new WaitForSeconds(0.3f / 2);
+        if (animator != null)
+        {
+            animator.SetTrigger("DontMove");      // Transición a otro estado si es necesario
+        }
+        animator.speed = 1f;
+    }
+
 }
 

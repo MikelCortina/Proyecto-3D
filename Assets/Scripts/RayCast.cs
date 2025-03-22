@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class RayCast : MonoBehaviour
 {
@@ -15,7 +17,13 @@ public class RayCast : MonoBehaviour
     public bool soundEffectYoN;
     public AudioClip shootSound; // Clip de sonido del disparo
     public AudioSource audioSource; // Fuente de audio
+    public Animator animator;
+    public Image screenEffect;  // Referencia al Image de UI que actuará como efecto
 
+    private void Start()
+    {
+       
+    }
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
@@ -38,6 +46,8 @@ public class RayCast : MonoBehaviour
             // Si golpea un enemigo, lo destruye
             if (hit.collider.CompareTag("Enemigo"))
             {
+                StartCoroutine(PlayScreenEffect());
+                
                 hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
 
                 if (armaJugador != null)
@@ -52,6 +62,7 @@ public class RayCast : MonoBehaviour
             }
             else if (hit.collider.CompareTag("EnemigoMovimiento"))
             {
+                StartCoroutine(PlayScreenEffect());
                 jugador.MoveToEnemy(hit.collider.gameObject.GetComponent<Transform>().position);
                 hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
 
@@ -77,10 +88,12 @@ public class RayCast : MonoBehaviour
             // Reproducir sonido en todos los casos excepto cuando el tag es "EnemigoMovimiento"
             if (audioSource != null && shootSound != null && !hit.collider.CompareTag("EnemigoMovimiento"))
             {
+                StartCoroutine(ShootAnim());
                 audioSource.PlayOneShot(shootSound);
             }
             else if (audioSource != null && shootSound != null && hit.collider.CompareTag("Enemigo"))
             {
+                StartCoroutine(ShootAnim());
                 // Si es un enemigo, también se asegura de reproducir el sonido
                 audioSource.PlayOneShot(shootSound);
             }
@@ -90,12 +103,55 @@ public class RayCast : MonoBehaviour
             // Si el raycast no impacta nada, reproducir el sonido
             if (audioSource != null && shootSound != null)
             {
+                StartCoroutine(ShootAnim());
                 audioSource.PlayOneShot(shootSound);
             }
         }
 
     }
+    IEnumerator ShootAnim()
+    {
+        // Iniciar la animación de disparo
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot"); // Asegúrate que este trigger existe en tu Animator Controller
+        }
+        yield return new WaitForSeconds(0.1f);
+      
+        // Iniciar la animación de disparo
+        if (animator != null)
+        {
+            animator.SetTrigger("DontShoot");  // Asegúrate que este trigger existe en tu Animator Controller
+        }
 
+    }
+    private IEnumerator PlayScreenEffect()
+    {
+        // Establece el color blanco con opacidad al inicio (opacidad 0.1f)
+        screenEffect.color = new Color(1f, 1f, 1f, 0.025f);  // Blanco con algo de opacidad
+        Debug.Log("Inicio - Opacidad: 0.1f");
+
+        // Espera un momento para que el efecto sea visible
+        yield return new WaitForSeconds(0.05f);
+
+        // Desvanecimiento (fade out)
+        float timeElapsed = 0f;
+        float fadeDuration = 0.3f;  // Duración del desvanecimiento
+
+        while (timeElapsed < fadeDuration)
+        {
+            // Lerp para hacer un fade de opacidad de 0.1 a 0
+            float alphaValue = Mathf.Lerp(0.025f, 0f, timeElapsed / fadeDuration);
+            screenEffect.color = new Color(1f, 1f, 1f, alphaValue);
+            Debug.Log("Alpha: " + alphaValue);  // Imprime el valor de alpha para verificar que cambia
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Asegúrate de que el valor alpha sea 0 al final del fade
+        screenEffect.color = new Color(1f, 1f, 1f, 0f);  // Establece completamente transparente
+        Debug.Log("Final - Opacidad: 0f");
+    }
 
 
 }
