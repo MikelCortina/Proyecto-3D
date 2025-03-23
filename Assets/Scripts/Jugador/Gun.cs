@@ -17,12 +17,11 @@ public class Gun : MonoBehaviour
     private Quaternion originalMuzzleRotation; // Rotación original del muzzle
    
     public Animator animator;
-    
-    
+
+   
 
     private void Start()
     {
-
 
         animator.speed = 3f;
         originalMuzzleRotation = muzzle.transform.localRotation;
@@ -92,11 +91,11 @@ public class Gun : MonoBehaviour
     }
     IEnumerator ShootAnim()
     {
-
+      
         yield return new WaitForSeconds(0.1f);
         Shoot();
-        
 
+    
     }
 
 }

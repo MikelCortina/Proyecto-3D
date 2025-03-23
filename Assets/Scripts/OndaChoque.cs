@@ -12,6 +12,7 @@ public class PlayerFallAttack : MonoBehaviour
     private Impulsos impulsos;
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles2; // Arrastra el Particle System desde el Inspector
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class PlayerFallAttack : MonoBehaviour
             rb.AddForce(Vector3.down * fallForce, ForceMode.Impulse);
             isFalling = true; // Marca que el jugador está cayendo
             speedParticles.Play();
+            speedParticles2.Play();
         }
     }
 

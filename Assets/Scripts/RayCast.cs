@@ -20,9 +20,16 @@ public class RayCast : MonoBehaviour
     public Animator animator;
     public Image screenEffect;  // Referencia al Image de UI que actuará como efecto
 
+    public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles2; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles3; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles4; // Arrastra el Particle System desde el Inspector
     private void Start()
     {
-       
+        speedParticles.Stop();
+        speedParticles2.Stop();
+        speedParticles3.Stop();
+        speedParticles4.Stop();
     }
     void Update()
     {
@@ -111,6 +118,10 @@ public class RayCast : MonoBehaviour
     }
     IEnumerator ShootAnim()
     {
+        speedParticles.Play();
+        speedParticles2.Play();
+        speedParticles3.Play();
+        speedParticles4.Play();
         // Iniciar la animación de disparo
         if (animator != null)
         {
@@ -123,6 +134,10 @@ public class RayCast : MonoBehaviour
         {
             animator.SetTrigger("DontShoot");  // Asegúrate que este trigger existe en tu Animator Controller
         }
+        speedParticles.Stop();
+        speedParticles2.Stop();
+        speedParticles3.Stop();
+        speedParticles4.Stop();
 
     }
     private IEnumerator PlayScreenEffect()
