@@ -25,6 +25,8 @@ public class DashRigidbody : MonoBehaviour
 
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles2; // Arrastra el Particle System desde el Inspector
+
     public float speedThreshold; // Velocidad mínima para activar partículas
 
     public Animator animator;
@@ -37,6 +39,7 @@ public class DashRigidbody : MonoBehaviour
     void Start()
     {
         speedParticles.Stop();
+        speedParticles2.Stop();
 
         rb = GetComponent<Rigidbody>();
        
@@ -100,6 +103,7 @@ public class DashRigidbody : MonoBehaviour
         canDash = false;
         hasDashed = true;
         speedParticles.Play();
+        speedParticles2.Play();
 
 
         rb.useGravity = false;
@@ -129,6 +133,7 @@ public class DashRigidbody : MonoBehaviour
         isDashing = false;
         rb.useGravity = true;
         speedParticles.Stop();
+        speedParticles2.Stop();
         // Espera un poquito antes de terminar el dash (opcional)
         yield return new WaitForSeconds(0.15f);
 

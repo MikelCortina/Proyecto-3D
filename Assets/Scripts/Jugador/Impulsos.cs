@@ -37,15 +37,25 @@ public class Impulsos : MonoBehaviour
     private bool isReloading = false; // Bandera para saber si estamos recargando
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
- 
-    
+    public ParticleSystem speedParticles2;
+    public ParticleSystem bulletParticles1; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem bulletParticles2; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem bulletParticles3; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem bulletParticles4; // Arrastra el Particle System desde el Inspector
+
+
 
     void Awake()
     {
-
+        speedParticles2.Stop();
+        bulletParticles1.Stop();
+        bulletParticles2.Stop();
+        bulletParticles3.Stop();
+        bulletParticles4.Stop();
     }
     void Start()
     {
+        
         originalPosition1 = camera.transform.localPosition;
         originalPosition2 = muzzle.transform.localPosition;
         originalMuzzleRotation = muzzle.transform.localRotation;
@@ -73,15 +83,25 @@ public class Impulsos : MonoBehaviour
             {
 
                 speedParticles.Play(); // Activa las partículas
+                speedParticles2.Play();
             }
             nextFireTime = Time.time + fireRate;
 
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            
+        }
         if (Input.GetMouseButtonUp(1))
         {
+            bulletParticles1.Stop();
+            bulletParticles2.Stop();
+            bulletParticles3.Stop();
+            bulletParticles4.Stop();
             if (speedParticles.isPlaying)
             {
-                speedParticles.Stop(); // Activa las partículas
+                speedParticles.Stop();
+                speedParticles2.Stop();
             }
         }
 
@@ -117,6 +137,10 @@ public class Impulsos : MonoBehaviour
 
     void Shoot()
     {
+       bulletParticles1.Play();
+       bulletParticles2.Play();
+       bulletParticles3.Play();
+       bulletParticles4.Play();
         Vector3 shootingDirection = -camera.transform.forward;
         rb.AddForce(shootingDirection * shootForce, ForceMode.Impulse);
         recoilTimer = recoilDuration;
@@ -186,19 +210,5 @@ public class Impulsos : MonoBehaviour
     {
         bulletText.text = charger + "/" + chargerMax;
     }
-
-    IEnumerator DashScreen()
-    {
-        if (!speedParticles.isPlaying)
-        {
-            speedParticles.Play(); // Activa las partículas
-        }
-
-        yield return new WaitForSeconds(0.05f);
-
-        if (speedParticles.isPlaying)
-        {
-            speedParticles.Stop(); // Desactiva las partículas
-        }
-    }
+    
 }

@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     private float nextFireTime = 0f;  // Para controlar el tiempo de recarga entre disparos
     public new Camera camera;
     private float recoilAmount = 10f; // Ángulo de retroceso en grados
-    private float recoilCameraAmount = 3f;
+    private float recoilCameraAmount = 0f;
     private float recoilDuration = 0.1f; // Duración del retroceso
     private float recoilTimer = 0f; // Temporizador de retroceso
     private Quaternion originalCameraRotation; // Rotación original de la cámara

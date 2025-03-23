@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public bool rapido = false;
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
+    public ParticleSystem speedParticles2;
 
     private Coroutine currentDashEffectCoroutine; // Guarda la corutina actual en ejecución
 
@@ -63,8 +64,9 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.speed = 1;
         speedParticles.Stop();
-       
-        
+        speedParticles2.Stop();
+
+
         // Busca todos los textos en la escena
         TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
 
@@ -161,8 +163,9 @@ public class PlayerMovement : MonoBehaviour
             stepInterval = 0.2f;
 
             speedParticles.Play(); // Activa las partículas
+            speedParticles2.Play();
 
-        
+
         }
         else
         {
@@ -184,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isMovingTowards)
             {
                 speedParticles.Stop(); // Activa las partículas
+                speedParticles2.Stop();
             }
 
         }
@@ -292,6 +296,7 @@ public class PlayerMovement : MonoBehaviour
         float journeyLength = Vector3.Distance(transform.position, targetPosition);
         float startTime = Time.time;
         speedParticles.Play(); // Activa las partículas
+        speedParticles2.Play();
 
         // Lerp desde la posición actual hasta la del enemigo
         while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
@@ -316,7 +321,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = targetPosition;
 
         speedParticles.Stop(); // Desactiva las partículas
-                               // Restauramos la velocidad original
+        speedParticles2.Stop(); // Desactiva las partículas
         rb.linearVelocity = originalVelocity;
 
         // Limpiamos la referencia a la corrutina actual
@@ -403,8 +408,10 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashEffect()
     {
         speedParticles.Play();
+        speedParticles2.Play();
         yield return new WaitForSeconds(0.5f);
         speedParticles.Stop();
+        speedParticles2.Stop();
     }
     public IEnumerator MoveAnim()
     {
