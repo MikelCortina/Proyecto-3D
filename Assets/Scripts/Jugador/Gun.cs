@@ -18,61 +18,58 @@ public class Gun : MonoBehaviour
    
     public Animator animator;
 
-   
-
     private void Start()
     {
-
         animator.speed = 3f;
         originalMuzzleRotation = muzzle.transform.localRotation;
     }
 
     void Update()
     {
-       
-        originalCameraRotation = camera.transform.localRotation;
-        // Detectar si el jugador hace clic para disparar
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) // "Fire1" es el clic izquierdo por defecto
-        {
-            
-            animator.speed = 3f;
-            StartCoroutine(ShootAnim());
-            
-            nextFireTime = Time.time + fireRate;  // Controlar la tasa de disparo
-        }
-        
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            animator.speed = 1f;
-            animator.SetTrigger("FuckYes"); // Asegúrate que este trigger existe en tu Animator Controller
-        }
-        else if (Input.GetKeyUp(KeyCode.C))
-        {
-            animator.speed = 1f;
 
-            animator.SetTrigger("FuckNo");
-        }
+            originalCameraRotation = camera.transform.localRotation;
+            // Detectar si el jugador hace clic para disparar
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime) // "Fire1" es el clic izquierdo por defecto
+            {
 
-        // Controla la duración del retroceso
-        if (recoilTimer > 0)
-        {
-            recoilTimer -= Time.deltaTime;
+                animator.speed = 3f;
+                StartCoroutine(ShootAnim());
 
-            // Rotar la cámara hacia arriba rápidamente
+                nextFireTime = Time.time + fireRate;  // Controlar la tasa de disparo
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                animator.speed = 1f;
+                animator.SetTrigger("FuckYes"); // Asegúrate que este trigger existe en tu Animator Controller
+            }
+            else if (Input.GetKeyUp(KeyCode.C))
+            {
+                animator.speed = 1f;
+
+                animator.SetTrigger("FuckNo");
+            }
+
+            // Controla la duración del retroceso
+            if (recoilTimer > 0)
+            {
+                recoilTimer -= Time.deltaTime;
+
+                // Rotar la cámara hacia arriba rápidamente
 
 
-            // Rotar la boca del arma (muzzle) hacia arriba rápidamente
-            muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, Quaternion.Euler(-recoilAmount, 0, 0) * originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3));
-            camera.transform.localRotation = Quaternion.Slerp(originalCameraRotation, Quaternion.Euler(-recoilCameraAmount, 0, 0) * originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3));
-            muzzle.transform.localRotation = Quaternion.Slerp(muzzle.transform.localRotation, originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));            
-            camera.transform.localRotation = Quaternion.Slerp(camera.transform.localRotation, originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));
-        }
-        else
-        {
-            // Restablecer la rotación de la cámara y el arma
+                // Rotar la boca del arma (muzzle) hacia arriba rápidamente
+                muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, Quaternion.Euler(-recoilAmount, 0, 0) * originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3));
+                camera.transform.localRotation = Quaternion.Slerp(originalCameraRotation, Quaternion.Euler(-recoilCameraAmount, 0, 0) * originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3));
+                muzzle.transform.localRotation = Quaternion.Slerp(muzzle.transform.localRotation, originalMuzzleRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));
+                camera.transform.localRotation = Quaternion.Slerp(camera.transform.localRotation, originalCameraRotation, 1 - ((recoilTimer / recoilDuration) / 3 * 2));
+            }
+            else
+            {
+                // Restablecer la rotación de la cámara y el arma
 
-            muzzle.transform.localRotation = originalMuzzleRotation;
-        }
+                muzzle.transform.localRotation = originalMuzzleRotation;
+            }
     }
 
     void Shoot()

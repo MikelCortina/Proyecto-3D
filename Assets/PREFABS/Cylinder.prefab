@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1243689452355199465}
   - component: {fileID: 5720241284325845880}
   - component: {fileID: 1676303298253521055}
-  - component: {fileID: 4035425912176236015}
+  - component: {fileID: 4732486682103959597}
   - component: {fileID: 36930782444941230}
   - component: {fileID: 7342716331863585895}
   m_Layer: 0
@@ -128,8 +128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killCount: 0
   end: {fileID: 36930782444941230}
-  killCountObjc: 0
---- !u!114 &4035425912176236015
+  killCountObjc: 5
+  startPanel: {fileID: 0}
+  playable: 0
+--- !u!114 &4732486682103959597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
-  player: {fileID: 7718179470875167799, guid: e1945f76d4f55774d8a529b51117a431, type: 3}
+  player: {fileID: 1318811154177241427, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  levelManager: {fileID: 1676303298253521055}
 --- !u!114 &36930782444941230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,9 +161,10 @@ MonoBehaviour:
   endLevelPanel: {fileID: 0}
   finalTimeText: {fileID: 0}
   bestTimesText: {fileID: 0}
-  timer: {fileID: 4035425912176236015}
+  timer: {fileID: 4732486682103959597}
   bestTimesManager: {fileID: 7342716331863585895}
   level: 0
+  levelManager: {fileID: 1676303298253521055}
 --- !u!114 &7342716331863585895
 MonoBehaviour:
   m_ObjectHideFlags: 0

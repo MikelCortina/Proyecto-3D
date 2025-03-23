@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private float tiempoDisolucion = 0.25f;
     private Transform jugador; // Referencia al jugador
-    private LevelExit levelExit;
+    private LevelManager levelExit;
 
     public AudioClip destroySound;
     public AudioSource audioSource;
@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
         GameObject salidaObj = GameObject.FindGameObjectWithTag("Salida");
         if (salidaObj != null)
         {
-            levelExit = salidaObj.GetComponent<LevelExit>();
+            levelExit = salidaObj.GetComponent<LevelManager>();
         }
         else
         {

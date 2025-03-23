@@ -658,10 +658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb3ade0ca8e92946b0c12113ec83d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectMaterial: {fileID: 2100000, guid: 40bb49ac70824514e8802775602d9922, type: 2}
-  paintingDuration: 0.2
-  paintAmount: 0
-  timer: 0
 --- !u!43 &151936727
 Mesh:
   m_ObjectHideFlags: 0
@@ -2977,6 +2973,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407111118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
+  m_PrefabInstance: {fileID: 692828994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b528bb97627620449be74273300f53bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &420286061
 Mesh:
   m_ObjectHideFlags: 0
@@ -4635,6 +4642,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: f1e38594f14520c48bc546f3a41f4f56, type: 2}
     - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
+      propertyPath: startPanel
+      value: 
+      objectReference: {fileID: 984325506}
+    - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: killCountObjc
       value: 7
       objectReference: {fileID: 0}
@@ -4650,6 +4661,10 @@ PrefabInstance:
       propertyPath: playerRigidbody
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4732486682103959597, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1572861445}
     - target: {fileID: 8787230114191053316, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: m_LocalPosition.x
       value: -243.5
@@ -7039,6 +7054,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &984325506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 167078831666585873, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &988848060
 GameObject:
   m_ObjectHideFlags: 0
@@ -13084,6 +13104,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106414379}
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: blackParticles
       value: 
       objectReference: {fileID: 0}
@@ -13091,6 +13115,10 @@ PrefabInstance:
       propertyPath: speedText
       value: 
       objectReference: {fileID: 720996954}
+    - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 407111118}
     - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: blackParticles
       value: 
@@ -13143,6 +13171,14 @@ PrefabInstance:
       propertyPath: bulletText
       value: 
       objectReference: {fileID: 891233415}
+    - target: {fileID: 3740512921958237540, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 4027266204820956603, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 407111118}
     - target: {fileID: 4027266204820956603, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: screenEffect
       value: 
@@ -16336,6 +16372,7 @@ SceneRoots:
   - {fileID: 1614835051}
   - {fileID: 1100241909}
   - {fileID: 556683464}
+  - {fileID: 1688290196}
   - {fileID: 404815474}
   - {fileID: 893938929}
   - {fileID: 804158144}
@@ -16367,4 +16404,3 @@ SceneRoots:
   - {fileID: 881940105}
   - {fileID: 1478210667}
   - {fileID: 1510888429}
-  - {fileID: 1688290196}

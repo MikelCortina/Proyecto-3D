@@ -43,6 +43,8 @@ public class Impulsos : MonoBehaviour
     public ParticleSystem bulletParticles3; // Arrastra el Particle System desde el Inspector
     public ParticleSystem bulletParticles4; // Arrastra el Particle System desde el Inspector
 
+    public LevelManager levelManager;
+
 
 
     void Awake()
@@ -55,7 +57,7 @@ public class Impulsos : MonoBehaviour
     }
     void Start()
     {
-        
+    
         originalPosition1 = camera.transform.localPosition;
         originalPosition2 = muzzle.transform.localPosition;
         originalMuzzleRotation = muzzle.transform.localRotation;
@@ -72,67 +74,69 @@ public class Impulsos : MonoBehaviour
 
     void Update()
     {
+        if (levelManager.playable == true)
+        {
+            // Disparo si se mantiene presionado el botón derecho y no se está recargando
+            if (Input.GetMouseButton(1) && Time.time >= nextFireTime && charger > 0 && !isReloading)
+            {
+                Shoot();
+                ShootBullet();
+                if (player.rapido)
+                {
+
+                    speedParticles.Play(); // Activa las partículas
+                    speedParticles2.Play();
+                }
+                nextFireTime = Time.time + fireRate;
+
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                bulletParticles1.Stop();
+                bulletParticles2.Stop();
+                bulletParticles3.Stop();
+                bulletParticles4.Stop();
+                if (speedParticles.isPlaying)
+                {
+                    speedParticles.Stop();
+                    speedParticles2.Stop();
+                }
+            }
+
+            // Recargar manualmente con la tecla R
+            if (Input.GetKeyDown(KeyCode.R) && !isReloading && charger < chargerMax)
+            {
+                StartCoroutine(Reload());
+            }
+
+            // Efecto de retroceso
+            if (recoilTimer > 0)
+            {
+                recoilTimer -= Time.deltaTime;
+                camera.transform.localPosition = Vector3.Lerp(originalPosition1, originalPosition1 - new Vector3(0, 0, recoilCameraDistance), (1 - (recoilTimer / recoilDuration)));
+                muzzle.transform.localPosition = Vector3.Lerp(originalPosition2, originalPosition2 - new Vector3(0, 0, recoilDistance), (1 - (recoilTimer / recoilDuration)));
+
+                float randomRecoilX = Random.Range(-recoilRotationAmount, recoilRotationAmount);
+                float randomRecoilY = Random.Range(-recoilRotationAmount, recoilRotationAmount);
+                Quaternion baseRotation = Quaternion.Euler(0, 0, 0);
+                Quaternion targetRotation = Quaternion.Euler(randomRecoilX, randomRecoilY, 0) * baseRotation * originalMuzzleRotation;
+                muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, targetRotation, 1 - (recoilTimer / recoilDuration));
+            }
+            else if (!isReloading) // Solo resetea cuando no se está recargando
+            {
+                camera.transform.localPosition = originalPosition1;
+                muzzle.transform.localPosition = originalPosition2;
+                muzzle.transform.localRotation = originalMuzzleRotation;
+            }
+
+
+            DisplayBullets();
+        }
         
-
-        // Disparo si se mantiene presionado el botón derecho y no se está recargando
-        if (Input.GetMouseButton(1) && Time.time >= nextFireTime && charger > 0 && !isReloading)
-        {
-            Shoot();
-            ShootBullet();
-            if (player.rapido)
-            {
-
-                speedParticles.Play(); // Activa las partículas
-                speedParticles2.Play();
-            }
-            nextFireTime = Time.time + fireRate;
-
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            bulletParticles1.Stop();
-            bulletParticles2.Stop();
-            bulletParticles3.Stop();
-            bulletParticles4.Stop();
-            if (speedParticles.isPlaying)
-            {
-                speedParticles.Stop();
-                speedParticles2.Stop();
-            }
-        }
-
-        // Recargar manualmente con la tecla R
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading && charger < chargerMax)
-        {
-            StartCoroutine(Reload());
-        }
-
-        // Efecto de retroceso
-        if (recoilTimer > 0)
-        {
-            recoilTimer -= Time.deltaTime;
-            camera.transform.localPosition = Vector3.Lerp(originalPosition1, originalPosition1 - new Vector3(0, 0, recoilCameraDistance), (1 - (recoilTimer / recoilDuration)));
-            muzzle.transform.localPosition = Vector3.Lerp(originalPosition2, originalPosition2 - new Vector3(0, 0, recoilDistance), (1 - (recoilTimer / recoilDuration)));
-
-            float randomRecoilX = Random.Range(-recoilRotationAmount, recoilRotationAmount);
-            float randomRecoilY = Random.Range(-recoilRotationAmount, recoilRotationAmount);
-            Quaternion baseRotation = Quaternion.Euler(0, 0, 0);
-            Quaternion targetRotation = Quaternion.Euler(randomRecoilX, randomRecoilY, 0) * baseRotation * originalMuzzleRotation;
-            muzzle.transform.localRotation = Quaternion.Slerp(originalMuzzleRotation, targetRotation, 1 - (recoilTimer / recoilDuration));
-        }
-        else if (!isReloading) // Solo resetea cuando no se está recargando
-        {
-            camera.transform.localPosition = originalPosition1;
-            muzzle.transform.localPosition = originalPosition2;
-            muzzle.transform.localRotation = originalMuzzleRotation;
-        }
-
-
-        DisplayBullets();
     }
 
     void Shoot()

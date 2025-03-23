@@ -11,6 +11,7 @@ public class EndLevelUI : MonoBehaviour
     public Timer timer;
     public BestTimesManager bestTimesManager;
     public int level;
+    public LevelManager levelManager;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class EndLevelUI : MonoBehaviour
 
     public void ShowEndScreen()
     {
+        levelManager.playable = false;
         // Pausar el tiempo del juego
         Time.timeScale = 0f;
 

@@ -57,8 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine currentMoveCoroutine; // Referencia a la corrutina actual
     private Vector3 targetPosition; // Posición objetivo actual
-
-
+    public LevelManager levelManager;
 
     void Awake()
     {
@@ -66,29 +65,9 @@ public class PlayerMovement : MonoBehaviour
         speedParticles.Stop();
         speedParticles2.Stop();
 
-
-        // Busca todos los textos en la escena
-        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
-
-        foreach (TextMeshProUGUI tmp in allTexts)
-        {
-            if (tmp.text == "Speed") // Aquí pones el texto que quieres buscar
-            {
-                speedText = tmp;
-                Debug.Log("speedText asignado automáticamente a: " + tmp.gameObject.name);
-                break;
-            }
-        }
-
-        if (speedText == null)
-        {
-            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Speed'");
-        }
     }
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
 
         Cursor.lockState = CursorLockMode.Locked; // Para que el cursor no se vea.
         Cursor.visible = false; // Hace invisible el cursor.
@@ -100,60 +79,66 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (landSoundCooldownTimer > 0f)
-        {
-            landSoundCooldownTimer -= Time.deltaTime;
-        }
-        if (rb.linearVelocity.y < 0) // Solo cuando cae
-        {
-            rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            rb.AddForce(Vector3.down * 5000f, ForceMode.Impulse);
 
-        }
+            if (landSoundCooldownTimer > 0f)
+            {
+                landSoundCooldownTimer -= Time.deltaTime;
+            }
+            if (rb.linearVelocity.y < 0) // Solo cuando cae
+            {
+                rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                rb.AddForce(Vector3.down * 5000f, ForceMode.Impulse);
 
-      
-        MovePlayer();
+            }
 
-        CheckGrounded();
 
-        PlayFootsteps();
+            MovePlayer();
+
+            CheckGrounded();
+
+            PlayFootsteps();
 
 
         // Solo saltas si el cooldown terminó
-        if (Input.GetButtonDown("Jump"))
+        if (levelManager.playable)
         {
-            if (isGrounded)
+            if (Input.GetButtonDown("Jump"))
             {
-                audioSource.PlayOneShot(jumpSound);
-                Jump();
-
-            }
-        }
-        if (!wasGrounded && isGrounded)
-        {
-            if (landSoundCooldownTimer <= 0f)
-            {
-                if (landSound != null && audioSource != null)
+                if (isGrounded)
                 {
-                    audioSource.PlayOneShot(landSound);
-                }
+                    audioSource.PlayOneShot(jumpSound);
+                    Jump();
 
-                // Reiniciar el cooldown después de reproducir el sonido
-                landSoundCooldownTimer = landSoundCooldown;
+                }
             }
         }
+            if (!wasGrounded && isGrounded)
+            {
+                if (landSoundCooldownTimer <= 0f)
+                {
+                    if (landSound != null && audioSource != null)
+                    {
+                        audioSource.PlayOneShot(landSound);
+                    }
 
-        wasGrounded = isGrounded;
+                    // Reiniciar el cooldown después de reproducir el sonido
+                    landSoundCooldownTimer = landSoundCooldown;
+                }
+            }
+
+            wasGrounded = isGrounded;
 
 
-        DisplaySpeed();
-         LookAround();
-       
-           
+            DisplaySpeed();
+        if (levelManager.playable)
+        {
+            LookAround();
+        }
     }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("ZonaVelocidad"))

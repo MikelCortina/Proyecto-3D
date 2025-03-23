@@ -24,6 +24,8 @@ public class RayCast : MonoBehaviour
     public ParticleSystem speedParticles2; // Arrastra el Particle System desde el Inspector
     public ParticleSystem speedParticles3; // Arrastra el Particle System desde el Inspector
     public ParticleSystem speedParticles4; // Arrastra el Particle System desde el Inspector
+
+    public LevelManager levelManager;
     private void Start()
     {
         speedParticles.Stop();
@@ -33,10 +35,13 @@ public class RayCast : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
+        if (levelManager.playable == true)
         {
-            nextFireTime = Time.time + fireRate;  // Actualiza el tiempo del siguiente disparo
-            Shoot();
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;  // Actualiza el tiempo del siguiente disparo
+                Shoot();
+            }
         }
     }
 

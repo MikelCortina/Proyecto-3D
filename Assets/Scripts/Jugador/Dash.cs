@@ -34,6 +34,8 @@ public class DashRigidbody : MonoBehaviour
     public AudioClip dashSound;
     public AudioSource audioSource;
 
+    public LevelManager levelManager;
+
 
 
     void Start()
@@ -47,13 +49,14 @@ public class DashRigidbody : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canDash)
+        if (levelManager.playable == true)
         {
-            audioSource.PlayOneShot(dashSound);
-            StartDash();
-        }
-
-        
+            if (Input.GetKeyDown(KeyCode.E) && canDash)
+            {
+                audioSource.PlayOneShot(dashSound);
+                StartDash();
+            }
+        }      
     }
 
     void FixedUpdate()

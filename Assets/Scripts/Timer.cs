@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     private float currentTime;
     private bool isRunning;
 
+    public LevelManager levelManager;
 
     void Awake()
     {
@@ -25,9 +26,13 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (!isRunning && player.linearVelocity.magnitude > 0.1f) // Detecta movimiento
+        if (levelManager.playable == true)
         {
-            StartTimer();
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) ||
+                Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
+            {
+                StartTimer();
+            }
         }
 
         if (isRunning)

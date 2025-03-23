@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalVelocity: {x: 0, y: 0, z: 0}
   fuerzaGlovo: 0
-  rb: {fileID: 0}
+  rb: {fileID: 1318811154177241427}
   playerCamera: {fileID: 6218290563337148242}
   footstepSounds:
   - {fileID: 8300000, guid: ecd647025e0a3c04fbd5829fff509e09, type: 3}
@@ -234,6 +234,7 @@ MonoBehaviour:
   bulletParticles2: {fileID: 7039739357548500803}
   bulletParticles3: {fileID: 7683372498799715480}
   bulletParticles4: {fileID: 8542258631762768256}
+  levelManager: {fileID: 0}
 --- !u!114 &720118448033238030
 MonoBehaviour:
   m_ObjectHideFlags: 0
