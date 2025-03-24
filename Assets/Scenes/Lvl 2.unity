@@ -4646,6 +4646,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984325506}
     - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
+      propertyPath: bestTimesText
+      value: 
+      objectReference: {fileID: 876900379}
+    - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: killCountObjc
       value: 7
       objectReference: {fileID: 0}
@@ -5181,6 +5185,15 @@ PrefabInstance:
     - target: {fileID: 8057802406313737304, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_Color.g
       value: 0.84313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133922326350767202, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_text
+      value: 'level 2
+
+
+
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6453,6 +6466,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &876900379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2150676996432459973, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &881940105
 PrefabInstance:
   m_ObjectHideFlags: 0

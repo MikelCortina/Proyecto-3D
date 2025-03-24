@@ -58,7 +58,7 @@ Material:
     - _Disolcuion_Inicial: -0.8
     - _Disolucion_Inicial: -0.8
     - _DissolveAmount: 0.02
-    - _EdgeWidth: 31.48
+    - _EdgeWidth: 100
     - _NoiseScale: 20
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -69,6 +69,6 @@ Material:
     m_Colors:
     - _Center: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _Color: {r: 0.054378778, g: 0.8867924, b: 0.5843294, a: 0}
-    - _EdgeColor: {r: 0, g: 1, b: 0.29324532, a: 0}
+    - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

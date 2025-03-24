@@ -129,8 +129,11 @@ MonoBehaviour:
   killCount: 0
   end: {fileID: 36930782444941230}
   killCountObjc: 5
-  startPanel: {fileID: 0}
+  startPanel: {fileID: 2025000205861596291, guid: 6a6f1c0676148f14ebaafcffb2f3592e, type: 3}
   playable: 0
+  bestTimesManager: {fileID: 7342716331863585895}
+  endLevel: {fileID: 36930782444941230}
+  bestTimesText: {fileID: 444813114800523538, guid: 1d345eecc8b6aed418651ac615022503, type: 3}
 --- !u!114 &4732486682103959597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3545bab04ecab564eb1391a84d77133a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endLevelPanel: {fileID: 0}
+  endLevelPanel: {fileID: 8556093208059645826, guid: 46d67a3ad5753c54ca1a581513076582, type: 3}
   finalTimeText: {fileID: 0}
   bestTimesText: {fileID: 0}
   timer: {fileID: 4732486682103959597}
