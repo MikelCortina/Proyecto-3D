@@ -70,6 +70,7 @@ public class RayCast : MonoBehaviour
                 if (dash != null)
                 {
                     dash.canDash = true;
+                  
                 }
             }
             else if (hit.collider.CompareTag("EnemigoMovimiento"))

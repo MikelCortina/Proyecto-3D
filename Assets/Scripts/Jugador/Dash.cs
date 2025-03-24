@@ -30,6 +30,7 @@ public class DashRigidbody : MonoBehaviour
     public float speedThreshold; // Velocidad mínima para activar partículas
 
     public Animator animator;
+    public Animator HUDanimator;
 
     public AudioClip dashSound;
     public AudioSource audioSource;
@@ -39,7 +40,7 @@ public class DashRigidbody : MonoBehaviour
 
 
     void Start()
-    {
+    { 
         speedParticles.Stop();
         speedParticles2.Stop();
 
@@ -53,6 +54,7 @@ public class DashRigidbody : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && canDash)
             {
+                HUDanimator.SetTrigger("CantDash");
                 audioSource.PlayOneShot(dashSound);
                 StartDash();
             }
@@ -99,11 +101,13 @@ public class DashRigidbody : MonoBehaviour
 
     void StartDash()
     {
+       
         StartCoroutine(DashAnim());
         isDashing = true;
         dashEndTime = Time.time + dashDuration;
         lastDashTime = Time.time;
         canDash = false;
+        
         hasDashed = true;
         speedParticles.Play();
         speedParticles2.Play();
@@ -128,6 +132,7 @@ public class DashRigidbody : MonoBehaviour
         if (isDashing && other.CompareTag("Enemigo"))
         {
             canDash = true;
+       
         }
     }
 
