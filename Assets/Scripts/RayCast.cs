@@ -26,6 +26,7 @@ public class RayCast : MonoBehaviour
     public ParticleSystem speedParticles4; // Arrastra el Particle System desde el Inspector
 
     public LevelManager levelManager;
+    public PlayerFallAttack fall;
     private void Start()
     {
         speedParticles.Stop();
@@ -72,6 +73,13 @@ public class RayCast : MonoBehaviour
                     dash.canDash = true;
                   
                 }
+
+                fall.canFall = true;
+               
+                fall.HUDanimator.ResetTrigger("CantPush"); // Asegura que no hay conflicto con el otro trigger
+                fall.HUDanimator.SetTrigger("CanPush");   // Activa correctamente la animación
+                dash.HUDanimator.ResetTrigger("CantDash");
+                dash.HUDanimator.SetTrigger("CanDash");
             }
             else if (hit.collider.CompareTag("EnemigoMovimiento"))
             {
@@ -88,6 +96,12 @@ public class RayCast : MonoBehaviour
                 {
                     dash.canDash = true;
                 }
+                fall.canFall = true;
+              
+                fall.HUDanimator.ResetTrigger("CantPush"); // Asegura que no hay conflicto con el otro trigger
+                fall.HUDanimator.SetTrigger("CanPush");   // Activa correctamente la animación
+                dash.HUDanimator.ResetTrigger("CantDash");
+                dash.HUDanimator.SetTrigger("CanDash");
 
                 soundEffectYoN = false; // No reproducir sonido cuando el tag es "EnemigoMovimiento"
             }

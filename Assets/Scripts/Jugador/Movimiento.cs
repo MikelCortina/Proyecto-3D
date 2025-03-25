@@ -88,11 +88,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.AddForce(Vector3.down * 1.5f, ForceMode.Acceleration); // Aumenta la gravedad
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                rb.AddForce(Vector3.down * 5000f, ForceMode.Impulse);
-
-            }
 
 
             MovePlayer();
@@ -276,41 +271,42 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
     {
-        originalVelocity = rb.linearVelocity;
+            originalVelocity = rb.linearVelocity;
 
-        float journeyLength = Vector3.Distance(transform.position, targetPosition);
-        float startTime = Time.time;
-        speedParticles.Play(); // Activa las partículas
-        speedParticles2.Play();
+            float journeyLength = Vector3.Distance(transform.position, targetPosition);
+            float startTime = Time.time;
+            speedParticles.Play(); // Activa las partículas
+            speedParticles2.Play();
 
-        // Lerp desde la posición actual hasta la del enemigo
-        while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
-        {
-            // Si el objetivo cambió, terminamos la corrutina
-            if (targetPosition != this.targetPosition)
+            // Lerp desde la posición actual hasta la del enemigo
+            while (Vector3.Distance(transform.position, targetPosition) > 2f) // Menor tolerancia
             {
-                yield break;
+                // Si el objetivo cambió, terminamos la corrutina
+                if (targetPosition != this.targetPosition)
+                {
+                    yield break;
+                }
+
+                float distanceCovered = (Time.time - startTime) * moveSpeed;
+                float fractionOfJourney = distanceCovered / journeyLength;
+
+                fractionOfJourney = Mathf.Clamp01(fractionOfJourney); // Aseguramos que no se pase del 100%
+
+                transform.position = Vector3.Lerp(transform.position, targetPosition, fractionOfJourney);
+
+                yield return null;
             }
 
-            float distanceCovered = (Time.time - startTime) * moveSpeed;
-            float fractionOfJourney = distanceCovered / journeyLength;
+            // Aseguramos que el jugador llegue exactamente a la posición del enemigo
+            transform.position = targetPosition;
 
-            fractionOfJourney = Mathf.Clamp01(fractionOfJourney); // Aseguramos que no se pase del 100%
+            speedParticles.Stop(); // Desactiva las partículas
+            speedParticles2.Stop(); // Desactiva las partículas
+            rb.linearVelocity = originalVelocity;
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, fractionOfJourney);
-
-            yield return null;
-        }
-
-        // Aseguramos que el jugador llegue exactamente a la posición del enemigo
-        transform.position = targetPosition;
-
-        speedParticles.Stop(); // Desactiva las partículas
-        speedParticles2.Stop(); // Desactiva las partículas
-        rb.linearVelocity = originalVelocity;
-
-        // Limpiamos la referencia a la corrutina actual
-        currentMoveCoroutine = null;
+            // Limpiamos la referencia a la corrutina actual
+            currentMoveCoroutine = null;
+        
     }
     private void OnTriggerEnter(Collider collision)
     {

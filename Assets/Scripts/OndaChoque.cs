@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class PlayerFallAttack : MonoBehaviour
 {
-    public float fallForce = 5000f;  // Fuerza de caída
-    public float damageRadius = 5f;  // Radio de daño
+    public float fallForce = 5000f;  // Fuerza de caï¿½da
+    public float damageRadius = 5f;  // Radio de daï¿½o
     public string enemyTag = "Enemy"; // Tag de los enemigos
 
     private Rigidbody rb;
     private bool isFalling = false;
     private DashRigidbody dashRigidbody;
     private Impulsos impulsos;
+    public Animator HUDanimator;
+    public DashRigidbody dash;
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
     public ParticleSystem speedParticles2; // Arrastra el Particle System desde el Inspector
+
+    public bool canFall = true;
 
     void Start()
     {
@@ -23,13 +27,21 @@ public class PlayerFallAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canFall)
         {
-            rb.AddForce(Vector3.down * fallForce, ForceMode.Impulse);
-            isFalling = true; // Marca que el jugador está cayendo
-            speedParticles.Play();
-            speedParticles2.Play();
+            StartFallAttack();
         }
+    }
+    public void StartFallAttack()
+    {
+
+        HUDanimator.ResetTrigger("CanPush"); // Evita que se superpongan triggers
+        HUDanimator.SetTrigger("CantPush");
+        canFall = false;
+        rb.AddForce(Vector3.down * fallForce, ForceMode.Impulse);
+        isFalling = true; // Marca que el jugador estï¿½ cayendo
+        speedParticles.Play();
+        speedParticles2.Play();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -37,7 +49,7 @@ public class PlayerFallAttack : MonoBehaviour
         if (isFalling)
         {
             speedParticles.Stop();
-            // Detectar todos los objetos en el radio de daño
+            // Detectar todos los objetos en el radio de daï¿½o
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius);
 
             foreach (Collider hit in hitColliders)
@@ -45,7 +57,10 @@ public class PlayerFallAttack : MonoBehaviour
                 // Verificar si el objeto tiene la tag de enemigo
                 if (hit.CompareTag(enemyTag))
                 {
-                   
+                    HUDanimator.ResetTrigger("CantPush"); // Evita que se superpongan triggers
+                    HUDanimator.SetTrigger("CanPush");
+                    dash.HUDanimator.ResetTrigger("CantDash");
+                    dash.HUDanimator.SetTrigger("CanDash");
                     Destroy(hit.gameObject); // Elimina al enemigo
                     dashRigidbody.canDash = true;
                     impulsos.charger = impulsos.chargerMax;
@@ -58,7 +73,7 @@ public class PlayerFallAttack : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Dibuja la esfera de daño en la escena para depuración
+        // Dibuja la esfera de daï¿½o en la escena para depuraciï¿½n
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
     }

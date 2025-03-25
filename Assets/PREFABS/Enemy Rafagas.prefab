@@ -156,6 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerFallAttack: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  destroySound: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
+  audioSource: {fileID: 0}
 --- !u!54 &8005866307326066872
 Rigidbody:
   m_ObjectHideFlags: 0

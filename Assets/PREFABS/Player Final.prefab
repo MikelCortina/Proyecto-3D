@@ -187,6 +187,7 @@ MonoBehaviour:
   speedParticles: {fileID: 5192159982933227114}
   speedParticles2: {fileID: 5196057962356256194}
   animator: {fileID: 7763611750343944414}
+  levelManager: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
 --- !u!114 &1573286958613818388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   bulletParticles2: {fileID: 7039739357548500803}
   bulletParticles3: {fileID: 7683372498799715480}
   bulletParticles4: {fileID: 8542258631762768256}
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
 --- !u!114 &720118448033238030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +261,12 @@ MonoBehaviour:
   speedParticles2: {fileID: 5196057962356256194}
   speedThreshold: 0
   animator: {fileID: 7763611750343944414}
+  HUDanimator: {fileID: 0}
   dashSound: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
   audioSource: {fileID: 6443942777209423725}
+  levelManager: {fileID: 0}
+  fall: {fileID: 6427735135310502488}
+  impulsos: {fileID: 3740512921958237540}
 --- !u!114 &4027266204820956603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +298,8 @@ MonoBehaviour:
   speedParticles2: {fileID: 3747939733226674389}
   speedParticles3: {fileID: 2990519304512736299}
   speedParticles4: {fileID: 7161774032435090418}
+  levelManager: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
+  fall: {fileID: 6427735135310502488}
 --- !u!114 &6427735135310502488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,8 +315,11 @@ MonoBehaviour:
   fallForce: 5000
   damageRadius: 5
   enemyTag: Enemigo
+  HUDanimator: {fileID: 0}
+  dash: {fileID: 720118448033238030}
   speedParticles: {fileID: 5192159982933227114}
   speedParticles2: {fileID: 5196057962356256194}
+  canFall: 1
 --- !u!114 &6951697279420999249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 3
-  healthText: {fileID: 0}
+  healthImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5457706770888200273
 GameObject:
   m_ObjectHideFlags: 0

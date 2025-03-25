@@ -154,8 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armaJugador: {fileID: 0}
-  dash: {fileID: 0}
+  PlayerFallAttack: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  destroySound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!54 &8378101354008675907
 Rigidbody:
   m_ObjectHideFlags: 0

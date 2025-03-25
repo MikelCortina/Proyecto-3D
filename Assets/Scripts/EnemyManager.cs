@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     private float tiempoDisolucion = 0.25f;
     private Transform jugador; // Referencia al jugador
     private LevelManager levelExit;
+    public PlayerFallAttack PlayerFallAttack;
 
     public AudioClip destroySound;
     public AudioSource audioSource;
@@ -145,9 +146,9 @@ public class EnemyHealth : MonoBehaviour
     }
 
     private void DestroyEnemy()
-    {
-        
+    {   
         Destroy(gameObject);
+        
     }
 
     private void OnDestroy()

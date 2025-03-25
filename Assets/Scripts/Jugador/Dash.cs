@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -37,6 +38,10 @@ public class DashRigidbody : MonoBehaviour
 
     public LevelManager levelManager;
 
+    public PlayerFallAttack fall;
+
+    public Impulsos impulsos;
+
 
 
     void Start()
@@ -54,11 +59,27 @@ public class DashRigidbody : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && canDash)
             {
+                HUDanimator.ResetTrigger("CanDash");
                 HUDanimator.SetTrigger("CantDash");
                 audioSource.PlayOneShot(dashSound);
                 StartDash();
             }
-        }      
+
+            // Permitir caer mientras se dashea
+            if (Input.GetKeyDown(KeyCode.LeftShift) && isDashing)
+            {
+                EndDashEarly();  // Termina el dash antes de tiempo
+                fall.StartFallAttack();  // Inicia el ataque de caída
+            }
+        }
+    }
+
+    void EndDashEarly()
+    {
+        isDashing = false;
+        rb.useGravity = true;
+        speedParticles.Stop();
+        speedParticles2.Stop();
     }
 
     void FixedUpdate()
@@ -93,8 +114,14 @@ public class DashRigidbody : MonoBehaviour
         {
             if (hit.collider.CompareTag("Enemigo"))
             {
+                fall.HUDanimator.ResetTrigger("CantPush"); // Asegura que no hay conflicto con el otro trigger
+                fall.HUDanimator.SetTrigger("CanPush");   // Activa correctamente la animación
+                fall.canFall = true;
                 hit.collider.gameObject.GetComponent<EnemyHealth>().IniciarDisolucion();
+                HUDanimator.ResetTrigger("CantDash");
+                HUDanimator.SetTrigger("CanDash");
                 canDash = true;  // Si quieres permitir concatenar el dash tras destruir uno
+                impulsos.charger = impulsos.chargerMax;
             }
         }
     }

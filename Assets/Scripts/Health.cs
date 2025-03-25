@@ -1,40 +1,18 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // Agrega esto para usar UI Text
+using UnityEngine.UI; // Para manejar imágenes de UI
 
 public class Health : MonoBehaviour
 {
     public int amount = 3;
-    public TextMeshProUGUI healthText; // Referencia al texto de la UI
+    public Image[] healthImages; // Array de imágenes de vida
     private DashRigidbody dash;
 
-    void Awake()
-    {
-        // Busca todos los textos en la escena
-        TextMeshProUGUI[] allTexts = FindObjectsOfType<TextMeshProUGUI>();
-
-        foreach (TextMeshProUGUI tmp in allTexts)
-        {
-            if (tmp.text == "Health") // Cambia aquí si el texto es diferente
-            {
-                healthText = tmp;
-                Debug.Log("healthText asignado automáticamente a: " + tmp.gameObject.name);
-                break;
-            }
-        }
-
-        if (healthText == null)
-        {
-            Debug.LogWarning("No se encontró un TextMeshProUGUI con el texto 'Health'");
-        }
-    }
     void Start()
     {
         dash = GetComponent<DashRigidbody>();
-        UpdateHealthUI(); // Mostrar la vida al iniciar
-         amount = 3;
-}
+        amount = healthImages.Length; // Asegurar que la cantidad de vida coincide con las imágenes
+    }
 
     void Update()
     {
@@ -43,27 +21,23 @@ public class Health : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        UpdateHealthUI(); // Actualiza la UI cada frame (opcional, depende de si cambias vida aquí o en otros scripts)
     }
 
-    void UpdateHealthUI()
+    public void TakeDamage(int damage)
     {
-        if (healthText != null)
+        for (int i = 0; i < damage; i++)
         {
-            healthText.text = "Vida: " + amount.ToString();
+            if (amount > 0)
+            {
+                amount--;
+                healthImages[amount].gameObject.SetActive(false); // Desactiva la imagen de la vida correspondiente
+            }
         }
     }
 
-    // Ejemplo de función para reducir vida desde otros scripts
-    public void TakeDamage(int damage)
-    {
-        amount -= damage;
-        UpdateHealthUI();
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("BalaEnemy")&&!dash.isDashing)
+        if (other.CompareTag("BalaEnemy") && !dash.isDashing)
         {
             TakeDamage(1);
             Destroy(other.gameObject);
