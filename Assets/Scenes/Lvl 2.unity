@@ -5223,17 +5223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &720996955 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5979574687464312695, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
-  m_PrefabInstance: {fileID: 720996953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &720996956 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 995936282009256526, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
@@ -9488,6 +9477,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1102370268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 587128321146931449, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105878945
 GameObject:
   m_ObjectHideFlags: 0
@@ -10053,6 +10053,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+--- !u!114 &1189413427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5783169282974233445, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1268481024
 GameObject:
   m_ObjectHideFlags: 0
@@ -13128,6 +13139,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106414379}
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 1815844263}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 407111118}
@@ -13207,10 +13222,26 @@ PrefabInstance:
       propertyPath: screenEffect
       value: 
       objectReference: {fileID: 720996956}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 1991620560}
     - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: healthText
       value: 
-      objectReference: {fileID: 720996955}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1189413427}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1936347414}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1102370268}
     - target: {fileID: 7972774188996515450, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: looping
       value: 1
@@ -14078,6 +14109,22 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &1815844263 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6649115152846358998, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1936347414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4910782196437017977, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1942416093
 GameObject:
   m_ObjectHideFlags: 0
@@ -14595,6 +14642,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &1991620560 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 691330386955971761, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 720996953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1991782184
 Mesh:
   m_ObjectHideFlags: 0
@@ -16391,12 +16443,12 @@ SceneRoots:
   - {fileID: 203844589}
   - {fileID: 720996953}
   - {fileID: 692828994}
+  - {fileID: 1688290196}
   - {fileID: 1529974570}
   - {fileID: 492787355}
   - {fileID: 1614835051}
   - {fileID: 1100241909}
   - {fileID: 556683464}
-  - {fileID: 1688290196}
   - {fileID: 404815474}
   - {fileID: 893938929}
   - {fileID: 804158144}

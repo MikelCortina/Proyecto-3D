@@ -51,6 +51,7 @@ public class PlayerFallAttack : MonoBehaviour
         if (isFalling)
         {
             speedParticles.Stop();
+            speedParticles2.Stop();
             // Detectar todos los objetos en el radio de da�o
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageRadius);
 

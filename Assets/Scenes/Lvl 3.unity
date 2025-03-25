@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1946052995}
   detectionRadius: 50
   obstacleLayer:
     serializedVersion: 2
@@ -423,6 +423,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 782528672}
     m_Modifications:
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 1280066038}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1159129594}
@@ -499,13 +503,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 918925959}
     - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 1280066037}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1159129594}
     - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: healthText
       value: 
-      objectReference: {fileID: 827309624}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1280066041}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1280066040}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1280066039}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1464,17 +1484,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &827309624 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5979574687464312695, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
-  m_PrefabInstance: {fileID: 1280066036}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &848311058 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6443942777209423725, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
@@ -1498,7 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1946052995}
   detectionRadius: 50
   obstacleLayer:
     serializedVersion: 2
@@ -3666,6 +3675,49 @@ PrefabInstance:
       addedObject: {fileID: 959483564}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+--- !u!95 &1280066037 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 691330386955971761, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 1280066036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1280066038 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6649115152846358998, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 1280066036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1280066039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 587128321146931449, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 1280066036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1280066040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4910782196437017977, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 1280066036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1280066041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5783169282974233445, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 1280066036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1296862836
 Mesh:
   m_ObjectHideFlags: 0
@@ -5019,7 +5071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1946052995}
   detectionRadius: 50
   shootInterval: 2
   projectileSpeed: 10
@@ -6238,7 +6290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1946052995}
   detectionRadius: 50
   obstacleLayer:
     serializedVersion: 2
@@ -7115,7 +7167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1946052995}
   detectionRadius: 50
   obstacleLayer:
     serializedVersion: 2

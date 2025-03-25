@@ -284,6 +284,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &118945760 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4101552174530014241, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 1290232773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &127542835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8717925640279641286, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
@@ -684,6 +689,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 557813157}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1290232777}
@@ -775,8 +784,24 @@ PrefabInstance:
       propertyPath: screenEffect
       value: 
       objectReference: {fileID: 1290232776}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 118945760}
     - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: healthText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1290232780}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1290232779}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[2]'
       value: 
       objectReference: {fileID: 1290232774}
     - target: {fileID: 8468842491557152092, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
@@ -963,6 +988,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &557813157 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7869439650315962694, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 1290232773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &697651387 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5044117567715638331, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
@@ -2166,13 +2196,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
 --- !u!114 &1290232774 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7171997617153134567, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4131591631322138729, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
   m_PrefabInstance: {fileID: 1290232773}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1290232775 stripped
@@ -2213,6 +2243,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3684560109303718273, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
   m_PrefabInstance: {fileID: 1290232773}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290232779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8454699925762401769, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 1290232773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1290232780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7003743352466650101, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 1290232773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1353008826
 Mesh:
   m_ObjectHideFlags: 0

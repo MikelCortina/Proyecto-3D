@@ -264,7 +264,7 @@ MonoBehaviour:
   HUDanimator: {fileID: 0}
   dashSound: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
   audioSource: {fileID: 6443942777209423725}
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
   fall: {fileID: 6427735135310502488}
   impulsos: {fileID: 3740512921958237540}
 --- !u!114 &4027266204820956603
@@ -316,6 +316,7 @@ MonoBehaviour:
   damageRadius: 5
   enemyTag: Enemigo
   HUDanimator: {fileID: 0}
+  animator: {fileID: 7763611750343944414}
   dash: {fileID: 720118448033238030}
   speedParticles: {fileID: 5192159982933227114}
   speedParticles2: {fileID: 5196057962356256194}

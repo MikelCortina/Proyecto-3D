@@ -1697,7 +1697,7 @@ PrefabInstance:
     - target: {fileID: 4559604013998213079, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1051486559}
     - target: {fileID: 4559604013998213079, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: detectionRadius
       value: 100
@@ -3374,6 +3374,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1670977004}
     m_Modifications:
     - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 2009595969}
+    - target: {fileID: 720118448033238030, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 628655500}
@@ -3441,8 +3445,28 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 628655500}
+    - target: {fileID: 4027266204820956603, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: screenEffect
+      value: 
+      objectReference: {fileID: 2009595968}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: HUDanimator
+      value: 
+      objectReference: {fileID: 2009595967}
     - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: healthText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2009595966}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2009595965}
+    - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: 'healthImages.Array.data[2]'
       value: 
       objectReference: {fileID: 2009595964}
     m_RemovedComponents: []
@@ -4202,7 +4226,7 @@ PrefabInstance:
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1051486559}
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: detectionRadius
       value: 60
@@ -5257,7 +5281,7 @@ PrefabInstance:
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1051486559}
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: detectionRadius
       value: 45
@@ -6474,7 +6498,7 @@ PrefabInstance:
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1051486559}
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: detectionRadius
       value: 45
@@ -8085,15 +8109,58 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
 --- !u!114 &2009595964 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7171997617153134567, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4131591631322138729, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
   m_PrefabInstance: {fileID: 2009595963}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2009595965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8454699925762401769, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 2009595963}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2009595966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7003743352466650101, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 2009595963}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &2009595967 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4101552174530014241, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 2009595963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2009595968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4369050670057374430, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 2009595963}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &2009595969 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7869439650315962694, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+  m_PrefabInstance: {fileID: 2009595963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2085577627
 GameObject:
   m_ObjectHideFlags: 0
@@ -8505,7 +8572,7 @@ PrefabInstance:
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1051486559}
     - target: {fileID: 7286644789238135659, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: detectionRadius
       value: 70
