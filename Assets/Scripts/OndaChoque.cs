@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerFallAttack : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerFallAttack : MonoBehaviour
     private DashRigidbody dashRigidbody;
     private Impulsos impulsos;
     public Animator HUDanimator;
+    public Animator animator;
     public DashRigidbody dash;
 
     public ParticleSystem speedParticles; // Arrastra el Particle System desde el Inspector
@@ -34,7 +36,7 @@ public class PlayerFallAttack : MonoBehaviour
     }
     public void StartFallAttack()
     {
-
+        StartCoroutine(FallAnim());
         HUDanimator.ResetTrigger("CanPush"); // Evita que se superpongan triggers
         HUDanimator.SetTrigger("CantPush");
         canFall = false;
@@ -77,4 +79,24 @@ public class PlayerFallAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
     }
+
+    public IEnumerator FallAnim()
+    {
+        animator.speed = 4f;
+        if (animator != null)
+        {
+            animator.SetTrigger("IsFalling");
+        }
+
+        yield return new WaitForSeconds(0.25f);
+
+        if (animator != null)
+        {
+            animator.SetTrigger("IsntFalling");
+            Debug.Log("Cambio a IdleShooting");
+        }
+
+        animator.speed = 1f;
+    }
+
 }
