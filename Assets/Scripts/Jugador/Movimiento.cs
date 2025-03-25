@@ -397,7 +397,7 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator MoveAnim()
     {
 
-        animator.speed = 0.75f;
+        
         yield return new WaitForSeconds(0.2f / 2);
         if (animator != null)
         {
