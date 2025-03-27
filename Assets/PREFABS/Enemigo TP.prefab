@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2981912434190469110}
   - component: {fileID: 4841739799072018573}
   - component: {fileID: 8378101354008675907}
+  - component: {fileID: -7983674357811502789}
   m_Layer: 0
   m_Name: Enemigo TP
   m_TagString: Enemigo
@@ -154,8 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerFallAttack: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
-  destroySound: {fileID: 0}
+  destroySound: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
   audioSource: {fileID: 0}
 --- !u!54 &8378101354008675907
 Rigidbody:
@@ -184,3 +184,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-7983674357811502789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816228568336845229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb6aa22110375d42b05753380c535c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
+  player: {fileID: 0}
+  detectionRadius: 10
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  minShootInterval: 1
+  maxShootInterval: 3
+  projectileSpeed: 5
+  detectionRadiusColor: {r: 1, g: 0, b: 0, a: 1}

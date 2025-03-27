@@ -90,6 +90,13 @@ public class Impulsos : MonoBehaviour
                 nextFireTime = Time.time + fireRate;
 
             }
+            if (charger == 0)
+            {
+                bulletParticles1.Stop();
+                bulletParticles2.Stop();
+                bulletParticles3.Stop();
+                bulletParticles4.Stop();
+            }
             if (Input.GetMouseButtonDown(1))
             {
 
