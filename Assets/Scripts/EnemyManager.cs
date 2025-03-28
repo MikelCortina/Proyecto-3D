@@ -9,49 +9,108 @@ public class EnemyHealth : MonoBehaviour
     private Renderer enemyRenderer;
     private MaterialPropertyBlock propertyBlock;
     private float tiempoDisolucion = 0.25f;
-    private Transform jugador;
+    private Transform jugador; // Referencia al jugador
     private LevelManager levelExit;
+
     public AudioClip destroySound;
     public AudioSource audioSource;
-    public float explosionForce ;
-    public float explosionRadius;
-    public float shrinkDuration = 1.5f;
+
+    private Animator animator;
+
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+
+        // Buscar el arma del jugador en la escena
         armaJugador = FindObjectOfType<Impulsos>();
+
+        // Buscar el dash del jugador en la escena
         dash = FindObjectOfType<DashRigidbody>();
+
+        // Buscar al jugador en la escena
         GameObject jugadorObj = GameObject.FindGameObjectWithTag("Player");
-        if (jugadorObj != null) jugador = jugadorObj.transform;
+        if (jugadorObj != null)
+        {
+            jugador = jugadorObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un objeto con la etiqueta 'Player'.");
+        }
+
+        // Inicializa el bloque de propiedades para cambiar los valores del shader
         propertyBlock = new MaterialPropertyBlock();
+
+        // Asigna el renderer automáticamente
         enemyRenderer = GetComponent<Renderer>() ?? GetComponentInChildren<Renderer>();
+
+
         GameObject salidaObj = GameObject.FindGameObjectWithTag("Salida");
-        if (salidaObj != null) levelExit = salidaObj.GetComponent<LevelManager>();
+        if (salidaObj != null)
+        {
+            levelExit = salidaObj.GetComponent<LevelManager>();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró un objeto con el tag 'Salida'.");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && dash != null && dash.hasDashed)
         {
-            if (armaJugador != null) armaJugador.charger = armaJugador.chargerMax;
-            if (dash != null) dash.canDash = true;
-            if (PuedeVerAlJugador()) IniciarDisolucion();
+            if (armaJugador != null)
+            {
+                armaJugador.charger = armaJugador.chargerMax;
+            }
+
+            if (dash != null)
+            {
+                dash.canDash = true;
+            }
+
+            if (PuedeVerAlJugador()) // Verifica si el enemigo tiene línea de visión con el jugador
+            {
+
+                IniciarDisolucion();
+            }
         }
     }
 
     private bool PuedeVerAlJugador()
     {
-        if (jugador == null) return false;
+        if (jugador == null) return false; // Si no hay referencia al jugador, no puede verlo
+
         Vector3 direccion = (jugador.position - transform.position).normalized;
-        if (Physics.Raycast(transform.position, direccion, out RaycastHit hit))
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, direccion, out hit))
         {
-            return hit.collider.CompareTag("Player");
+            // Si el objeto impactado no es el jugador, entonces hay un obstáculo en el camino
+            if (!hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("El enemigo no puede ver al jugador. Hay un obstáculo: " + hit.collider.name);
+                return false;
+            }
         }
-        return false;
+
+        return true;
     }
 
     public void IniciarDisolucion()
     {
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Dead");
+        }
+
         audioSource.PlayOneShot(destroySound);
         GetComponent<Collider>().enabled = false;
         StartCoroutine(DisolverCoroutine(-0.80f, 0.60f, tiempoDisolucion));
@@ -60,6 +119,7 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator DisolverCoroutine(float inicio, float fin, float duracion)
     {
         float tiempo = 0f;
+
         while (tiempo < duracion)
         {
             float valorDisolucion = Mathf.Lerp(inicio, fin, tiempo / duracion);
@@ -67,55 +127,46 @@ public class EnemyHealth : MonoBehaviour
             tiempo += Time.deltaTime;
             yield return null;
         }
+
         AplicarDisolucion(fin);
-        ExplodeChildren();
         DestroyEnemy();
     }
 
     private void AplicarDisolucion(float valorDisolucion)
     {
-        if (enemyRenderer == null) return;
+        if (enemyRenderer == null)
+        {
+            Debug.LogWarning($"No se puede aplicar la disolución porque enemyRenderer no está asignado en {gameObject.name}.");
+            return;
+        }
+
         enemyRenderer.GetPropertyBlock(propertyBlock);
         propertyBlock.SetFloat("_Disolucion_Inicial", valorDisolucion);
         enemyRenderer.SetPropertyBlock(propertyBlock);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bala"))
+        {
+            Debug.Log("¡Impacto registrado!");
+
+            if (PuedeVerAlJugador()) // Solo se destruye si tiene línea de visión con el jugador
+            {
+                Destroy(gameObject, 0.1f);
+            }
+        }
+    }
+
     private void DestroyEnemy()
     {
         Destroy(gameObject);
-    }
 
-    private void ExplodeChildren()
-    {
-        foreach (Transform child in transform)
-        {
-            child.SetParent(null);
-            if (child.TryGetComponent(out Rigidbody rb))
-            {
-                Vector3 explosionDir = (child.position - transform.position).normalized;
-                rb.isKinematic = false;
-                rb.AddForce(explosionDir * explosionForce, ForceMode.Impulse);
-            }
-            StartCoroutine(ShrinkAndDestroy(child));
-        }
-    }
-
-    IEnumerator ShrinkAndDestroy(Transform obj)
-    {
-        float elapsed = 0f;
-        Vector3 initialScale = obj.localScale;
-        while (elapsed < shrinkDuration)
-        {
-            float scaleFactor = Mathf.Lerp(1f, 0f, elapsed / shrinkDuration);
-            obj.localScale = initialScale * scaleFactor;
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        Destroy(obj.gameObject);
     }
 
     private void OnDestroy()
     {
-        if (levelExit != null) levelExit.killCount++;
+        levelExit.killCount++;
     }
+
 }

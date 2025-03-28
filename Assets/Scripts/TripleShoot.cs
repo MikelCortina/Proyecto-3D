@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public class EnemyShooter : MonoBehaviour
+public class EnemyTripleShooter : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public Transform player;
@@ -109,7 +109,8 @@ public class EnemyShooter : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.SetTrigger("Shoot");            
+            animator.SetTrigger("Shoot");
+            animator.SetTrigger("TShoot");
         }
 
         yield return new WaitForSeconds(0.2f);
@@ -118,6 +119,7 @@ public class EnemyShooter : MonoBehaviour
 
         if (animator != null)
         {
+            animator.SetTrigger("DontShoot");
             animator.SetTrigger("TDontShoot");
         }
     }
