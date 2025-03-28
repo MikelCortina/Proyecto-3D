@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DisolucionShader
-  m_Shader: {fileID: -6465566751694194690, guid: f61b9a426dffc7f4eb7ac94e166d47a9, type: 3}
+  m_Name: DisolucionShader 1
+  m_Shader: {fileID: -6465566751694194690, guid: f60c22ae5fefda74d8e49bcc9c456593, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
