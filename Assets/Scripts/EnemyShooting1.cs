@@ -118,7 +118,7 @@ public class EnemyShooter : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetTrigger("TDontShoot");
+            animator.SetTrigger("DontShoot");
         }
     }
 }
