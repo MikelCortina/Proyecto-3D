@@ -53,6 +53,7 @@ public class EndLevelUI : MonoBehaviour
 
     public void NextLevel()
     {
+        PlayerPrefs.DeleteKey("HasStarted_" + SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
         int escenaActual = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(escenaActual + 1);

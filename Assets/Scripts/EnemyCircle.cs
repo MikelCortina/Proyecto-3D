@@ -15,7 +15,7 @@ public class EnemyShooterBurst : MonoBehaviour
 
     private void Start()
     {
-       
+
         // Asigna el Animator desde el objeto o sus hijos
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -49,7 +49,7 @@ public class EnemyShooterBurst : MonoBehaviour
         if (distanceToPlayer <= detectionRadius)
         {
             StartCoroutine(ShootAnim());
-            
+
         }
     }
 

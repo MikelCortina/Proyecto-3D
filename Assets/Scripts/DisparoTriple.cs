@@ -8,19 +8,12 @@ public class EnemyShooterSingle : MonoBehaviour
     public float detectionRadius = 10f;
     public float shootInterval = 2f;
     public float projectileSpeed = 5f;
-    public Color detectionRadiusColor = Color.red;
-    private Animator animator;
     public float oscillationAmplitude = 0.5f;
     public float oscillationFrequency = 2f;
+    public Animator animator;
 
     private void Start()
     {
-        animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
-        if (animator == null)
-        {
-            Debug.LogWarning("No se encontró un Animator en el objeto ni en sus hijos.");
-        }
-
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -36,31 +29,22 @@ public class EnemyShooterSingle : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
             if (distanceToPlayer <= detectionRadius)
             {
-                yield return StartCoroutine(ShootSequence());
+                StartCoroutine(ShootBurst());
             }
             yield return new WaitForSeconds(shootInterval);
         }
     }
 
-    private IEnumerator ShootSequence()
+    private IEnumerator ShootBurst()
     {
-        if (animator != null)
+        for (int i = 0; i < 3; i++)
         {
+            animator.ResetTrigger("Shoot");
             animator.SetTrigger("Shoot");
-        }
-
-        for (int i = 0; i < 3; i++) // Disparar tres proyectiles con 0.1 segundos de diferencia
-        {
             ShootAtPlayer();
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
         }
-
-        if (animator != null)
-        {
-            animator.SetTrigger("DontShoot");
-        }
-
-        yield return new WaitForSeconds(2f); // Espera 2 segundos antes de comenzar de nuevo
+        animator.SetTrigger("DontShoot");
     }
 
     private void ShootAtPlayer()
@@ -76,11 +60,5 @@ public class EnemyShooterSingle : MonoBehaviour
         }
 
         projectile.transform.LookAt(player.position);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = detectionRadiusColor;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

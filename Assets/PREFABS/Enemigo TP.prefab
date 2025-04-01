@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 4243023086933333762}
   m_Layer: 0
   m_Name: Enemigo TP
-  m_TagString: Enemigo
+  m_TagString: EnemigoMovimiento
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelExit: {fileID: 0}
   destroySound: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
   audioSource: {fileID: 0}
 --- !u!54 &8378101354008675907

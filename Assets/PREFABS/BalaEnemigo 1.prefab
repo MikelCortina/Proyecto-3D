@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5548752554258834552}
   - component: {fileID: 6530972184472614115}
   - component: {fileID: 2395686305818038331}
+  - component: {fileID: 6630671628687065784}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: BalaEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,6 +87,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6630671628687065784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954492006603664402}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.0000019073486}
 --- !u!1 &3766637730949643036
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,9 +119,10 @@ GameObject:
   - component: {fileID: 6880708370040701866}
   - component: {fileID: 991616547215849857}
   - component: {fileID: 4937769652801710207}
+  - component: {fileID: 7153008830359557498}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: BalaEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,6 +195,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7153008830359557498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766637730949643036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.0000019073486}
 --- !u!1 &5707350071410457775
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +232,7 @@ GameObject:
   - component: {fileID: 6088127802909864189}
   - component: {fileID: 9100728930887895063}
   m_Layer: 3
-  m_Name: BalaEnemigo
+  m_Name: BalaEnemigo 1
   m_TagString: BalaEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,9 +403,10 @@ GameObject:
   - component: {fileID: 8324517719291952572}
   - component: {fileID: 8373820118181267219}
   - component: {fileID: 3742748334352324760}
+  - component: {fileID: 7090569575471488630}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: BalaEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -434,3 +479,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7090569575471488630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739142877144285712}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.0000019073486}

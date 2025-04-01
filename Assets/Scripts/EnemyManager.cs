@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private float tiempoDisolucion = 0.25f;
     private Transform jugador; // Referencia al jugador
-    private LevelManager levelExit;
+    public LevelManager levelExit;
 
     public AudioClip destroySound;
     public AudioSource audioSource;

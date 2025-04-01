@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
+  m_Name: Disolucion Rafgas
   m_Shader: {fileID: -6465566751694194690, guid: f61b9a426dffc7f4eb7ac94e166d47a9, type: 3}
   m_Parent: {fileID: 2100000, guid: 97113f9978b00fc4b92a9e2ffa4f3c93, type: 2}
   m_ModifiedSerializedProperties: 0

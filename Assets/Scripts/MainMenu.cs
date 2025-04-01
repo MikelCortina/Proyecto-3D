@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
 
     public void Historia()
     {
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl1");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl2");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl3");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl4");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl5");
         SceneManager.LoadScene("Lvl 1"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
 

@@ -1322,7 +1322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 40bb49ac70824514e8802775602d9922, type: 2}
+  - {fileID: 2100000, guid: 601415662a51b674e9140aa177fab097, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297107bd79e502248b853356794e0154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelExit: {fileID: 0}
   destroySound: {fileID: 8300000, guid: a34782ff571e821489b4ef6715f9419d, type: 3}
   audioSource: {fileID: 0}
 --- !u!54 &8005866307326066872
@@ -1444,10 +1445,10 @@ MonoBehaviour:
   player: {fileID: 1302960204873297798, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
   detectionRadius: 50
   shootInterval: 2
-  projectileSpeed: 5
-  detectionRadiusColor: {r: 1, g: 0, b: 0, a: 1}
+  projectileSpeed: 20
   oscillationAmplitude: 0.02
-  oscillationFrequency: 2
+  oscillationFrequency: 3.5
+  animator: {fileID: 7006309837937803442}
 --- !u!1 &7882863292820939724
 GameObject:
   m_ObjectHideFlags: 0

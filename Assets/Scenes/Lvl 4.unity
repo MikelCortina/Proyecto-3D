@@ -7797,7 +7797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4944081987037010846, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       propertyPath: m_text
-      value: '(V)
+      value: '(F)
 
 '
       objectReference: {fileID: 0}
@@ -7966,7 +7966,7 @@ PrefabInstance:
     - {fileID: 6452948774158186621, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4040527748032824639, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
-      insertIndex: 3
+      insertIndex: -1
       addedObject: {fileID: 1051486559}
     - targetCorrespondingSourceObject: {fileID: 4040527748032824639, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       insertIndex: -1
