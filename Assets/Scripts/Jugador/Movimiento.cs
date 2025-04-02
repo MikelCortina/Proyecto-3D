@@ -271,6 +271,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition)
     {
+        dashRigidbody.canDash = false;   
             originalVelocity = rb.linearVelocity;
 
             float journeyLength = Vector3.Distance(transform.position, targetPosition);
@@ -306,7 +307,8 @@ public class PlayerMovement : MonoBehaviour
 
             // Limpiamos la referencia a la corrutina actual
             currentMoveCoroutine = null;
-        
+        dashRigidbody.canDash = true;
+
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -398,19 +400,21 @@ public class PlayerMovement : MonoBehaviour
     {
 
         
-        yield return new WaitForSeconds(0.2f / 2);
+        yield return new WaitForSeconds(0.1f / 2);
         if (animator != null)
         {
-          
-            animator.Play("MoveFw", 0, 0f);         // Empieza desde el principio sí o sí
+            animator.ResetTrigger("MoveFw");
+            animator.SetTrigger("MoveFw");         // Empieza desde el principio sí o sí
         }
         // Espera el tiempo necesario para el dash o la duración de la animación
         yield return new WaitForSeconds(0.3f / 2);
         if (animator != null)
         {
+            animator.ResetTrigger("DontMove");
             animator.SetTrigger("DontMove");      // Transición a otro estado si es necesario
         }
         animator.speed = 1f;
+        
     }
 
 }
