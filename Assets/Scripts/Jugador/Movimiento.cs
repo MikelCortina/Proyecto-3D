@@ -79,8 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (rb.linearVelocity.y < 0) // Solo cuando el objeto está cayendo
+        {
+            rb.AddForce(Physics.gravity * (0.1f), ForceMode.Acceleration);
+            
+        }
 
-            if (landSoundCooldownTimer > 0f)
+        if (landSoundCooldownTimer > 0f)
             {
                 landSoundCooldownTimer -= Time.deltaTime;
             }
