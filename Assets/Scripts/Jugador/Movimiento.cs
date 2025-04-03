@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ZonaVelocidad"))
         {
-            maxVelocity = 50f;
+            maxVelocity = 60f;
             moveSpeed = 35f;
             stepInterval = 0.2f;
 
@@ -166,15 +166,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ZonaVelocidad"))
         {
-            maxVelocity = originMaxVelocity;
-            moveSpeed = originSpeed;
+            StopAllCoroutines(); // Detenemos cualquier reducción anterior
+            StartCoroutine(ReduceSpeedGradually());
+        }
+    }
 
-            if (!isMovingTowards)
-            {
-                speedParticles.Stop(); // Activa las partículas
-                speedParticles2.Stop();
-            }
+    private IEnumerator ReduceSpeedGradually()
+    {
+        while (maxVelocity > originMaxVelocity || moveSpeed > originSpeed)
+        {
+            maxVelocity = Mathf.Max(originMaxVelocity, maxVelocity - 5f * Time.deltaTime);
+            moveSpeed = Mathf.Max(originSpeed, moveSpeed - 5f * Time.deltaTime);
+            yield return null; // Espera un frame antes de continuar
+        }
 
+        if (!isMovingTowards)
+        {
+            speedParticles.Stop();
+            speedParticles2.Stop();
         }
     }
 
