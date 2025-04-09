@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX = 0f;
     private bool isGrounded;
 
-    public AudioClip[] footstepSounds;  // Array de sonidos de pasos
+      // Array de sonidos de pasos
 
     public float stepInterval;    // Tiempo entre pasos
     private float stepTimer = 0f;        // Controla el tiempo entre pasos
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isMovingTowards = false;
     public AudioClip jumpSound;
     public AudioClip dashSound;
+    public AudioClip[] footstepSounds;
 
 
     public DashRigidbody dashRigidbody;
@@ -81,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.linearVelocity.y < 0) // Solo cuando el objeto está cayendo
         {
-            rb.AddForce(Physics.gravity * (0.1f), ForceMode.Acceleration);
+            rb.AddForce(Physics.gravity * (0.25f), ForceMode.Acceleration);
             
         }
 
@@ -147,8 +148,17 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 35f;
             stepInterval = 0.2f;
 
-            speedParticles.Play(); // Activa las partículas
-            speedParticles2.Play();
+            if (rb.linearVelocity.magnitude > 10)
+            {
+                speedParticles.Play(); // Activa las partículas
+                speedParticles2.Play();
+            }
+            else if (rb.linearVelocity.magnitude < 10)
+            {
+                speedParticles.Stop(); // Activa las partículas
+                speedParticles2.Stop();
+            }
+
 
 
         }

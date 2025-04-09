@@ -170,17 +170,17 @@ MonoBehaviour:
   fuerzaGlovo: 0
   rb: {fileID: 1318811154177241427}
   playerCamera: {fileID: 6218290563337148242}
-  footstepSounds:
-  - {fileID: 8300000, guid: ecd647025e0a3c04fbd5829fff509e09, type: 3}
-  - {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
-  - {fileID: 8300000, guid: 7b4b6eb734482064c8c1e5fd45d4d76c, type: 3}
-  - {fileID: 8300000, guid: e924ff5d774024542830602ee674d9a9, type: 3}
   stepInterval: 0.25
   audioSource: {fileID: 6443942777209423725}
   landSound: {fileID: 8300000, guid: c2e0d3f88cb48f240af40a1f1bac7e8c, type: 3}
   isMovingTowards: 0
   jumpSound: {fileID: 8300000, guid: e708389b7a8f64a46aa12d201c187b69, type: 3}
-  dashSound: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
+  dashSound: {fileID: 8300000, guid: 55718db065ea5d34390f61e9797449c1, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: ecd647025e0a3c04fbd5829fff509e09, type: 3}
+  - {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
+  - {fileID: 8300000, guid: 7b4b6eb734482064c8c1e5fd45d4d76c, type: 3}
+  - {fileID: 8300000, guid: e924ff5d774024542830602ee674d9a9, type: 3}
   dashRigidbody: {fileID: 720118448033238030}
   speedText: {fileID: 0}
   rapido: 0
@@ -227,6 +227,8 @@ MonoBehaviour:
   chargerMax: 15
   recargaTimer: 1.5
   shootSound: {fileID: 8300000, guid: 44c4cb28643bd7444b13486596e1fc0c, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 44c4cb28643bd7444b13486596e1fc0c, type: 3}
   audioSource: {fileID: 6443942777209423725}
   bulletText: {fileID: 0}
   speedParticles: {fileID: 5192159982933227114}

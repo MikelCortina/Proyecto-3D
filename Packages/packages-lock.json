@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.lootlocker.lootlockersdk": {
+      "version": "file:C:/Users/mkmik/Downloads/unity-sdk-main/unity-sdk-main",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.parallel-cascades.bind-gradient-to-texture": {
       "version": "file:com.parallel-cascades.bind-gradient-to-texture",
       "depth": 0,

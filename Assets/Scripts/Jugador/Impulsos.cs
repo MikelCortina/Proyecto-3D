@@ -30,6 +30,7 @@ public class Impulsos : MonoBehaviour
     public float recargaTimer = 1.5f;
 
     public AudioClip shootSound;
+    public AudioClip[] shootSounds;
     public AudioSource audioSource;
 
     public TextMeshProUGUI bulletText;
@@ -163,14 +164,16 @@ public class Impulsos : MonoBehaviour
         Vector3 shootingDirection = camera.transform.forward;
         GameObject projectile = Instantiate(projectilePrefab, muzzleBalas.position, Quaternion.LookRotation(shootingDirection));
 
-        if (audioSource != null && shootSound != null)
+        if (audioSource != null && shootSounds != null && shootSounds.Length > 0)
         {
-            audioSource.PlayOneShot(shootSound);
+            AudioClip randomClip = shootSounds[Random.Range(0, shootSounds.Length)];
+            audioSource.PlayOneShot(randomClip);
         }
     }
-   
-   
- 
+
+
+
+
     IEnumerator Reload()
     {
         isReloading = true;

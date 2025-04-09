@@ -131,6 +131,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start
       objectReference: {fileID: 0}
+    - target: {fileID: 447762998505508870, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_text
+      value: 'LEVEL 7
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 3912694816609938657, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -218,6 +224,14 @@ PrefabInstance:
     - target: {fileID: 8004161509711508562, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 131
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133922326350767202, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_text
+      value: 'level 7
+
+
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2470,6 +2484,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1110511341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2150676996432459973, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+  m_PrefabInstance: {fileID: 13110881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1165015755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6409,7 +6434,7 @@ PrefabInstance:
     - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: bestTimesText
       value: 
-      objectReference: {fileID: 298962575}
+      objectReference: {fileID: 1110511341}
     - target: {fileID: 4732486682103959597, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: player
       value: 

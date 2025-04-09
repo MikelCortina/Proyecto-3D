@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using LootLocker.Requests;
 
 
 public class Timer : MonoBehaviour
@@ -15,9 +16,18 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
-        
 
-      
+        LootLockerSDKManager.StartGuestSession((response) => {
+            if (response.success)
+            {
+                Debug.Log("Sesión iniciada");
+            }
+            else
+            {
+                Debug.LogError("Error al iniciar sesión");
+            }
+        });
+
     }
     void Start()
     {
