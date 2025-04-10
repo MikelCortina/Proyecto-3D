@@ -1,3 +1,4 @@
+using LootLocker.Requests;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,9 @@ public class LevelManager : MonoBehaviour
     public BestTimesManager bestTimesManager;
     public EndLevelUI endLevel;
     public TextMeshProUGUI bestTimesText;
+    public int level;
+    public LeaderboardUploader leaderboardUploader;
+    public TextMeshProUGUI onlineLeaderboardText; // Asignalo desde el inspector
 
     private void Start()
     {
@@ -26,13 +30,26 @@ public class LevelManager : MonoBehaviour
                 startPanel.SetActive(true);
                 Time.timeScale = 0f;
                 playable = false;
-                string bestTimesDisplay = "";
-                float[] bestTimes = bestTimesManager.GetBestTimes(endLevel.level);
-                for (int i = 0; i < bestTimes.Length; i++)
+                // Mostrar leaderboard online
+                string leaderboardKey = "level" + level;
+                LootLockerSDKManager.GetScoreList(leaderboardKey, 10, 0, (response) =>
                 {
-                    bestTimesDisplay += $"{i + 1}: {bestTimes[i]:F2} s\n";
-                }
-                bestTimesText.text = bestTimesDisplay;
+                    if (response.success)
+                    {
+                        string leaderboardDisplay = "";
+                        for (int i = 0; i < response.items.Length; i++)
+                        {
+                            string name = string.IsNullOrEmpty(response.items[i].member_id) ? "Jugador" : response.items[i].member_id;
+                            float tiempo = response.items[i].score / 100f;
+                            leaderboardDisplay += $"{i + 1}. {name}: {tiempo:F2} s\n";
+                        }
+                        onlineLeaderboardText.text = leaderboardDisplay;
+                    }
+                    else
+                    {
+                        onlineLeaderboardText.text = "Error al obtener leaderboard online.";
+                    }
+                });
             }
         }
         else
@@ -58,13 +75,27 @@ public class LevelManager : MonoBehaviour
                 startPanel.SetActive(true);
                 Time.timeScale = 0f;
 
-                string bestTimesDisplay = "";
-                float[] bestTimes = bestTimesManager.GetBestTimes(endLevel.level);
-                for (int i = 0; i < bestTimes.Length; i++)
+                // Mostrar leaderboard online
+                string leaderboardKey = "level" + level;
+                LootLockerSDKManager.GetScoreList(leaderboardKey, 10, 0, (response) =>
                 {
-                    bestTimesDisplay += $"{i + 1}: {bestTimes[i]:F2} s\n";
-                }
-                bestTimesText.text = bestTimesDisplay;
+                    if (response.success)
+                    {
+                        string leaderboardDisplay = "";
+                        for (int i = 0; i < response.items.Length; i++)
+                        {
+                            string name = string.IsNullOrEmpty(response.items[i].member_id) ? "Jugador" : response.items[i].member_id;
+                            float tiempo = response.items[i].score / 100f;
+                            leaderboardDisplay += $"{i + 1}. {name}: {tiempo:F2} s\n";
+                        }
+                        onlineLeaderboardText.text = leaderboardDisplay;
+                    }
+                    else
+                    {
+                        onlineLeaderboardText.text = "Error al obtener leaderboard online.";
+                    }
+                });
+
             }
             // Desactivar el panel al presionar la tecla V
             if (Input.GetKeyDown(KeyCode.F) && startPanel.activeSelf)

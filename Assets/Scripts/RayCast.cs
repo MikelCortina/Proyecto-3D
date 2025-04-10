@@ -134,7 +134,6 @@ public class RayCast : MonoBehaviour
                 audioSource.PlayOneShot(shootSound);
             }
         }
-
     }
     IEnumerator ShootAnim()
     {
@@ -158,8 +157,8 @@ public class RayCast : MonoBehaviour
         speedParticles2.Stop();
         speedParticles3.Stop();
         speedParticles4.Stop();
-
     }
+
     private IEnumerator PlayScreenEffect()
     {
         // Establece el color blanco con opacidad al inicio (opacidad 0.1f)
@@ -178,7 +177,6 @@ public class RayCast : MonoBehaviour
             // Lerp para hacer un fade de opacidad de 0.1 a 0
             float alphaValue = Mathf.Lerp(0.025f, 0f, timeElapsed / fadeDuration);
             screenEffect.color = new Color(1f, 1f, 1f, alphaValue);
-            Debug.Log("Alpha: " + alphaValue);  // Imprime el valor de alpha para verificar que cambia
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -187,6 +185,4 @@ public class RayCast : MonoBehaviour
         screenEffect.color = new Color(1f, 1f, 1f, 0f);  // Establece completamente transparente
         Debug.Log("Final - Opacidad: 0f");
     }
-
-
 }

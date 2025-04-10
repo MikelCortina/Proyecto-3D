@@ -6,6 +6,7 @@ public class BestTimesManager : MonoBehaviour
     private const int maxTimes = 3; // Número máximo de mejores tiempos guardados
     private float[] bestTimes = new float[maxTimes];
     public LeaderboardUploader leaderboardUploader; // Referencia al script de LootLocker
+    public LeaderboardViewer leaderboardViewer;
 
     void Start()
     {
@@ -31,10 +32,16 @@ public class BestTimesManager : MonoBehaviour
         }
         SaveBestTimes(level); // Guardar los mejores tiempos del nivel
 
-        // Enviar el nuevo mejor tiempo al leaderboard de LootLocker
-        int tiempoEntero = (int)newTime;
-        leaderboardUploader.EnviarPuntaje(tiempoEntero);
-        
+        // Convertir el tiempo a centésimas de segundo (para enviar como int)
+        int tiempoFormateado = Mathf.RoundToInt(newTime * 100);
+
+        // Asegurar que se use la clave del leaderboard correspondiente al nivel
+        leaderboardUploader.leaderboardKey = "level" + level;
+        leaderboardViewer.leaderboardKey = "level" + level;
+
+        // Enviar puntaje a LootLocker
+        leaderboardUploader.EnviarPuntaje(tiempoFormateado);
+        leaderboardViewer.ObtenerTopScores();
     }
 
     public float[] GetBestTimes(int level)

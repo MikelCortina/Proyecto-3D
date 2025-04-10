@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.lootlocker.lootlockersdk": {
-      "version": "file:C:/Users/mkmik/Downloads/unity-sdk-main/unity-sdk-main",
+      "version": "https://github.com/LootLocker/unity-sdk.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "509af77fe5e074d50bde6d10c4ef2d8b66f62a6e"
     },
     "com.parallel-cascades.bind-gradient-to-texture": {
       "version": "file:com.parallel-cascades.bind-gradient-to-texture",

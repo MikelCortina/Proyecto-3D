@@ -4,10 +4,14 @@ using LootLocker.Requests;
 public class LeaderboardUploader : MonoBehaviour
 {
     public string leaderboardKey;
-
+    string playerName;
+    public void Start()
+    {
+        playerName = PlayerPrefs.GetString("PlayerName", "guest_player");
+    }
     public void EnviarPuntaje(int score)
     {
-        LootLockerSDKManager.SubmitScore(leaderboardKey, score, "guest_player", (response) =>
+        LootLockerSDKManager.SubmitScore(playerName, score, leaderboardKey, (response) =>
         {
             if (response.success)
             {
