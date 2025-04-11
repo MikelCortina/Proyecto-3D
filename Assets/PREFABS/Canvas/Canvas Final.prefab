@@ -1630,7 +1630,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191106020399914540, guid: 6a6f1c0676148f14ebaafcffb2f3592e, type: 3}
       propertyPath: m_text
-      value: 'best 3 scores
+      value: 'best times
+
 
 '
       objectReference: {fileID: 0}

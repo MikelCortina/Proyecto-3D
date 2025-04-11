@@ -21600,7 +21600,9 @@ MonoBehaviour:
   playable: 0
   bestTimesManager: {fileID: 1317642297445007385}
   endLevel: {fileID: 5324765342772538188}
-  bestTimesText: {fileID: 444813114800523538, guid: 1d345eecc8b6aed418651ac615022503, type: 3}
+  level: 0
+  leaderboardUploader: {fileID: 0}
+  onlineLeaderboardText: {fileID: 0}
 --- !u!114 &4870681369465616472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21630,11 +21632,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endLevelPanel: {fileID: 7093663449441696681}
   finalTimeText: {fileID: 6362891071832192156}
-  bestTimesText: {fileID: 6536561934323293016}
   timer: {fileID: 4870681369465616472}
   bestTimesManager: {fileID: 1317642297445007385}
   level: 6
   levelManager: {fileID: 3951580953381527353}
+  leaderboardUploader: {fileID: 0}
+  onlineLeaderboardText: {fileID: 0}
 --- !u!114 &1317642297445007385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21647,6 +21650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43918fbb0aa58f040b0c7c6f7a9c3584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderboardUploader: {fileID: 0}
+  leaderboardViewer: {fileID: 0}
 --- !u!1 &1870207306761198192
 GameObject:
   m_ObjectHideFlags: 0
@@ -25355,7 +25360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6179698953756158501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39225,17 +39230,17 @@ MonoBehaviour:
   fuerzaGlovo: 0
   rb: {fileID: 1408661739709508909}
   playerCamera: {fileID: 2675378302894727407}
-  footstepSounds:
-  - {fileID: 8300000, guid: ecd647025e0a3c04fbd5829fff509e09, type: 3}
-  - {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
-  - {fileID: 8300000, guid: 7b4b6eb734482064c8c1e5fd45d4d76c, type: 3}
-  - {fileID: 8300000, guid: e924ff5d774024542830602ee674d9a9, type: 3}
   stepInterval: 0.25
   audioSource: {fileID: 6804675154138507193}
   landSound: {fileID: 8300000, guid: c2e0d3f88cb48f240af40a1f1bac7e8c, type: 3}
   isMovingTowards: 0
   jumpSound: {fileID: 8300000, guid: e708389b7a8f64a46aa12d201c187b69, type: 3}
   dashSound: {fileID: 8300000, guid: 7027694daba0ef6469e97de2e3b6d158, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: ecd647025e0a3c04fbd5829fff509e09, type: 3}
+  - {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
+  - {fileID: 8300000, guid: 7b4b6eb734482064c8c1e5fd45d4d76c, type: 3}
+  - {fileID: 8300000, guid: e924ff5d774024542830602ee674d9a9, type: 3}
   dashRigidbody: {fileID: 2429003265922626748}
   speedText: {fileID: 735482069087177674}
   rapido: 0
@@ -39282,6 +39287,7 @@ MonoBehaviour:
   chargerMax: 15
   recargaTimer: 1.5
   shootSound: {fileID: 8300000, guid: 44c4cb28643bd7444b13486596e1fc0c, type: 3}
+  shootSounds: []
   audioSource: {fileID: 6804675154138507193}
   bulletText: {fileID: 6335623610468425994}
   speedParticles: {fileID: 5956782634752313015}
@@ -40130,7 +40136,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HIGH SCORES
+  m_text: 'best times
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f715610e1b9e6a94a970b9de0c51093b, type: 2}
   m_sharedMaterial: {fileID: 3312600033717915936, guid: f715610e1b9e6a94a970b9de0c51093b, type: 2}
@@ -41797,7 +41805,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -44.255615, y: 0, z: -336.9082, w: -314.86685}
+  m_margin: {x: -106.95874, y: 0, z: -352.7837, w: -401.51382}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

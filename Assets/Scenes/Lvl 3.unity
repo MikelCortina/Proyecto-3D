@@ -3229,7 +3229,7 @@ PrefabInstance:
     - target: {fileID: 6321538278470547914, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       propertyPath: onlineLeaderboardText
       value: 
-      objectReference: {fileID: 1728072501}
+      objectReference: {fileID: 3862281}
     - target: {fileID: 6372903583536277279, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       propertyPath: m_Mesh
       value: 
