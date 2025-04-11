@@ -10752,6 +10752,14 @@ PrefabInstance:
       propertyPath: killCountObjc
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4646242829198857979, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+      propertyPath: leaderboardUploader
+      value: 
+      objectReference: {fileID: 1162931988}
+    - target: {fileID: 4646242829198857979, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+      propertyPath: onlineLeaderboardText
+      value: 
+      objectReference: {fileID: 702564551}
     - target: {fileID: 4695402123380944641, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       propertyPath: m_Mesh
       value: 

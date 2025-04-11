@@ -8,7 +8,6 @@ public class EndLevelUI : MonoBehaviour
 {
     public GameObject endLevelPanel;
     public TextMeshProUGUI finalTimeText;
-    public TextMeshProUGUI bestTimesText;
     public Timer timer;
     public BestTimesManager bestTimesManager;
     public int level;

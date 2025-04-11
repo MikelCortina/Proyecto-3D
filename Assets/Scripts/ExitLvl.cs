@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour
     public bool playable = false;
     public BestTimesManager bestTimesManager;
     public EndLevelUI endLevel;
-    public TextMeshProUGUI bestTimesText;
     public int level;
     public LeaderboardUploader leaderboardUploader;
     public TextMeshProUGUI onlineLeaderboardText; // Asignalo desde el inspector
