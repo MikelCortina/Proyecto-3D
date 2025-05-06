@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
+    public void Sensi()
+    {
+        SceneManager.LoadScene("Sensibilidad");
+    }
 
     public void Historia()
     {
@@ -35,6 +39,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("HasStarted_" + "Lvl3");
         PlayerPrefs.DeleteKey("HasStarted_" + "Lvl4");
         PlayerPrefs.DeleteKey("HasStarted_" + "Lvl5");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl6");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl7");
+        PlayerPrefs.DeleteKey("HasStarted_" + "Lvl8");
         SceneManager.LoadScene("Lvl 1"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
 
