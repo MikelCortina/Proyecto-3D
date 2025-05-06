@@ -13243,6 +13243,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: fall
+      value: 
+      objectReference: {fileID: 1688290198}
+    - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: speedText
       value: 
       objectReference: {fileID: 720996954}
@@ -13315,9 +13319,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 720996956}
     - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: fallForce
+      value: 7500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: HUDanimator
       value: 
       objectReference: {fileID: 1991620560}
+    - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: damageRadius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6951697279420999249, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: healthText
       value: 
@@ -13354,6 +13366,17 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1318811154177241427, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
   m_PrefabInstance: {fileID: 1688290196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1688290198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  m_PrefabInstance: {fileID: 1688290196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d15651287c07a489833d094ec81c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1729693845
 Mesh:
   m_ObjectHideFlags: 0

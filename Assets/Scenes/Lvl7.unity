@@ -1842,6 +1842,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1940652429}
     - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: fall
+      value: 
+      objectReference: {fileID: 673058792}
+    - target: {fileID: 878438982078430053, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: speedText
       value: 
       objectReference: {fileID: 454593237}
@@ -1930,6 +1934,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+--- !u!114 &673058792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+  m_PrefabInstance: {fileID: 673058791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d15651287c07a489833d094ec81c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &677951051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2670069052937946131, guid: 224e03f8c4aca484fbd05ad8d0b64dd9, type: 3}

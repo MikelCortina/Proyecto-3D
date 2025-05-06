@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 originalVelocity;
     private float speed;
     public float fuerzaGlovo;
+    public PlayerFallAttack fall;
 
 
     public Rigidbody rb;
@@ -65,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         animator.speed = 1;
         speedParticles.Stop();
         speedParticles2.Stop();
+        lookSpeed = GameData.sliderValue;
 
     }
     void Start()
@@ -82,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.linearVelocity.y < 0) // Solo cuando el objeto está cayendo
         {
-            rb.AddForce(Physics.gravity * (0.25f), ForceMode.Acceleration);
+            rb.AddForce(Physics.gravity * (0.1f), ForceMode.Acceleration);
             
         }
 
@@ -346,9 +348,14 @@ public class PlayerMovement : MonoBehaviour
             }
 
             currentDashEffectCoroutine = StartCoroutine(DashEffect());
+            fall.HUDanimator.ResetTrigger("CantPush"); // Evita que se superpongan triggers
+            fall.HUDanimator.SetTrigger("CanPush");
+            dashRigidbody.HUDanimator.ResetTrigger("CantDash");
+            dashRigidbody.HUDanimator.SetTrigger("CanDash");
 
             // Lógica del impulso vertical para Glovo
             rb.linearVelocity = new Vector3(rb.linearVelocity.x,fuerzaGlovo, rb.linearVelocity.z);
+            fall.canFall = true;
             dashRigidbody.canDash = true;
             dashRigidbody.isDashing = false;
             rb.useGravity = true;
@@ -363,10 +370,15 @@ public class PlayerMovement : MonoBehaviour
             }
 
             currentDashEffectCoroutine = StartCoroutine(DashEffect());
+            fall.HUDanimator.ResetTrigger("CantPush"); // Evita que se superpongan triggers
+            fall.HUDanimator.SetTrigger("CanPush");
+            dashRigidbody.HUDanimator.ResetTrigger("CantDash");
+            dashRigidbody.HUDanimator.SetTrigger("CanDash");
 
             // Lógica del impulso vertical para SuperGlovo
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 100f, rb.linearVelocity.z);
             dashRigidbody.canDash = true;
+            fall.canFall = true;
             dashRigidbody.isDashing = false;
             rb.useGravity = true;
 

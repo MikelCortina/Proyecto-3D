@@ -15,11 +15,12 @@ public class LevelManager : MonoBehaviour
     public int level;
     public LeaderboardUploader leaderboardUploader;
     public TextMeshProUGUI onlineLeaderboardText; // Asignalo desde el inspector
+    public bool tutorial;
 
     private void Start()
     {
         // Verificar si es la primera vez que se carga la escena
-        if (!PlayerPrefs.HasKey("HasStarted_" + SceneManager.GetActiveScene().name))
+        if (!PlayerPrefs.HasKey("HasStarted_" + SceneManager.GetActiveScene().name)&&!tutorial)
         {
             PlayerPrefs.SetInt("HasStarted_" + SceneManager.GetActiveScene().name, 1);
             PlayerPrefs.Save();
@@ -63,7 +64,7 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
        
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G)&&!tutorial)
         {
             PlayerPrefs.DeleteKey("HasStarted_" + SceneManager.GetActiveScene().name); // Restablecer solo esta escena
             ReloadScene();
@@ -124,10 +125,15 @@ public class LevelManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && killCount >= killCountObjc)
+        if (other.CompareTag("Player") && killCount >= killCountObjc &&!tutorial)
         {
             end.ShowEndScreen();
         }
+        if (other.CompareTag("Player") && killCount >= killCountObjc && tutorial)
+        {
+            SceneManager.LoadScene("Tutorial2");
+        }
+
     }
 
     public void ReloadScene()
