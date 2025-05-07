@@ -13941,9 +13941,13 @@ PrefabInstance:
 '
       objectReference: {fileID: 0}
     - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: f715610e1b9e6a94a970b9de0c51093b, type: 2}
+      objectReference: {fileID: 11400000, guid: cd94cfba5a6b55e43aee1f662cef1531, type: 2}
     - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_fontColor.b
       value: 0
@@ -13957,9 +13961,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 3312600033717915936, guid: f715610e1b9e6a94a970b9de0c51093b, type: 2}
+      objectReference: {fileID: -4913216140872603244, guid: cd94cfba5a6b55e43aee1f662cef1531, type: 2}
     - target: {fileID: 703892168693502459, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4278190080
@@ -13970,7 +13978,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1454087039768352670, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.8
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454087039768352670, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -651.9
       objectReference: {fileID: 0}
     - target: {fileID: 3758913412789150114, guid: 4bbfe751c90b8db4aaf0a2f9a86af513, type: 3}
       propertyPath: m_Name
