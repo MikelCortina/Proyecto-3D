@@ -13,6 +13,7 @@ TagManager:
   - EnemigoMovimiento
   - Salida
   - SuperGlovo
+  - Zona 0
   layers:
   - Default
   - TransparentFX

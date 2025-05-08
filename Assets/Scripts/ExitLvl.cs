@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public LeaderboardUploader leaderboardUploader;
     public TextMeshProUGUI onlineLeaderboardText; // Asignalo desde el inspector
     public bool tutorial;
+    public int tutolvl;
 
     private void Start()
     {
@@ -131,7 +132,7 @@ public class LevelManager : MonoBehaviour
         }
         if (other.CompareTag("Player") && killCount >= killCountObjc && tutorial)
         {
-            SceneManager.LoadScene("Tutorial2");
+            SceneManager.LoadScene("Tutorial"+tutolvl);
         }
 
     }
