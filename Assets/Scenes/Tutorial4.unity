@@ -294,7 +294,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 292354275892424306, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -201.8
+      value: -200.1
       objectReference: {fileID: 0}
     - target: {fileID: 292354275892424306, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1817,11 +1817,6 @@ Mesh:
 --- !u!224 &697323895 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2759006122130014753, guid: 37973177d474b3a418f07e9461959431, type: 3}
-  m_PrefabInstance: {fileID: 2064336420}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &697323896 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5124443886907557207, guid: 37973177d474b3a418f07e9461959431, type: 3}
   m_PrefabInstance: {fileID: 2064336420}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &723928522
@@ -3637,7 +3632,7 @@ PrefabInstance:
     - target: {fileID: 654321065296419779, guid: d2930fcfa9e15d84aab4f40b212840b2, type: 3}
       propertyPath: HUDanimator
       value: 
-      objectReference: {fileID: 697323896}
+      objectReference: {fileID: 0}
     - target: {fileID: 780554707332181974, guid: d2930fcfa9e15d84aab4f40b212840b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 144.65701
@@ -3892,7 +3887,7 @@ PrefabInstance:
       objectReference: {fileID: 2075939954}
     - target: {fileID: 1466991587112210907, guid: d2930fcfa9e15d84aab4f40b212840b2, type: 3}
       propertyPath: tutolvl
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1466991587112210907, guid: d2930fcfa9e15d84aab4f40b212840b2, type: 3}
       propertyPath: killCountObjc
@@ -4560,7 +4555,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 28.839
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5452005072208361327, guid: 37973177d474b3a418f07e9461959431, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452005072208361327, guid: 37973177d474b3a418f07e9461959431, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452005072208361327, guid: 37973177d474b3a418f07e9461959431, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5124443886907557207, guid: 37973177d474b3a418f07e9461959431, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

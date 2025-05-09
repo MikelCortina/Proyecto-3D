@@ -50,6 +50,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sensibilidad.unity
     guid: e28deeadd053d3642b6104b00f3908cc
+  - enabled: 1
+    path: Assets/Scenes/Tutorial3.unity
+    guid: 610b700b3f669254199387e36962f60a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial4.unity
+    guid: de9862a8a404b24428b1f9d69c25ee67
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
