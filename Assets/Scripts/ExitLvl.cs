@@ -130,9 +130,13 @@ public class LevelManager : MonoBehaviour
         {
             end.ShowEndScreen();
         }
-        if (other.CompareTag("Player") && killCount >= killCountObjc && tutorial)
+        if (other.CompareTag("Player") && killCount >= killCountObjc && tutorial&& tutolvl!=6)
         {
             SceneManager.LoadScene("Tutorial"+tutolvl);
+        }
+        if (other.CompareTag("Player") && killCount >= killCountObjc && tutorial&& tutolvl==6)
+        {
+            end.ShowPanel();
         }
 
     }

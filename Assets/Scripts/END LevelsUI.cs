@@ -7,6 +7,7 @@ using LootLocker.Requests;
 public class EndLevelUI : MonoBehaviour
 {
     public GameObject endLevelPanel;
+    public GameObject endLevelPanel2;
     public TextMeshProUGUI finalTimeText;
     public Timer timer;
     public BestTimesManager bestTimesManager;
@@ -76,6 +77,15 @@ public class EndLevelUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ShowPanel()
+    {
+        levelManager.playable = false;
+        Time.timeScale = 0f;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        endLevelPanel2.SetActive(true);
+    }
     public void NextLevel()
     {
         PlayerPrefs.DeleteKey("HasStarted_" + SceneManager.GetActiveScene().name);
