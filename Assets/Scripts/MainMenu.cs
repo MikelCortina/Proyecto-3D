@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void DEMO()
     {
-        SceneManager.LoadScene("SampleScene"); // Cambia "GameScene" por el nombre de tu escena de juego
+        SceneManager.LoadScene("Tutorial"); // Cambia "GameScene" por el nombre de tu escena de juego
     }
     
     public void Config()

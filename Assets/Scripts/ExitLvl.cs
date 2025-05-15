@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
        
-        if (Input.GetKeyDown(KeyCode.G)&&!tutorial)
+        if (Input.GetKeyDown(KeyCode.Escape)&&!tutorial)
         {
             PlayerPrefs.DeleteKey("HasStarted_" + SceneManager.GetActiveScene().name); // Restablecer solo esta escena
             ReloadScene();

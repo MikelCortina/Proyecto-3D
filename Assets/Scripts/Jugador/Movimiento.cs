@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb.linearVelocity.y < 0) // Solo cuando el objeto está cayendo
         {
-            rb.AddForce(Physics.gravity * (0.1f), ForceMode.Acceleration);
+            rb.AddForce(Physics.gravity * (0.01f), ForceMode.Acceleration);
             
         }
 
