@@ -110,11 +110,11 @@ public class LevelManager : MonoBehaviour
                
             }
 
-            if (!playable && Input.GetKeyDown(KeyCode.Escape))
+            if (!playable && Input.GetKey(KeyCode.KeypadEnter))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("Menu Jugar");
             }
         }
 

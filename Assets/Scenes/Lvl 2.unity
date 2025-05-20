@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 12ccb828343c3405fb94289774b51aad, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b821556fd91ce674a8fa410427f1e822, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -3380,6 +3380,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 184843971}
@@ -4648,7 +4652,7 @@ PrefabInstance:
     - target: {fileID: 1243689452355199465, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f1e38594f14520c48bc546f3a41f4f56, type: 2}
+      objectReference: {fileID: 2100000, guid: f0382eb58c5fb9c448683be21d36b7e0, type: 2}
     - target: {fileID: 1676303298253521055, guid: fcba2d4cd39e6094d81a37da91e0aa52, type: 3}
       propertyPath: level
       value: 2
@@ -6925,6 +6929,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 184843971}
@@ -8400,6 +8408,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 184843971}
@@ -9345,6 +9357,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
@@ -10365,6 +10381,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 184843971}
@@ -10437,6 +10457,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 
@@ -16241,6 +16265,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5707350071410457775, guid: 23d443589acb44c4eb08b4b8c3353fdf, type: 3}
+    - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 407111118}
     - target: {fileID: 5267133088009898925, guid: 9dea8eb7199dadc49a78486dac96f7b2, type: 3}
       propertyPath: audioSource
       value: 

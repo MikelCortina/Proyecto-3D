@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerFallAttack : MonoBehaviour
 {
-    public float fallForce = 5000f;  // Fuerza de ca�da
+    private float fallForce = 10000f;  // Fuerza de ca�da
     public float damageRadius = 5f;  // Radio de da�o
     public string enemyTag = "Enemy"; // Tag de los enemigos
 

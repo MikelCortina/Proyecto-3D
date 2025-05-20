@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 33ab377b49aa14f6fae6e5bac230a5d4, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3617fef50806b1f4daa5dbfdf8227ee1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2306,6 +2306,10 @@ PrefabInstance:
       value: EnemigoMovimiento
       objectReference: {fileID: 0}
     - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
@@ -4179,6 +4183,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
+    - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
@@ -5232,6 +5240,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
     - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: audioSource
       value: 
@@ -6437,6 +6449,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
     - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: audioSource
       value: 
@@ -7926,6 +7942,10 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 5078883061092136845, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f0382eb58c5fb9c448683be21d36b7e0, type: 2}
     - target: {fileID: 5086722169639090374, guid: b3cbe8f23df96764d9e9df77b795f9e7, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8216,6 +8236,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EnemigoMovimiento
       objectReference: {fileID: 0}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
     - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
       propertyPath: audioSource
       value: 
@@ -8634,6 +8658,10 @@ PrefabInstance:
       value: EnemigoMovimiento
       objectReference: {fileID: 0}
     - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
@@ -8650,6 +8678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
+      propertyPath: levelExit
+      value: 
+      objectReference: {fileID: 628655500}
     - target: {fileID: 1064964189856904826, guid: d6b06cd579587874a8b36339d2a0c14c, type: 3}
       propertyPath: audioSource
       value: 
