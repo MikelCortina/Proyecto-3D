@@ -1,10 +1,19 @@
-// Añade este script a tu GameObject con AudioSource
 using UnityEngine;
 
-public class MusicPlayer : MonoBehaviour
+public class ObjetoPersistente : MonoBehaviour
 {
+    private static ObjetoPersistente instanciaUnica;
+
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instanciaUnica == null)
+        {
+            instanciaUnica = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instanciaUnica != this)
+        {
+            Destroy(gameObject);
+        }
     }
 }

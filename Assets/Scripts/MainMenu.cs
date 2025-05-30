@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Sensibilidad");
     }
 
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial"); 
+    }
+
     public void Historia()
     {
         PlayerPrefs.DeleteKey("HasStarted_" + "Lvl1");

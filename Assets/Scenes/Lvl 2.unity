@@ -13670,6 +13670,10 @@ PrefabInstance:
       propertyPath: screenEffect
       value: 
       objectReference: {fileID: 720996956}
+    - target: {fileID: 4486748924640892861, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6427735135310502488, guid: 256a19dccd769314dbc41ae194257aa3, type: 3}
       propertyPath: fallForce
       value: 7500

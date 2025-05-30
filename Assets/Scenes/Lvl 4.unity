@@ -2313,6 +2313,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c8bd518230a490458ea2bab90a536a6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8244,6 +8248,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c8bd518230a490458ea2bab90a536a6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8665,6 +8673,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 147662857}
+    - target: {fileID: 4841739799072018573, guid: 55a5024fe636c4e4bbfb878adc2f9aa0, type: 3}
+      propertyPath: destroySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c8bd518230a490458ea2bab90a536a6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

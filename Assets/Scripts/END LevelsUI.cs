@@ -76,6 +76,10 @@ public class EndLevelUI : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MenuPrincipal");
+    }
 
     public void ShowPanel()
     {

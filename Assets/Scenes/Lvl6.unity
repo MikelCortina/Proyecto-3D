@@ -582,6 +582,10 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 1789230476}
+    - target: {fileID: 5022812516271049118, guid: 35fed7e89a408d64b8009c5938b54513, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5151018403110071879, guid: 35fed7e89a408d64b8009c5938b54513, type: 3}
       propertyPath: m_Mesh
       value: 
